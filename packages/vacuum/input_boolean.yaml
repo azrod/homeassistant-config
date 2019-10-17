@@ -1,0 +1,51 @@
+# ========================================================================================= #
+#                                                                                           #
+#       INPUT BOOLEAN VACCUM                                                                #
+#                                                                                           #
+#                                                                                           #
+#                                                                                           #
+# ========================================================================================= #
+
+  # input_boolean.room_cuisine
+  room_cuisine:
+    name: Pièce Cuisine
+    initial: off
+  # input_boolean.room_salon
+  room_salon:
+    name: Pièce Salon
+    initial: off
+  # input_boolean.room_cellier
+  room_cellier:
+    name: Pièce Cellier
+    initial: off
+  # input_boolean.room_couloir
+  room_couloir:
+    name: Pièce Couloir
+    initial: off
+  # input_boolean.room_sdb
+  room_sdb:
+    name: Pièce Salle de bain
+    initial: off
+  # input_boolean.room_toilette
+  room_toilette:
+    name: Pièce Toilette
+    initial: off
+  # input_boolean.room_chambre
+  room_chambre:
+    name: Pièce Chambre
+    initial: off
+  # input_boolean.zone_salon
+  zone_salon:
+    name: Zone Salon
+    initial: off
+  # input_boolean.zone_chambre
+  zone_chambre:
+    name: Zone Chambre
+    initial: off
+  # input_boolean.zone_devant_porte
+  zone_devant_porte:
+    name: Zone Devant Porte
+    initial: off
+  zone_devant_baie_vitree:
+    name: Zone Baie Vitrée
+    initial: off

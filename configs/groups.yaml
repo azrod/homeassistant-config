@@ -1,0 +1,144 @@
+
+# DEFAULT VIEW
+  default_view:
+    view: true
+    icon: mdi:home
+    entities:
+      - weather.openweathermap
+      - media_player.salon
+
+
+## LIGHTS 
+
+  lights:
+    view: true
+    name: Eclairage
+    icon: mdi:lightbulb-on-outline
+    entities:
+      - group.exterieur
+      - group.salon
+
+  exterieur:
+    name: Exterieur
+    entities:
+      - light.fibaro_system_fgd212_dimmer_2_level_2
+  salon:
+    name: Salon
+    entities:
+      - light.salon_all_lights
+      - light.salon_lampe_1
+      - light.salon_lampe_2
+      - light.salon_lampe_3
+      - light.salon_lampe_4
+
+## SENSOR
+
+  sensor:
+    view: true
+    name: Sensor
+    icon: mdi:home
+    entities:
+      - group.internal_sensor
+      - group.exterieur_sensor
+      - group.door_sensor
+      - group.presence_sensor
+
+  internal_sensor:
+    view: false
+    name: Intérieur
+    icon: mdi:thermometer-lines
+    entities:
+      - sensor.temperature_cellier
+      - sensor.zigate_00158d0002c99bd4_temperature
+      - sensor.zigate_00158d0002c99bd4_humidity
+  
+  exterieur_sensor:
+    view: false
+    name: Extérieur
+    icon: mdi:thermometer-lines
+    entities:
+      - sensor.zigate_00158d0002c770dc_temperature
+      - sensor.zigate_00158d0002c770dc_humidity
+      - sun.sun
+  
+  door_sensor:
+    view: false
+    name: Portes
+    icon: mdi:door
+    entities:
+      - binary_sensor.zigate_00158d0002e214e0_onoff
+
+  presence_sensor:
+    view: false
+    name: Détection de présence
+    icon: mdi:door
+    entities:
+      - binary_sensor.zigate_00158d0002c63823_presence
+
+
+## BATTERIE MONITOR
+  batteries:
+    view: true
+    name: Batteries
+    icon: mdi:battery
+    entities:
+      - group.batteries_sondes_temperatures
+      - group.batteries_sondes_Fuites
+      - group.batteries_bal
+      - group.batteries_IR
+
+  batteries_sondes_temperatures:
+    view: false
+    name: Batteries Sondes Températures
+    icon: mdi:battery
+    entities:
+      - sensor.battery_sonde_temp_interieur_salon_01
+      - sensor.battery_sonde_temp_exterieur_01
+
+  batteries_sondes_Fuites:
+    view: false
+    name: Batteries Sondes Fuites
+    icon: mdi:battery
+    entities:
+      - sensor.battery_sonde_fuite_baignoire
+
+  batteries_bal:
+    view: false
+    name: Batteries Sondes Boite au lettre
+    icon: mdi:battery
+    entities:
+      - sensor.battery_sonde_bal_courrier
+      - sensor.battery_sonde_bal_colis
+
+  batteries_IR:
+    view: false
+    name: Batteries Sondes IR
+    icon: mdi:battery
+    entities:
+      - sensor.battery_sonde_IR1
+      - sensor.battery_sonde_IR2
+
+## VACUUM MONITOR
+  vacuum:
+    view: true
+    name: Aspirateur
+    icon: mdi:robot-vacuum
+    entities:
+      - group.group_vacuum
+      - group.group_vacuum_status
+  group_vacuum:
+    view: false
+    name: Aspirateur
+    icon: mdi:robot-vacuum
+    entities:
+      - vacuum.xiaomi_vacuum_cleaner
+      - input_select.vacuum_room
+      - input_select.vacuum_zone
+  group_vacuum_status:
+    view: false
+    name: Status Aspritaeur
+    icon: mdi:robot-vacuum
+    entities:
+      - sensor.xiaomi_vacuum_main_brush_left
+      - sensor.xiaomi_vacuum_side_brush_left
+      - sensor.xiaomi_vacuum_filter_left

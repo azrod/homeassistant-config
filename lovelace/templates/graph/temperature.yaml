@@ -1,0 +1,58 @@
+# lovelace_gen
+{% set Color = {"Blue":'#12AFF3',"Green":'#25C60E',"Red":'#D91F19'} %}
+
+type: custom:mini-graph-card
+hours_to_show: 48
+hour24: true
+points_per_hour: 2
+color_thresholds:
+{% if environnement == "interieur" %}
+  - value: 0
+    color: "{{ Color.Blue }}"
+  - value: 20
+    color: "{{ Color.Green }}"
+  - value: 24
+    color: "{{ Color.Red }}"
+{% elif environnement == "frigo" %}
+  - value: 0 
+    color: "#0CFFF4"
+  - value: 3
+    color: "#0096FA"
+  - value: 5
+    color: "#006ED0"         
+  - value: 8
+    color: "#D09B00"         
+  - value: 10
+    color: "#F80000" 
+{% elif environnement == "caveavin" %} 
+  - value: 10
+    color: "{{ Color.Blue }}"
+  - value: 12
+    color: "{{ Color.Green }}"
+  - value: 14
+    color: "{{ Color.Red }}"
+{% elif environnement == "exterieur" %} 
+  - value: 10
+    color: "{{ Color.Blue }}"
+  - value: 20
+    color: "{{ Color.Green }}"
+  - value: 30
+    color: "{{ Color.Red }}"
+{% elif environnement == "congelateur" %} 
+  - value: -20
+    color: "{{ Color.Blue }}"
+  - value: -18
+    color: "{{ Color.Green }}"
+  - value: -16
+    color: "{{ Color.Red }}"   
+{% endif %}
+entities:
+  {% if entities %}
+    {% for a in entities %}
+  - entity: {{ a.entity }}
+    name: {{ a.name }}
+    {% endfor %}
+  {% else %}
+  - entity: {{ entity }}
+    name: {{ name }}
+  {% endif %}

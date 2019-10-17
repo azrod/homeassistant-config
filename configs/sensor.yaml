@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------- #
+#
+# sensor Configuration
+# File : sensor.yaml
+# 
+# ---------------------------------------------------------------- #
+
+# RFLINK 
+- platform: rflink
+  automatic_add: true
+
+# NUT 
+- platform: nut
+  name: APCUPS
+  host: !secret nut_host
+  username: !secret nut_login
+  password: !secret nut_password
+  resources:
+    - ups.status.display
+    - ups.load
+    - ups.realpower.nominal
+    - input.voltage
+    - battery.runtime
+    - battery.charge
+
+# TELEINFO https://github.com/Domochip/WirelessTeleInfo 
+- platform: mqtt
+  name: "Teleinfo ampere"
+  state_topic: "teleinfo/811775938857/IINST"
+  unit_of_measurement: "A"
+- platform: mqtt
+  name: "Teleinfo watt"
+  state_topic: "teleinfo/811775938857/IINST"
+  value_template: '{{ value | multiply(230) | float }}'
+  unit_of_measurement: "W"
+- platform: mqtt 
+  name: "Teleinfo index"
+  state_topic: "teleinfo/811775938857/BASE"
+  unit_of_measurement: "Wh"
+
+# TEMPLATE 
+- platform: template
+  sensors:
+    xiaomi_vacuum_main_brush_left:
+      friendly_name: "Aspirateur brosse principale"
+      value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'main_brush_left') }}"
+      unit_of_measurement: 'H'
+    xiaomi_vacuum_side_brush_left:
+      friendly_name: "Aspirateur brosse latérale"
+      value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'side_brush_left') }}"
+      unit_of_measurement: 'H'
+    xiaomi_vacuum_filter_left:
+      friendly_name: "Aspirateur Filtre"
+      value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'filter_left') }}"
+      unit_of_measurement: 'H'
+

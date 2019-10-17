@@ -1,0 +1,13 @@
+# ---------------------------------------------------------------- #
+#
+# Notify Configuration
+# File : notify.yaml
+# 
+# ---------------------------------------------------------------- #
+  - platform: huawei_lte
+    name: sms
+    recipient: 
+    - !secret phone_number_1
+  - platform: discord
+    name: discord
+    token: !secret discord_token

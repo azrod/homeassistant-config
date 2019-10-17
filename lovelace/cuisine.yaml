@@ -1,0 +1,59 @@
+# lovelace_gen
+{% set Param = {"hours":"48","pointperhour":"2"} %}
+{% set Color = {"Blue":'#12AFF3',"Green":'#25C60E',"Red":'#D91F19'} %}
+
+{% set entity_temperature = [
+                          {"entity":"sensor.zigate_00158d0002c770dc_temperature","name":"Cellier","environnement":"interieur"},
+                          {"entity":"sensor.oregontemphygro_2dfe_temp","name":"Congélateur","environnement":"congelateur"},
+                          {"entity":"sensor.zigate_00158d0002b72523_temperature","name":"Frigo","environnement":"frigo"},
+                          {"entity":"sensor.zigate_00158d000227f221_temperature","name":"Cave a vin","environnement":"caveavin"}
+]%}
+
+{% set entity_humidity = [
+                          {"entity":"sensor.zigate_00158d0002c770dc_humidity","name":"Cellier","environnement":"interieur"},
+                          {"entity":"sensor.oregontemphygro_2dfe_hum","name":"Congélateur","environnement":"congelateur"},
+                          {"entity":"sensor.zigate_00158d0002b72523_humidity","name":"Frigo","environnement":"frigo"},
+                          {"entity":"sensor.zigate_00158d000227f221_humidity","name":"Cave a vin","environnement":"caveavin"}
+]%}
+
+type: custom:layout-card
+cards:
+  - type: vertical-stack
+    cards: 
+      - type: entities
+        show_header_toggle: false
+        title: Contrôles
+        entities:
+          - entity: switch.prise1_relay
+            name: Friteuse
+      - type: entities
+        show_header_toggle: false
+        title: Status
+        entities:
+          - entity: binary_sensor.zigate_00158d0002e214e0_onoff
+            name: Porte cellier
+          - entity: binary_sensor.zigate_00158d000283072c_zone_status
+            name: Fuite machine à laver
+      - type: entities
+        show_header_toggle: false
+        title: AUtomatisation
+        entities:
+          - entity: automation.notif_temperature_frigo
+            name: Notification temperature frigo
+          - entity: automation.notif_temperature_congelateur
+            name: Notification temperature congélateur
+          - entity: automation.notif_sonde_fuite_machinealaver
+            name: Notification fuite machine a laver
+  {% for c in entity_temperature -%}
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: {{ c.entity }}
+      name: Température {{ c.name }}
+      environnement: {{ c.environnement }}
+  {% endfor %}
+  {% for c in entity_humidity -%}
+  - !include
+    - templates/graph/humidity.yaml
+    - entity: {{ c.entity }}
+      name: Humidité {{ c.name }}
+  {% endfor %}

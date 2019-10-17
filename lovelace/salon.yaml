@@ -1,0 +1,120 @@
+# lovelace_gen
+{% set Param = {"hours":"48","pointperhour":"2"} %}
+{% set Color = {"Blue":'#12AFF3',"Green":'#25C60E',"Red":'#D91F19'} %}
+{% set graphcard_entity = [
+                          {"entity":"sensor.zigate_00158d0002c99bd4","name":"Salon"}
+]%}
+
+type: custom:layout-card
+cards:
+#  - type: custom:compact-custom-header
+  - type: vertical-stack
+    cards: 
+      {% for c in graphcard_entity -%}
+      - type: custom:mini-graph-card
+        hours_to_show: {{ Param.hours }}
+        hour24: true
+        points_per_hour: {{ Param.pointperhour }}
+        color_thresholds:
+          - value: 10
+            color: "{{ Color.Blue }}"
+          - value: 20
+            color: "{{ Color.Green }}"
+          - value: 24
+            color: "{{ Color.Red }}"
+        entities:
+          - entity: {{c.entity}}_temperature
+            name: Température {{c.name}}
+      - type: custom:mini-graph-card
+        hours_to_show: {{ Param.hours }}
+        hour24: true
+        line_color: '{{ Color.Blue }}'
+        points_per_hour: {{ Param.pointperhour }}
+        entities:
+          - entity: {{c.entity}}_humidity
+            name: Humidité {{c.name}}
+      {% endfor %}  
+  # CONFIGURATION TV
+  {% set TV = [
+    [{"entity":"script.group_tv_on_off","name":"ON/OFF Tous","icon":"play-box-outline"}],
+    [{"entity":"script.sound_bar_on_off","name":"ON/OFF Barre de son","icon":"volume-high"},
+     {"entity":"script.tv_on_off","name":"ON/OFF TV","icon":"television-classic"}],
+    [{"entity":"script.sound_bar_vol_up","name":"Volume Plus","icon":"volume-plus"},
+     {"entity":"script.sound_bar_vol_down","name":"Volume moins","icon":"volume-minus"}]
+    ]%}
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: icon
+        entity: device_tracker.c0_41_f6_93_75_a9
+        layout: icon_label
+        show_state: false
+        show_label: true
+        show_name: false
+        tap_action:
+          action: more-info
+        label: "TV"
+        state:
+          - value: "home"
+            color: green
+            icon: mdi:television
+          - value: "not_home"
+            color: red
+            icon: mdi:television-off
+          - operator: default
+            color: grey
+            icon: mdi:television
+      {% for T in TV %}
+      - type: horizontal-stack
+        cards:
+          {% for L in T %}
+          - type: "custom:button-card"
+            entity: {{ L.entity }}
+            color_type: card
+            color: blue
+            show_icon: false
+            size: 10%
+            name: {{ L.name }}
+          {% endfor %}
+      {% endfor %}
+  # CONFIGURATIONS DE L'ECLAIRAGE
+  {% set Lights = [
+    [{"entity":"light.salon_lampe_1","name":"Lampe salon 1"},
+     {"entity":"light.salon_lampe_2","name":"Lampe salon 2"}],
+    [{"entity":"light.salon_lampe_4","name":"Lampe salon 4"},
+     {"entity":"light.totem_light","name":"Lampe lanterne"}]
+    ]%}
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: label-card
+        color: rgb(233, 202, 9)
+        name: "Lumières"
+        style:
+          - font-size: 19px
+      {% for Light in Lights %}
+      - type: horizontal-stack
+        cards:
+          {% for L in Light %}
+          - type: "custom:button-card"
+            entity: {{ L.entity }}
+            color_type: card
+            color: auto
+            size: 10%
+            name: {{ L.name }}
+            state: 
+              - value: "off"
+                color: grey
+              - value: "on"
+                color: rgb(233, 202, 9) 
+          {% endfor %}
+      {% endfor %}
+
+#      - type: "custom:button-card"
+#        color_type: card
+#       .: automation.btn_light_salon_far_cry
+#       .tion:
+#       .on: turn_on
+#       ."FarCry Mode"
+#       .tate: false
+#       . auto

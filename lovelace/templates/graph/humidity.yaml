@@ -1,0 +1,18 @@
+# lovelace_gen
+{% set Color = {"Blue":'#12AFF3',"Green":'#25C60E',"Red":'#D91F19'} %}
+
+type: custom:mini-graph-card
+hours_to_show: 48
+hour24: true
+points_per_hour: 2
+# line_color: {{ Color.Blue }}
+entities:
+  {% if entities %}
+    {% for a in entities %}
+  - entity: {{ a.entity }}
+    name: {{ a.name }}
+    {% endfor %}
+  {% else %}
+  - entity: {{ entity }}
+    name: {{ name }}
+  {% endif %}

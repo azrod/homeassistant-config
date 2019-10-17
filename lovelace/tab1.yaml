@@ -1,0 +1,168 @@
+# lovelace_gen
+{% set Sensors = [
+  [{"entity":"binary_sensor.zigate_00158d0002e214e0_onoff","name":"Cellier","icon_true":"door-open","icon_false":"door-closed","color_true":"green","color_false":"orange"},
+  {"entity":"binary_sensor.zigate_00158d0002c63823_presence","name":"IR BAL","icon_true":"motion-sensor","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"}],
+  [{"entity":"binary_sensor.zigate_00158d0002b6e6d7_presence","name":"IR Porte","icon_true":"motion-sensor","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"},
+  {"entity":"binary_sensor.zigate_00158d00027741fa_zone_status","name":"Fuite baignoire","icon_true":"close-circle-outline","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"}],
+  [{"entity":"binary_sensor.zigate_00158d000283072c_zone_status","name":"Fuite cellier","icon_true":"close-circle-outline","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"},
+  {"entity":"binary_sensor.zigate_00158d0002eab5d6_onoff","name":"Bureau","icon_true":"door-open","icon_false":"door-closed","color_true":"orange","color_false":"green"}]
+
+
+  
+]%}
+
+type: custom:layout-card
+cards:
+#  - type: custom:compact-custom-header
+#    options: clock
+#    clock_format: 24
+#    menu: show
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: label-card
+        color: auto
+        name: "Capteurs"
+        style:
+          - font-size: 19px
+      {% for Sensor in Sensors %}
+      - type: horizontal-stack
+        cards:
+          {% for L in Sensor %}
+          - type: "custom:button-card"
+            entity: {{ L.entity }}
+            color_type: card
+            color: auto
+            size: 10%
+            name: {{ L.name }}
+            tap_action:
+              action: more-info
+            state: 
+              - value: "off"
+                icon: mdi:{{ L.icon_false }}
+                color: {{ L.color_false }}
+              - value: "on"
+                icon: mdi:{{ L.icon_true }}
+                color: {{ L.color_true }} 
+          {% endfor %}
+      {% endfor %}
+{% set Zwave = [
+  {"entity":"zwave.fibaro_system_fgd212_dimmer_2","label":"Zwave Fibaro Ouest"},
+  {"entity":"zwave.qubino_zmnhdd1_z_wave_plus_flush_dimmer","label":"Zwave Fibaro terrasse"},
+  {"entity":"zwave.sigma_designs_uzb_zwave_usb_adapter","label":"Zwave USB"}
+]%}
+#  - type: vertical-stack
+#    cards:
+      - type: "custom:button-card"
+        color_type: label-card
+        color: auto
+        name: "Zwave"
+        style:
+          - font-size: 19px
+    {% for zw in Zwave %}
+      - type: "custom:button-card"
+        color_type: icon
+        layout: icon_label
+        entity: {{ zw.entity }}
+        label: >
+          [[[
+            return '{{ zw.label }}';
+          ]]]
+        show_label: true
+        show_name: false
+        size: 20%
+        state:
+          - value: "ready"
+            color: green
+            icon: mdi:check-circle-outline
+          - operator: default
+            color: red
+            icon: mdi:shield-check
+            styles:
+              card:
+                - animation: blink 2s ease infinite
+    {% endfor %}
+{% set TeleInfo = [
+  {"entity":"sensor.teleinfo_watt","label":"Teleinfo Watt"},
+  {"entity":"sensor.teleinfo_ampere","label":"Teleinfo Ampere"}
+]%}
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: label-card
+        color: auto
+        name: "TeleInfo"
+        style:
+          - font-size: 19px
+    {% for ti in TeleInfo %}
+      - type: custom:mini-graph-card
+        hours_to_show: 12
+        hour24: true
+        points_per_hour: 30
+        show:
+          graph: bar
+        entities:
+          - entity: "{{ ti.entity }}"
+            name: "{{ ti.label }}"
+    {% endfor %}
+{% set FlightRadar = [
+  {"entity":"binary_sensor.fr24_feeder_link_connected"},
+  {"entity":"binary_sensor.fr24_feeder_receiver_connected"},
+  {"entity":"sensor.fr24_feeder_aircraft_tracked"},
+  {"entity":"sensor.fr24_feeder_aircraft_uploaded"},
+  {"entity":"sensor.fr24_feeder_radar_code"},
+  {"entity":"sensor.fr24_feeder_version"}
+]%}
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: label-card
+        color: auto
+        name: "FlightRadar"
+        style:
+          - font-size: 19pxa
+      - type: entities
+        show_header_toggle: false
+        entities:
+        {% for i in FlightRadar %}
+          - "{{ i.entity }}" 
+        {% endfor %}
+      - type: "custom:button-card"
+        color_type: label-card
+        color: auto
+        name: "APC UPS"
+        style:
+          - font-size: 19pxa
+      - type: vertical-stack
+        entities:
+          - entity: sensor.apcups_status
+            name: Status
+          - entity: sensor.apcups_input_voltage
+            name: Input Voltage
+          - entity: sensor.apcups_battery_runtime
+            name: Battery Runtime
+        theme: default
+        # title: CyberPower UPS CP1500PFCLCD
+        type: glance
+      - type: horizontal-stack
+        cards:
+        - entity: sensor.apcups_battery_charge
+          max: 100
+          min: 0
+          name: Batterie
+          severity:
+            green: 0
+            red: -80
+            yellow: -30
+          theme: default
+          type: gauge
+        - entity: sensor.apcups_load
+          max: 100
+          min: 0
+          name: Charge
+          severity:
+            green: 0
+            red: 90
+            yellow: 70
+          theme: default
+          type: gauge

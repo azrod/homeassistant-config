@@ -1,0 +1,24 @@
+customize:
+  ################################################
+  ## Node Anchors
+  ################################################
+  package.node_anchors:
+    customize: &customize
+      package: 'batterys'
+    expose: &expose
+      <<: *customize
+      haaska_hidden: false
+      homebridge_hidden: false
+  ################################################
+  ## Group
+  ################################################
+  group.battery_alert:
+    <<: *customize
+    friendly_name: "Battery Alert"
+    icon: mdi:steam
+  ################################################
+  ## Automation
+  ################################################
+  automation.battery_alert:
+    <<: *customize
+    friendly_name: "Battery Alert"

@@ -1,0 +1,72 @@
+- platform: template
+  sensors:
+    battery_zigate_00158d00027741fa:
+      friendly_name: SONDE FUITE SDB
+      value_template: '{{ state_attr("zigate.00158d00027741fa", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002c99bd4:
+      friendly_name: TEMP SALON
+      value_template: '{{ state_attr("zigate.00158d0002c99bd4", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002e214e0:
+      friendly_name: PORTE CELLIER
+      value_template: '{{ state_attr("zigate.00158d0002e214e0", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002b72523:
+      friendly_name: TEMP3 -- FRIGO
+      value_template: '{{ state_attr("zigate.00158d0002b72523", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002b6e6d7:
+      friendly_name: IR EXT PORTE
+      value_template: '{{ state_attr("zigate.00158d0002b6e6d7", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002b5403f:
+      friendly_name: TEMP5 - CHAMBRE
+      value_template: '{{ state_attr("zigate.00158d0002b5403f", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d00026bb4c6:
+      friendly_name: zigate bouton salon
+      value_template: '{{ state_attr("zigate.00158d00026bb4c6", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002eab5d6:
+      friendly_name: PORTE INACTIF
+      value_template: '{{ state_attr("zigate.00158d0002eab5d6", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002c770dc:
+      friendly_name: LUMI lumi.sensor_ht (2c32) 00158d0002c770dc
+      value_template: '{{ state_attr("zigate.00158d0002c770dc", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d000227f221:
+      friendly_name: TEMP7 - EXTERIEUR
+      value_template: '{{ state_attr("zigate.00158d000227f221", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002b8e16a:
+      friendly_name: TEMP4 SDB
+      value_template: '{{ state_attr("zigate.00158d0002b8e16a", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002c8bd7b:
+      friendly_name: TEMP6 - BUREAU
+      value_template: '{{ state_attr("zigate.00158d0002c8bd7b", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d0002c63823:
+      friendly_name: IR EXT BAL
+      value_template: '{{ state_attr("zigate.00158d0002c63823", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery
+    battery_zigate_00158d000275dd2b:
+      friendly_name: LUMI lumi.sensor_cube.aqgl01 (d0a8) 00158d000275dd2b
+      value_template: '{{ state_attr("zigate.00158d000275dd2b", "battery_level") }}'
+      unit_of_measurement: '%'
+      device_class: battery

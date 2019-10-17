@@ -1,0 +1,4 @@
+battery_alert:
+  control: hidden
+  entities:
+    - automation.battery_alert

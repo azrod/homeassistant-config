@@ -1,0 +1,8 @@
+force_light_ext:
+  name: Force eclairage exterieur
+  initial: off
+
+piscine_marche_force:
+  name: Piscine en marche forcé
+  initial: off
+  icon: mdi:pool

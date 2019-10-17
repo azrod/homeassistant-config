@@ -1,0 +1,55 @@
+# lovelace_gen
+
+type: custom:layout-card
+cards:
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d0002c99bd4_temperature
+      name: Salon
+      environnement: interieur
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d0002faa0f9_temperature
+      name: Salle de bain
+      environnement: interieur
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d0002c770dc_temperature
+      name: Cellier
+      environnement: interieur
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d0002b5403f_temperature
+      name: Chambre
+      environnement: interieur
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d0002c8bd7b_temperature
+      name: Bureau
+      environnement: interieur
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d0002b72523_temperature
+      name: Frigo
+      environnement: frigo
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.oregontemphygro_2dfe_temp
+      name: Congélateur
+      environnement: congelateur
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d000227f221_temperature
+      name: Cave a vin
+      environnement: caveavin
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d00036b917b_temperature
+      name: Extérieur
+      environnement: exterieur
+  - !include
+    - templates/graph/temperature.yaml
+    - entity: sensor.zigate_00158d0002faa0f9_temperature
+      name: Abris de Jardin
+      environnement: exterieur
+  

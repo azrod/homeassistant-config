@@ -1,0 +1,367 @@
+# ========================================================================================= #
+#                                                                                           #
+#       AUTOMATION VACCUM                                                                   #
+#                                                                                           #
+#                                                                                           #
+#                                                                                           #
+# ========================================================================================= #
+  - alias: Start Nettoyage d'une pièce
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_select.vacuum_room
+        from: 'Choisir la piece'
+    condition:
+      - condition: state
+        entity_id: 'binary_sensor.zigate_00158d0002e214e0_onoff'
+        state: 'on'
+    action:
+      - service: script.turn_on
+        data_template:
+          entity_id: >
+            {% if is_state("input_select.vacuum_room", "Cuisine") %}
+              script.vacuum_cuisine
+            {% elif is_state("input_select.vacuum_room", "Salon") %}
+              script.vacuum_salon
+            {% elif is_state("input_select.vacuum_room", "Cellier") %}
+              script.vacuum_cellier
+            {% elif is_state("input_select.vacuum_room", "Couloir") %}
+              script.vacuum_couloir
+            {% elif is_state("input_select.vacuum_room", "Salle de bain") %}
+              script.vacuum_sdb
+            {% elif is_state("input_select.vacuum_room", "Toilette") %}
+              script.vacuum_toilette
+            {% elif is_state("input_select.vacuum_room", "Chambre") %}
+              script.vacuum_chambre
+            {% else %}
+            {% endif %}
+      - service: input_select.select_option
+        entity_id: input_select.vacuum_room
+        data_template:
+          option: "Choisir la piece" 
+      - service: input_boolean.turn_off
+        entity_id: 
+          - input_boolean.room_cuisine
+          - input_boolean.room_salon
+          - input_boolean.room_cellier
+          - input_boolean.room_couloir
+          - input_boolean.room_sdb
+          - input_boolean.room_toilette
+          - input_boolean.room_chambre
+
+
+  - alias: Start Nettoyage d'une pièce
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_select.vacuum_zone
+        from: 'Choisir la zone'
+    condition:
+      - condition: state
+        entity_id: 'binary_sensor.zigate_00158d0002e214e0_onoff'
+        state: 'on'
+    action:
+      - service: script.turn_on
+        data_template:
+          entity_id: >
+            {% if is_state("input_select.vacuum_zone", "Zone Devant Porte") %}
+              script.vacuum_zone_devant_porte
+            {% elif is_state("input_select.vacuum_zone", "Zone Salon") %}
+              script.vacuum_zone_salon
+            {% elif is_state("input_select.vacuum_zone", "Zone Chambre") %}
+              script.vacuum_zone_chambre
+            {% elif is_state("input_select.vacuum_zone", "Zone Baie Vitrée") %}
+              script.vacuum_zone_baie_vitree
+            {% else %}
+            {% endif %}
+      - service: input_select.select_option
+        entity_id: input_select.vacuum_zone
+        data_template:
+          option: "Choisir la zone" 
+      - service: input_boolean.turn_off
+        entity_id: 
+          - input_boolean.zone_devant_porte
+          - input_boolean.zone_salon
+          - input_boolean.zone_chambre
+          - input_boolean.zone_baie_vitree
+
+  - alias: Start Fail Nettoyage d'une pièce
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_select.vacuum_room
+        from: 'Choisir la piece'
+      - platform: state
+        entity_id: input_select.vacuum_zone
+        from: 'Choisir la zone'
+    condition:
+      - condition: state
+        entity_id: 'binary_sensor.zigate_00158d0002e214e0_onoff'
+        state: 'off'
+    action:
+      - service: input_select.select_option
+        entity_id: input_select.vacuum_zone
+        data_template:
+          option: "Choisir la zone" 
+      - service: input_select.select_option
+        entity_id: input_select.vacuum_room
+        data_template:
+          option: "Choisir la pièce" 
+      - service: notify.discord
+        data:
+          target: ['623247992119361560']
+          message: "[NESTOR] Impossible de nettoyer la porte du cellier est fermée"
+
+  - alias: Start Nettoyage Cuisine
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_cuisine
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_cuisine
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_cuisine
+
+  - alias: Start Nettoyage Salon
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_salon
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_salon
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_salon
+
+  - alias: Start Nettoyage Cellier
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_cellier
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_cellier
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_cellier
+
+  - alias: Start Nettoyage Couloir
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_couloir
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_couloir
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_couloir
+
+  - alias: Start Nettoyage Salle de bain
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_sdb
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_sdb
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_sdb
+
+  - alias: Start Nettoyage Toilette
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_toilette
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_toilette
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_toilette
+
+  - alias: Start Nettoyage Chambre
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_chambre
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_chambre
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_chambre
+
+  - alias: Start Nettoyage Zone devant porte
+    trigger:
+      - platform: state
+        entity_id: input_boolean.zone_devant_porte
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_devant_porte
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.zone_devant_porte
+
+  - alias: Start Nettoyage Zone salon
+    trigger:
+      - platform: state
+        entity_id: input_boolean.zone_salon
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_salon
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.zone_salon
+
+  - alias: Start Nettoyage Zone chambre
+    trigger:
+      - platform: state
+        entity_id: input_boolean.zone_chambre
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_chambre
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.zone_chambre
+
+  - alias: Start Nettoyage Zone Baie Vitree
+    trigger:
+      - platform: state
+        entity_id: input_boolean.zone_baie_vitree
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_baie_vitree
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.zone_baie_vitree
+
+  - id: Automation nettoyage zone baie vitree
+    alias: Automation nettoyage zone baie vitree
+    trigger:
+      - at: '03:30:00'
+        platform: time
+    condition:
+      condition: and
+      conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue 
+          - wed
+          - thu
+          - fri
+          - sat
+          - sun
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_baie_vitree
+
+  - id: Automation nettoyage zone salon
+    alias: Automation nettoyage zone salon
+    trigger:
+      - at: '11:00:00'
+        platform: time
+    condition:
+      condition: and
+      conditions:
+      - condition: time
+        weekday:
+          - mon
+          - wed
+          - fri
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_salon
+
+  - id: Automation nettoyage cuisine nuits
+    alias: Automation nettoyage cuisine nuits
+    trigger:
+      - at: '04:00:00'
+        platform: time
+    condition:
+      condition: and
+      conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue 
+          - wed
+          - thu
+          - fri
+          - sat
+          - sun
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_cuisine
+
+  - id: Automation nettoyage devant porte nuits
+    alias: Automation nettoyage devant porte nuits
+    trigger:
+      - at: '03:00:00'
+        platform: time
+    condition:
+      condition: and
+      conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue 
+          - wed
+          - thu
+          - fri
+          - sat
+          - sun
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_devant_porte
+
+  - id: Automation nettoyage devant porte
+    alias: Automation nettoyage devant porte
+    trigger:
+      - at: '10:30:00'
+        platform: time
+    condition:
+      condition: and
+      conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue 
+          - wed
+          - thu
+          - fri
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_devant_porte
+
+  - id: Automation nettoyage zone chambre
+    alias: Automation nettoyage zone chambre
+    trigger:
+      - at: '14:00:00'
+        platform: time
+    condition:
+      condition: and
+      conditions:
+      - condition: time
+        weekday:
+          - mon
+          - wed
+          - fri
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_zone_chambre
+
+  - id: Notification Vidage aspirateur
+    alias: "[Notif] Vidage aspirateur"
+    trigger:
+      - platform: time
+        at: '20:00:00'
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - wed
+          - fri
+    action:
+      - service: notify.discord
+        data:
+          target: [!secret discord_target]
+          message: "[NESTOR] Vider l'aspirateur"

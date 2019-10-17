@@ -1,0 +1,55 @@
+# AUTOMATION BOUTON FRITEUSE 
+- id: btn_cellier_onoff
+  alias: '[BTN] On/OFF Friteuse'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.zigate_00158d0002f98bcf_onoff
+    from: 'off'
+    to: 'on'
+    for: 
+      seconds: 1
+  action:
+    - service: switch.toggle
+      data:
+        entity_id:
+          - switch.prise1_relay
+
+- id: notification sonde fuite machinealaver
+  alias: "[Notif] sonde fuite machinealaver"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.zigate_00158d000283072c_zone_status
+    from: 'off'
+    to: 'on'
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "Fuite d'eau machine a laver"
+
+
+- id: notification temperature frigo
+  alias: "[Notif] Temperature Frigo"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.zigate_00158d0002b72523_temperature
+      above: 9
+  condition: []
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "La tempéature actuelle du frigo est de {{ states.zigate_00158d0002b72523_temperature.state }}C"
+
+- id: notification temperature congélateur
+  alias: "[Notif] Temperature congélateur"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.oregontemphygro_2dfe_temp
+      above: -13
+  condition: []
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "La température actuele du congélateur est de {{ sensor.oregontemphygro_2dfe_temp }C"

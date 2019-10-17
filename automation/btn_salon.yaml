@@ -1,0 +1,172 @@
+# --------------------------------------------------------- #
+#     Controle du bouton switch du salon                    #
+#                                                           #
+#         V 1.2  -  20/04/2019                              # 
+# --------------------------------------------------------- #
+
+- id: btn_light_salon_on_off
+  alias: "[BTN] Light On/Off Salon"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.zigate_00158d00026bb4c6_onoff
+    from: 'off'
+    to: 'on'
+    for: 
+      seconds: 1
+  action:
+    - service: light.toggle
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+          - light.totem_light
+
+- id: btn_light_salon_far_cry
+  alias: "[BTN] Far Cry Mode"
+  trigger:
+    platform: state
+    entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+    from: '0'
+    to: '3'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.totem_light
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+          
+- id: btn_light_salon_off
+  alias: "[BTN] Light Off Salon"
+  trigger:
+    platform: state
+    entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+    from: '0'
+    to: '4'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+          - light.totem_light
+
+- id: btn_tv_on_off
+  alias: "[BTN] Start/Stop TV"
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+    from: '0'
+    to: '2'
+  action:
+    service: script.turn_on
+    entity_id: script.group_tv_on_off
+
+- id: telecommande_tv_on_off
+  alias: "[TELECOMMANDE] Start/Stop TV"
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: switch.bouton_2
+    from: 'off'
+    to: 'on'
+  action:
+    - service: script.turn_on
+      entity_id: script.group_tv_on_off
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.bouton_2
+
+- id: telecommande_salon_on_off
+  alias: "[TELECOMMANDE] ON/OFF lampes salon"
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: switch.bouton_1
+    from: 'off'
+    to: 'on'
+  action:
+    - service: light.toggle
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+          - light.totem_light
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.bouton_1
+
+- id: telecommande_salon_farcry
+  alias: "[TELECOMMANDE] FARCRY lampes"
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: switch.bouton_3
+    from: 'off'
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.totem_light
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.bouton_3
+
+
+- id: telecommande_salon_off
+  alias: "[TELECOMMANDE] OFF lampes salon"
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: switch.bouton_8
+    from: 'off'
+    to: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+          - light.totem_light
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.bouton_8
+
+- id: telecommande_exterieur_off
+  alias: "[TELECOMMANDE] ON/OFF lampes extérieur"
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: switch.bouton_7
+    from: 'off'
+    to: 'on'
+  action:
+    - service: light.toggle
+      data:
+        entity_id:
+          - light.qubino_zmnhdd1_z_wave_plus_flush_dimmer_level
+          - light.fibaro_system_fgd212_dimmer_2_level_2
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.bouton_7

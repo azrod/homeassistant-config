@@ -1,0 +1,55 @@
+# ---------------------------------------------------------------- #
+#
+# Light Configuration 
+# File : light.yaml
+# 
+# ---------------------------------------------------------------- #
+
+# MILIGHT intégration 
+# https://github.com/sidoh/esp8266_milight_hub 
+
+- platform: mqtt
+  name: "Salon all lights"
+  schema: json
+  state_topic: "lights/states/0x524E/rgbw/0"
+  command_topic: "lights/0x524E/rgbw/0"
+  color_temp: false
+  rgb: true
+  brightness: true
+  effect: false
+- platform: mqtt
+  schema: json
+  name: "Salon Lampe 1"
+  state_topic: "lights/states/0x524E/rgbw/1"
+  command_topic: "lights/0x524E/rgbw/1"
+  color_temp: false
+  rgb: true
+  brightness: true
+  effect: false
+- platform: mqtt
+  schema: json
+  name: "Salon Lampe 2"
+  state_topic: "lights/states/0x524E/rgbw/2"
+  command_topic: "lights/0x524E/rgbw/2"
+  color_temp: false
+  rgb: true
+  brightness: true
+  effect: false
+- platform: mqtt
+  schema: json
+  name: "Salon Lampe 3"
+  state_topic: "lights/states/0x524E/rgbw/3"
+  command_topic: "lights/0x524E/rgbw/3"
+  color_temp: false
+  rgb: true
+  brightness: true
+  effect: false
+- platform: mqtt
+  schema: json
+  name: "Salon Lampe 4"
+  state_topic: "lights/states/0x524E/rgbw/4"
+  command_topic: "lights/0x524E/rgbw/4"
+  color_temp: false
+  rgb: true
+  brightness: true
+  effect: false

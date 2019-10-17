@@ -1,0 +1,68 @@
+
+# CONFIGURATION FIBARO
+# Fibaro FGD-212
+light.fibaro_system_fgd212_dimmer_2_level_2:
+  friendly_name: Lampe Extérieur Ouest
+
+# ZIGBEE
+sensor.zigate_00158d0002c99bd4_temperature:
+  friendly_name: Sonde 1 - Temperature
+
+sensor.zigate_00158d0002c99bd4_humidity:
+  friendly_name: Sonde 1 - Humidité
+
+sensor.zigate_00158d0002c770dc_humidity:
+  friendly_name: Extérieur - Humidité
+
+sensor.zigate_00158d0002c770dc_temperature:
+  friendly_name: Extérieur - Temperature
+
+binary_sensor.zigate_00158d0002e214e0_onoff:
+  friendly_name: Porte Cellier
+
+binary_sensor.zigate_00158d0002eab5d6_onoff:
+  friendly_name: Porte Bureau 
+
+zigate.00158d0002c63823:
+  frinedly_name: Device IR 1
+
+binary_sensor.zigate_00158d0002c63823_presence:
+  friendly_name: IR BAL
+
+binary_sensor.zigate_00158d0002b6e6d7_presence:
+  friendly_name: IR porte
+
+binary_sensor.zigate_00158d00032bd376_presence:
+  friendly_bame: IR terrasse 1
+
+binary_sensor.zigate_00158d0002f3c9b8_presence:
+  friendly_name: IR terrasse 2
+
+binary_sensor.zigate_00158d00026bb4c6_onoff:
+  friendly_name: Bouton 1
+
+binary_sensor.zigate_00158d00027741fa_zone_status:
+  frinedly_name: Sonde Fuite 
+
+device_tracker.34_03_de_17_80_d0:
+  frinedly_name: Camera 2
+
+device_tracker.34_03_de_4f_86_ee:
+  frinedly_name: Camera 1
+
+device_tracker.e4_db_6d_ab_cd_2b:
+  friendly_name: Xiaomi IR
+
+device_tracker.android_d1194b4582084b0a:
+  friendly_name: Téléphone Elodie
+
+
+# Sonde extrieur 
+sensor.zigate_00158d0002faa0f9_temperature:
+  frinedly_name: Abris Jardin - Température
+
+sensor.zigate_00158d0002faa0f9_humidity:
+  frinedly_name: Abris Jardin - Humidité
+
+zigate.00158d0002faa0f9:
+  frinedly_name: Abris Jardin - Sonde

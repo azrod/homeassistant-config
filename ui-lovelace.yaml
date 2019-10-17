@@ -1,0 +1,102 @@
+# lovelace_gen
+
+title: Home
+
+resources:
+  - url: !file /local/custom-lovelace/layout-card.js
+    type: module
+  - url: !file /local/custom-lovelace/monster-card.js
+    type: module
+  - url: !file /local/custom-lovelace/button-card.js
+    type: module
+  - url: !file /local/custom-lovelace/mini-media-player.js
+    type: module
+  - url: !file /local/custom-lovelace/mini-graph-card-bundle.js
+    type: module
+  - url: !file /local/custom-lovelace/vertical-stack-in-card.js
+    type: module
+  - url: !file /local/custom-lovelace/card-tools.js
+    type: module
+  - url: !file /local/custom-lovelace/slider-entity-row.js
+    type: module
+
+
+views:
+  - title: TAB1
+    icon: mdi:home
+    panel: true
+    cards:
+      - !include lovelace/tab1.yaml
+  - title: Salon
+    icon: mdi:sofa
+    panel: true
+    cards:
+      - !include lovelace/salon.yaml
+  - title: Cuisine
+    icon: mdi:fridge-outline
+    panel: true
+    cards:
+      - !include lovelace/cuisine.yaml
+  - title: Jardin
+    icon: mdi:flower
+    panel: true
+    cards:
+      - !include lovelace/jardin.yaml
+  - title: VACCUM
+    icon: mdi:robot-vacuum
+    panel: true
+    cards:
+      - !include lovelace/vaccum.yaml
+  - title: THERMAL
+    icon: mdi:thermometer-lines
+    panel: true
+    cards:
+      - !include lovelace/thermal.yaml
+  - title: AUTOMATION
+    icon: mdi:home-automation
+    panel: true
+    cards:
+      - !include lovelace/automation.yaml
+#  - title: INTERNET
+#    icon: mdi:home-automation
+#    panel: true
+#    cards:
+#      - !include internet.yaml
+  - title: BATTERY
+    icon: mdi:battery-50
+    panel: true
+    cards:
+      - !include lovelace/battery.yaml
+
+
+  - title: TODO
+    icon: mdi:markdown
+    panel: true
+    cards:
+      - type: custom:layout-card
+        cards:
+          - type: markdown
+            content: >
+              ## Todo 
+                * Resync sonde fuite SDB
+                * Alerte porte ouverte
+                * https://www.home-assistant.io/components/github/
+                * https://www.home-assistant.io/components/scrape/
+          - type: entities
+            title: Admin Tools
+            show_header_toggle: false    
+            entities:
+              - type: weblink
+                name: EspHome
+                url: https://esphome.i.home/
+                icon: mdi:car-esp
+              - type: weblink
+                name: Firewall
+                url: https://fw.home/
+                icon: mdi:shield-home
+          - type: entities
+            title: Admin Control
+            show_header_toggle: false    
+            entities:
+              - entity: input_boolean.zigate_permit_join
+                name: Permit Join Zigate 30s

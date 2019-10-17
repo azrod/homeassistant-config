@@ -1,0 +1,81 @@
+# ---------------------------------------------------------------- #
+#
+# Home Assistant Configuration
+# File : configuration.yaml
+# 
+# ---------------------------------------------------------------- #
+homeassistant:
+  name: Home
+  customize: !include customize.yaml
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: 0
+  unit_system: metric
+  time_zone: Europe/Paris
+  packages: 
+    zigate: !include packages/zigate.yaml 
+    pkg_cellier: !include_dir_named packages/cellier/
+    pkg_vacuum: !include_dir_named packages/vacuum/
+    pkg_battery: !include_dir_named packages/battery/
+    pkg_fr24: !include_dir_named packages/fr24/
+
+rflink:
+  port: /dev/ttyUSB1
+
+lovelace_gen:
+
+lovelace:
+  mode: yaml
+
+zwave:
+  usb_path: /dev/ttyACM0
+  device_config: !include zwave_device_config.yaml
+
+mqtt:
+  broker: !secret mqtt_host
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  discovery: true
+  discovery_prefix: homeassistant
+
+zigate:
+  enable_led : false
+
+recorder:
+  purge_keep_days: 15
+  db_url: !secret db_url
+
+http:
+  base_url: !secret base_url
+
+# Huawei_LTE 
+huawei_lte:
+  - url: !secret huawei_lte_url
+    username: !secret huawei_lte_username
+    password: !secret huawei_lte_password
+
+weather: 
+frontend:
+  themes: !include_dir_merge_named themes
+config:
+updater:  
+discovery:
+history:
+logbook:
+sun:
+system_health:
+
+# INCLUDE
+
+group: !include configs/groups.yaml
+automation old: !include_dir_merge_list automation/
+input_boolean: !include configs/input_boolean.yaml
+script: !include configs/scripts.yaml
+switch: !include configs/switch.yaml
+remote: !include configs/remote.yaml
+sensor: !include configs/sensor.yaml
+light: !include configs/light.yaml
+google_assistant: !include configs/googleassistant.yaml
+notify: !include configs/notify.yaml
+logger: !include configs/logger.yaml
+device_tracker: !include configs/device_tracker.yaml

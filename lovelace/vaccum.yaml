@@ -1,0 +1,154 @@
+# lovelace_gen
+
+{% set InputSelect = [
+      {"entity":"input_select.vacuum_room"},
+      {"entity":"input_select.vacuum_zone"}
+]%}
+
+{% set SensorLine1 = [
+      {"entity":"sensor.vacuum_cleaning_time"},
+      {"entity":"sensor.vacuum_cleaned_area"},
+      {"entity":"sensor.vacuum_cleanmainbrush"},
+      {"entity":"sensor.vacuum_cleansidebrush"},
+      {"entity":"sensor.vacuum_cleanfilter"},
+      {"entity":"sensor.vacuum_sensordirtyleft"}
+]%}
+
+{% set Actions = [
+      {"action":"start","icon":"play"},
+      {"action":"pause","icon":"pause"},
+      {"action":"stop","icon":"stop"},
+      {"action":"return_to_base","icon":"home"},
+      {"action":"clean_spot","icon":"crosshairs"},
+      {"action":"locate","icon":"bell-ring"}
+]%}
+
+{% set Automations = [
+      [{"automation":"automation.automation_nettoyage_devant_porte","name":"Devant porte tous les matin la semaine"},
+      {"automation":"automation.automation_nettoyage_devant_porte_nuits","name":"Devant porte toute les nuits"}],
+      [{"automation":"automation.automation_nettoyage_cuisine_nuits","name":"Cuisine toute les nuits"},
+      {"automation":"automation.automation_nettoyage_zone_chambre","name":"Zone Chambre 3 fois par semaine"}],
+      [{"automation":"automation.automation_nettoyage_zone_salon","name":"Zone Salon 3 fois par semaine"},
+      {"automation":"automation.automation_nettoyage_zone_baie_vitree","name":"Zone baie vitée toute les nuits"}]
+]%}
+
+type: custom:layout-card
+cards:
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: "custom:button-card"
+        color_type: card
+        color: rgb(44, 109, 214)
+        name: "Aspirateur Nestor"
+        size: 10%
+        entity: vacuum.xiaomi_vacuum_cleaner
+        tap_action:
+          action: more-info
+        styles:
+          card:
+            - font-size: 19px
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            entity: sensor.vacuum_battery
+            show_state: true
+            show_name: false
+            color: rgb(40, 40, 40)
+            color_type: card
+            tap_action:
+              action: more-info
+            size: 10%
+            style:
+              - font-size: 15px
+          - type: "custom:button-card"
+            entity: sensor.vacuum_status
+            show_state: true
+            show_name: false
+            color_type: card
+            color: rgb(40, 40, 40)
+            size: 10%
+            style:
+              - font-size: 15px
+            state:                     
+              - value: 'Charging'
+                color: rgb(18, 170, 82)
+              - value: 'off'
+                color: rgb(198, 101, 3)
+              - value: 'Cleaning'
+                color: rgb(0, 185, 198)
+              - value: 'Returning home'
+                color: rgb(96, 160, 0)
+      - type: entities
+        title: Status
+        show_header_toggle: false
+        entities:
+          {% for Sensor in SensorLine1 %}
+          - {{ Sensor.entity }}
+          {% endfor %}
+
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: "custom:button-card"
+        color_type: label-card
+        color: rgb(44, 109, 214)
+        name: "Actions"
+        style:
+          - font-size: 19px
+      - type: "custom:button-card"
+        color_type: blank-card
+
+      - type: horizontal-stack
+        cards:
+          {% for Action in Actions %}
+          - type: "custom:button-card"
+            icon: mdi:{{ Action.icon }}
+            color_type: card
+            color: rgb(66, 134, 244)
+            action: service
+            size: 45%
+            tap_action:
+              action: call-service
+              service: vacuum.{{ Action.action }}
+              service_data:
+                entity_id: vacuum.xiaomi_vacuum_cleaner
+          {% endfor %}
+      - type: entities
+        show_header_toggle: false
+        title: Lancer un nettoyage
+        entities:
+        {% for Input in InputSelect -%}
+          - {{ Input.entity }}
+        {% endfor %}
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: "custom:button-card"
+        color_type: label-card
+        color: rgb(44, 109, 214)
+        name: "Automatisations"
+        style:
+          - font-size: 19px
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: entities
+        show_header_toggle: false
+        entities:
+          {% for auto in Automations %}
+          {% for A in auto %}
+          - entity: {{ A.automation }}
+            name: {{ A.name }}
+          {% endfor %}  
+          {% endfor %}

@@ -1,0 +1,27 @@
+# ---------------------------------------------------------------- #
+#
+# Switch Configuration
+# File : switch.yaml
+# 
+# ---------------------------------------------------------------- #
+# SWITCH 433MZH Sonoff
+- platform: rflink
+  device_defaults:
+    fire_event: true
+  devices:
+    ev1527_0fea25_08:
+      name: Bouton 1
+    ev1527_0fea25_0c:
+      name: Bouton 2
+    ev1527_0fea25_04:
+      name: Bouton 3
+    ev1527_0fea25_09:
+      name: Bouton 4
+    ev1527_0fea25_02:
+      name: Bouton 5
+    ev1527_0fea25_05:
+      name: Bouton 6
+    ev1527_0fea25_01:
+      name: Bouton 7
+    ev1527_0fea25_03:
+      name: Bouton 8

@@ -1,0 +1,3 @@
+{% set ColorHtml_Blue = '#12AFF3' %}
+{% set ColorHtml_Green = '#25C60E' %}
+{% set ColorHtml_Red = '#D91F19' %}

@@ -1,0 +1,230 @@
+# lovelace_gen
+{% set Param = {"hours":"48","pointperhour":"2"} %}
+{% set Color = {"Blue":'#12AFF3',"Green":'#25C60E',"Red":'#D91F19'} %}
+
+{% set Lights = [
+  [{"entity":"light.fibaro_system_fgd212_dimmer_2_level_2","name":"Lampe Ouest"},{"entity":"light.qubino_zmnhdd1_z_wave_plus_flush_dimmer_level","name":"Lampes terrasse"}]
+  ]%}
+
+{% set Sensors = [
+  [{"entity":"binary_sensor.zigate_00158d00032bd376_presence","name":"IR terrasse 1","icon_true":"motion-sensor","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"},{"entity":"binary_sensor.zigate_00158d0002f3c9b8_presence","name":"IR terrasse 2","icon_true":"motion-sensor","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"}],
+  [{"entity":"binary_sensor.zigate_00158d0002c63823_presence","name":"IR BAL","icon_true":"motion-sensor","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"},{"entity":"binary_sensor.zigate_00158d0002b6e6d7_presence","name":"IR Porte","icon_true":"motion-sensor","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"}] 
+]%}
+
+type: custom:layout-card
+cards:
+#  - type: custom:compact-custom-header
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        color_type: label-card
+        color: rgb(233, 202, 9)
+        name: "Lumières"
+        style:
+          - font-size: 19px
+      {% for Light in Lights %}
+      - type: horizontal-stack
+        cards:
+          {% for L in Light %}
+          - type: "custom:button-card"
+            entity: {{ L.entity }}
+            color_type: card
+            color: auto
+            size: 10%
+            name: {{ L.name }}
+            state: 
+              - value: "off"
+                color: grey
+              - value: "on"
+                color: rgb(233, 202, 9) 
+          {% endfor %}
+      {% endfor %}
+      - type: "custom:button-card"
+        color_type: label-card
+        color: auto
+        name: "Capteurs"
+        style:
+          - font-size: 19px
+      {% for Sensor in Sensors %}
+      - type: horizontal-stack
+        cards:
+          {% for L in Sensor %}
+          - type: "custom:button-card"
+            entity: {{ L.entity }}
+            color_type: card
+            color: auto
+            size: 10%
+            name: {{ L.name }}
+            tap_action:
+              action: more-info
+            state: 
+              - value: "off"
+                icon: mdi:{{ L.icon_false }}
+                color: {{ L.color_false }}
+              - value: "on"
+                icon: mdi:{{ L.icon_true }}
+                color: {{ L.color_true }} 
+          {% endfor %}
+      {% endfor %}
+      - type: entities
+        show_header_toggle: false
+        title: Station météo 
+        entities:
+          - sensor.battery_voltage_2
+          - sensor.bme280_temperature
+          - sensor.bme280_relative_humidity
+          - sensor.bme280_pressure
+  - type: vertical-stack
+    cards:
+      - !include
+        - templates/graph/temperature.yaml
+        - entities: 
+          - entity: sensor.bme280_temperature
+            name: Station Météo Température
+          - entity: sensor.zigate_00158d00036b917b_temperature
+            name: Température extérieur Xiaomi
+          environnement: exterieur
+      - !include
+        - templates/graph/humidity.yaml
+        - entities: 
+          - entity: sensor.bme280_relative_humidity
+            name: Station Météo Humidité
+          - entity: sensor.zigate_00158d00036b917b_humidity
+            name: Humidité extérieur Xiaomi
+
+  - type: vertical-stack
+    cards: 
+      - type: history-graph
+        title: 'Activité de la pisicne'
+        entities:
+          - entity: switch.piscine_relay
+            name: Pompe piscine
+      - type: "custom:button-card"
+        color_type: icon
+        entity: input_boolean.piscine_marche_force
+        layout: icon_label
+        label: >
+          [[[
+            return 'Marche forcée : ' + states['input_boolean.piscine_marche_force'].state;
+          ]]]
+        show_label: true
+        show_name: false
+        size: 20%
+        state:
+          - value: "on"
+            color: orange
+            icon: mdi:pool
+          - value: "off"
+            color: red
+            icon: mdi:pool
+          - operator: default
+            color: grey
+            icon: mdi:pool
+      - type: "custom:button-card"
+        color_type: icon
+        entity: switch.piscine_relay
+        layout: icon_label
+        label: >
+          [[[
+            return 'Pompe piscine : ' + states['switch.piscine_relay'].state;
+          ]]]
+        show_label: true
+        show_name: false
+        state:
+          - value: "on"
+            color: green
+            icon: mdi:pool
+          - value: "off"
+            color: red
+            icon: mdi:pool
+          - operator: default
+            color: grey
+            icon: mdi:pool
+      - type: "custom:button-card"
+        color_type: icon
+        entity: automation.nettoyage_piscine_cycle_start_extra
+        layout: icon_label
+        label: >
+          [[[
+            return 'Cycle supplémentaires : ' + states['automation.nettoyage_piscine_cycle_start_extra'].state;
+          ]]]
+        show_label: true
+        show_name: false
+        size: 20%
+        state:
+          - value: "on"
+            color: green
+            icon: mdi:alarm-plus
+          - value: "off"
+            color: red
+            icon: mdi:alarm-plus
+          - operator: default
+            color: grey
+            icon: mdi:alarm-plus  
+      - type: "custom:button-card"
+        color_type: icon
+        entity: automation.nettoyage_piscine_cycle_start
+        layout: icon_label
+        label: >
+          [[[
+            return 'Automatisation piscine : ' + states['automation.nettoyage_piscine_cycle_start'].state;
+          ]]]
+        show_label: true
+        show_name: false
+        size: 20%
+        state:
+          - value: "on"
+            color: green
+            icon: mdi:power-plug
+          - value: "off"
+            color: red
+            icon: mdi:power-plug-off
+          - operator: default
+            color: grey
+            icon: mdi:cancel     
+      - type: "custom:button-card"
+        color_type: label-card
+        color: rgb(70, 135, 240)
+        name: Déclancher la piscine pour une durée
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            size: 40px
+            entity: script.cycle_piscine_1h
+            tap_action: 
+              action: call_service
+            service: script.turn_on
+            icon: mdi:numeric-1-box
+            show_icon: true
+            show_name: false
+          - type: "custom:button-card"
+            size: 40px
+            entity: script.cycle_piscine_2h
+            tap_action: 
+              action: call_service
+            service: script.turn_on
+            icon: mdi:numeric-2-box
+            show_icon: true
+            show_name: false
+          - type: "custom:button-card"
+            size: 40px
+            entity: script.cycle_piscine_3h
+            tap_action: 
+              action: call_service
+            service: script.turn_on
+            icon: mdi:numeric-3-box
+            show_icon: true
+            show_name: false
+          - type: "custom:button-card"
+            size: 40px
+            entity: script.cycle_piscine_4h
+            tap_action: 
+              action: call_service
+            service: script.turn_on
+            icon: mdi:numeric-4-box
+            show_icon: true
+            show_name: false
+
+
+
+

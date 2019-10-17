@@ -1,0 +1,60 @@
+# lovelace_gen
+type: custom:layout-card
+cards:
+  - type: custom:monster-card
+    show_empty: false
+    card:
+      type: entities
+      show_header_toggle: false
+      title: 'Critical Zigate Batteries'
+    filter:
+      include:
+        - entity_id: "sensor.battery_zigate*"
+          state: '< 20'  
+  - type: custom:monster-card
+    show_empty: false
+    card:
+      type: entities
+      show_header_toggle: false
+      title: 'Zigate Batteries Monitor'
+    filter:
+      include:
+        - entity_id: "sensor.battery_zigate*"
+          state: '< 50' 
+          # attributes:
+  - type: vertical-stack
+    cards:
+      - type: entities
+        show_header_toggle: false
+        title: Lanterne
+        entities:
+          - binary_sensor.totem_status
+          - sensor.esphome_version_totem
+          - sensor.uptime_totem
+          - sensor.wifi_signal_totem
+  - type: vertical-stack
+    cards:
+      - type: entities
+        show_header_toggle: false
+        title: Prise cellier 
+        entities:
+          - binary_sensor.prise1_status
+          - sensor.esphome_version_prise1
+          - sensor.uptime_prise1
+          - sensor.wifi_signal_prise1
+  - type: vertical-stack
+    cards:
+      - type: entities
+        show_header_toggle: false
+        title: Piscine
+        entities:
+          - binary_sensor.piscine_status
+          - sensor.esphome_version_piscine
+          - sensor.uptime_piscine
+          - sensor.wifi_signal_piscine
+      - type: custom:mini-graph-card
+        hours_to_show: 24
+        hour24: true
+        entities:
+          - entity: sensor.data_usage
+            name: "Usage 4G"
