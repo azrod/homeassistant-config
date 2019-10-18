@@ -45,5 +45,5 @@
 * [Sonof R20](https://sonoff.tech/product/wifi-smart-plugs/s20) avec [Esphome](https://esphome.io/) <sup>[WiFi]</sup>
 
 ### Aspirateur 
-* Xiaomi Vaccum <sup>[WiFi]</sup>
+* [Xiaomi Mi Robot Vaccum S50](https://fr.aliexpress.com/item/32850707934.html) <sup>[WiFi]</sup>
 
