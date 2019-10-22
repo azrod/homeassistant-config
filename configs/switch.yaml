@@ -25,3 +25,6 @@
       name: Bouton 7
     ev1527_0fea25_03:
       name: Bouton 8
+- platform: wake_on_lan
+  mac_address: !secret mac_address_pc
+  host: !secret ip_address_pc
