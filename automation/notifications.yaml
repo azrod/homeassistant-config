@@ -1,0 +1,117 @@
+- id: notification produit fosse
+  alias: "[Notif] Mettre produit pour la Fosse"
+  trigger:
+    platform: time
+    at: '20:30:00'
+  condition:
+    - condition: time
+      weekday:
+        - sun
+  action:
+    - service: notify.discord
+      data: 
+        target: [!secret discord_target]
+        message: 'Mettre un sachet dans la fosse'
+
+- id: notification sonde fuite baignoire
+  alias: "[Notif] sonde fuite baignoire"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.zigate_00158d00027741fa_zone_status
+    from: 'off'
+    to: 'on'
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "Fuite d'eau baignoire"
+
+- id: notification probleme electrique
+  alias: "[Notif] Problème electrique"
+  trigger:
+    platform: state
+    entity_id: sensor.apcups_status
+    from: 'Online'
+    to: 'Offline'
+  condition:
+    - condition: state
+      entity_id: 'input_boolean.notification_onduleur'
+      state: 'on'
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "[Alerte] Coupure de courant. Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
+
+- id: notification retour electrique
+  alias: "[Notif] retour electrique"
+  trigger:
+    platform: state
+    entity_id: sensor.apcups_status
+    from: 'Offline'
+    to: 'Online'
+  condition:
+    - condition: state
+      entity_id: 'input_boolean.notification_onduleur'
+      state: 'on'
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "[Info] Retour du courant."
+
+- id: notification probleme electrique niveau batterie
+  alias: "[Notif] Problème electrique niveau batterie"
+  trigger:
+    - platform: state
+      entity_id: sensor.apcups_battery_charge
+      below: '80'
+    - platform: state
+      entity_id: sensor.apcups_battery_charge
+      below: '60'
+    - platform: state
+      entity_id: sensor.apcups_battery_charge
+      below: '40'
+    - platform: state
+      entity_id: sensor.apcups_battery_charge
+      below: '20'
+    - platform: state
+      entity_id: sensor.apcups_battery_charge
+      below: '5'
+    - platform: state
+      entity_id: sensor.apcups_battery_charge
+      below: '1'
+  condition:
+    - condition: state
+      entity_id: 'input_boolean.notification_onduleur'
+      state: 'on'
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "[Alerte] Coupure de courant. Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
+
+
+- id: tracking_temperature_ext
+  alias: Tracking Temprature Extérieur
+  trigger:
+    platform: time
+    at: '08:00:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.zigate_00158d0002c770dc_temperature
+      below: '2'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "RISQUE DE GEL. Il fait actuellement {{ states.sensor.zigate_00158d0002c770dc_temperature.state }}°C"

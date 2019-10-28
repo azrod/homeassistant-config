@@ -132,6 +132,8 @@ cards:
             name: Input Voltage
           - entity: sensor.apcups_battery_runtime
             name: Battery Runtime
+          - entity : input_boolean.notification_onduleur
+            name: Notification
         theme: default
       - type: horizontal-stack
         cards:

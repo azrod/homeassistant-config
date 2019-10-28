@@ -6,3 +6,8 @@ piscine_marche_force:
   name: Piscine en marche forcé
   initial: off
   icon: mdi:pool
+
+notification_onduleur:
+  name: Notification Onduleur
+  initial: off
+  icon: mdi:car-battery
