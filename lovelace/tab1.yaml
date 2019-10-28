@@ -13,10 +13,6 @@
 
 type: custom:layout-card
 cards:
-#  - type: custom:compact-custom-header
-#    options: clock
-#    clock_format: 24
-#    menu: show
   - type: vertical-stack
     cards:
       - type: "custom:button-card"

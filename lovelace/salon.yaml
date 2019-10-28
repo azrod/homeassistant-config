@@ -77,6 +77,19 @@ cards:
             name: {{ L.name }}
           {% endfor %}
       {% endfor %}
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            action: call-service
+            service: switch.turn_on
+            service_data: switch.wake_on_lan
+            entity: switch.wake_on_lan
+            color_type: card
+            color: blue
+            show_icon: false
+            size: 10%
+            name: ON PC
+  
   # CONFIGURATIONS DE L'ECLAIRAGE
   {% set Lights = [
     [{"entity":"light.salon_lampe_1","name":"Lampe salon 1"},

@@ -47,6 +47,9 @@
 ### Aspirateur 
 * [Xiaomi Mi Robot Vaccum S50](https://fr.aliexpress.com/item/32850707934.html) <sup>[WiFi]</sup>
 
+### TeleInfo 
+* [WirelessTeleInfo](https://github.com/Domochip/WirelessTeleInfo) <sup>[Wifi]</sup> DIY
+
 ## Tracking des avions - FlighRadar 
 
 J'ai installé une antenne TV de type DVB-T pour pouvoir suivre l'activité aérienne civile au dessus de chez moi. ([Antenne - Amazon](https://www.amazon.fr/gp/product/B013Q94CT6/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1&_encoding=UTF8&tag=azrod0d-21&linkCode=ur2&linkId=f952cf91e04350a5fe42c3dac0a421a0&camp=1642&creative=6746)). Afin de partager avec la communauté je transmet les informations au site [FlightRadar](https://www.flightradar24.com/) qui permet d'avoir un compte premium sur le site. FlightRadar fournis un soft pour transmettre les données [FR24Feed](https://www.flightradar24.com/share-your-data) et s'appuie sur le soft dump1090 pour pouvoir lire et décoder les informations de l'antenne. Installé sur un RaspberryPI 1 c'est un bon moyen pour utiliser ce vieux RaspberryPI. 
@@ -56,3 +59,4 @@ Dump1090 fournis une page web avec des informations en Json pour récupérer les
 ![dump1090](mdimg/dump1090-lovelace.png)
 
 Tous les fichiers de configuration pour HomeAssistant sont dsponible dans `packages/fr24/`
+

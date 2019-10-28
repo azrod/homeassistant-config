@@ -5,19 +5,21 @@ title: Home
 resources:
   - url: !file /local/custom-lovelace/layout-card.js
     type: module
+  - url: !file /community_plugin/monster-card/monster-card.js
+    type: js
   - url: !file /local/custom-lovelace/monster-card.js
     type: module
-  - url: !file /local/custom-lovelace/button-card.js
+  - url: !file /community_plugin/button-card/button-card.js
     type: module
-  - url: !file /local/custom-lovelace/mini-media-player.js
+  - url: !file /community_plugin/mini-media-player/mini-media-player-bundle.js
     type: module
-  - url: !file /local/custom-lovelace/mini-graph-card-bundle.js
+  - url: !file /community_plugin/mini-graph-card/mini-graph-card-bundle.js
     type: module
-  - url: !file /local/custom-lovelace/vertical-stack-in-card.js
-    type: module
+  - url: !file /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
+    type: js
   - url: !file /local/custom-lovelace/card-tools.js
     type: module
-  - url: !file /local/custom-lovelace/slider-entity-row.js
+  - url: !file /community_plugin/lovelace-slider-entity-row/slider-entity-row.js
     type: module
 
 
@@ -57,11 +59,6 @@ views:
     panel: true
     cards:
       - !include lovelace/automation.yaml
-#  - title: INTERNET
-#    icon: mdi:home-automation
-#    panel: true
-#    cards:
-#      - !include internet.yaml
   - title: BATTERY
     icon: mdi:battery-50
     panel: true
@@ -80,20 +77,6 @@ views:
               ## Todo 
                 * Resync sonde fuite SDB
                 * Alerte porte ouverte
-                * https://www.home-assistant.io/components/github/
-                * https://www.home-assistant.io/components/scrape/
-          - type: entities
-            title: Admin Tools
-            show_header_toggle: false    
-            entities:
-              - type: weblink
-                name: EspHome
-                url: https://esphome.i.home/
-                icon: mdi:car-esp
-              - type: weblink
-                name: Firewall
-                url: https://fw.home/
-                icon: mdi:shield-home
           - type: entities
             title: Admin Control
             show_header_toggle: false    
