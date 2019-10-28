@@ -28,11 +28,11 @@
   name: "Teleinfo ampere"
   state_topic: "teleinfo/811775938857/IINST"
   unit_of_measurement: "A"
-- platform: mqtt
-  name: "Teleinfo watt"
-  state_topic: "teleinfo/811775938857/IINST"
-  value_template: '{{ value | multiply(230) | float }}'
-  unit_of_measurement: "W"
+# - platform: mqtt
+#   name: "Teleinfo watt"
+#   state_topic: "teleinfo/811775938857/IINST"
+#   value_template: '{{ value | multiply(states(sensor.apcups_input_voltage)) | float }}'
+#   unit_of_measurement: "W"
 - platform: mqtt 
   name: "Teleinfo index"
   state_topic: "teleinfo/811775938857/BASE"
@@ -41,6 +41,10 @@
 # TEMPLATE 
 - platform: template
   sensors:
+    teleinfo_watt:
+      friendly_name: "Teleinfo watt"
+      value_template: "{{ states('sensor.teleinfo_ampere')|int * states('sensor.apcups_input_voltage')|int }}"
+      unit_of_measurement: "W"
     xiaomi_vacuum_main_brush_left:
       friendly_name: "Aspirateur brosse principale"
       value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'main_brush_left') }}"
