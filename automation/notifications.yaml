@@ -63,22 +63,22 @@
 - id: notification probleme electrique niveau batterie
   alias: "[Notif] Problème electrique niveau batterie"
   trigger:
-    - platform: state
+    - platform: numeric_state
       entity_id: sensor.apcups_battery_charge
       below: '80'
-    - platform: state
+    - platform: numeric_state
       entity_id: sensor.apcups_battery_charge
       below: '60'
-    - platform: state
+    - platform: numeric_state
       entity_id: sensor.apcups_battery_charge
       below: '40'
-    - platform: state
+    - platform: numeric_state
       entity_id: sensor.apcups_battery_charge
       below: '20'
-    - platform: state
+    - platform: numeric_state
       entity_id: sensor.apcups_battery_charge
       below: '5'
-    - platform: state
+    - platform: numeric_state
       entity_id: sensor.apcups_battery_charge
       below: '1'
   condition:
