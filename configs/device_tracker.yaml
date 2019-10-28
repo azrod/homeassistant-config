@@ -8,8 +8,3 @@
     home_interval: 10
     hosts:
       - !secret track_ip_tv
-  - platform: unifi
-    verify_ssl: false
-    host: !secret unifi_host
-    username: !secret unifi_username
-    password: !secret unifi_password
