@@ -5,10 +5,7 @@
   [{"entity":"binary_sensor.zigate_00158d0002b6e6d7_presence","name":"IR Porte","icon_true":"motion-sensor","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"},
   {"entity":"binary_sensor.zigate_00158d00027741fa_zone_status","name":"Fuite baignoire","icon_true":"close-circle-outline","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"}],
   [{"entity":"binary_sensor.zigate_00158d000283072c_zone_status","name":"Fuite cellier","icon_true":"close-circle-outline","icon_false":"check-circle-outline","color_true":"orange","color_false":"green"},
-  {"entity":"binary_sensor.zigate_00158d0002eab5d6_onoff","name":"Bureau","icon_true":"door-open","icon_false":"door-closed","color_true":"orange","color_false":"green"}]
-
-
-  
+  {"entity":"binary_sensor.zigate_00158d0002eab5d6_onoff","name":"Bureau","icon_true":"door-open","icon_false":"door-closed","color_true":"orange","color_false":"green"}] 
 ]%}
 
 type: custom:layout-card
@@ -47,8 +44,6 @@ cards:
   {"entity":"zwave.qubino_zmnhdd1_z_wave_plus_flush_dimmer","label":"Zwave Fibaro terrasse"},
   {"entity":"zwave.sigma_designs_uzb_zwave_usb_adapter","label":"Zwave USB"}
 ]%}
-#  - type: vertical-stack
-#    cards:
       - type: "custom:button-card"
         color_type: label-card
         color: auto
@@ -129,7 +124,7 @@ cards:
         name: "APC UPS"
         style:
           - font-size: 19pxa
-      - type: vertical-stack
+      - type: glance
         entities:
           - entity: sensor.apcups_status
             name: Status
@@ -138,8 +133,6 @@ cards:
           - entity: sensor.apcups_battery_runtime
             name: Battery Runtime
         theme: default
-        # title: CyberPower UPS CP1500PFCLCD
-        type: glance
       - type: horizontal-stack
         cards:
         - entity: sensor.apcups_battery_charge
