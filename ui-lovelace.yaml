@@ -3,12 +3,10 @@
 title: Home
 
 resources:
-  - url: !file /local/custom-lovelace/layout-card.js
-    type: module
+  - url: /community_plugin/lovelace-layout-card/layout-card.js
+    type: js
   - url: !file /community_plugin/monster-card/monster-card.js
     type: js
-  - url: !file /local/custom-lovelace/monster-card.js
-    type: module
   - url: !file /community_plugin/button-card/button-card.js
     type: module
   - url: !file /community_plugin/mini-media-player/mini-media-player-bundle.js
@@ -17,9 +15,11 @@ resources:
     type: module
   - url: !file /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
     type: js
-  - url: !file /local/custom-lovelace/card-tools.js
-    type: module
+  - url: /community_plugin/lovelace-card-tools/card-tools.js
+    type: js
   - url: !file /community_plugin/lovelace-slider-entity-row/slider-entity-row.js
+    type: module
+  - url: /community_plugin/button-entity-row/button-entity-row.js
     type: module
 
 
