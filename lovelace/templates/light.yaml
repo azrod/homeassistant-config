@@ -1,0 +1,11 @@
+# lovelace_gen
+{% if dimmable == true %}
+type: custom:slider-entity-row
+name: {{ name }}
+entity: {{ entity }}
+toggle: true
+hide_when_off: true
+{% elif dimmable == false %}
+name: {{ name }}
+entity: {{ entity }}
+{% endif %}

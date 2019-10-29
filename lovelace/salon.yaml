@@ -91,12 +91,6 @@ cards:
             name: ON PC
   
   # CONFIGURATIONS DE L'ECLAIRAGE
-  {% set Lights = [
-    [{"entity":"light.salon_lampe_1","name":"Lampe salon 1"},
-     {"entity":"light.salon_lampe_2","name":"Lampe salon 2"}],
-    [{"entity":"light.salon_lampe_4","name":"Lampe salon 4"},
-     {"entity":"light.totem_light","name":"Lampe lanterne"}]
-    ]%}
   - type: vertical-stack
     cards:
       - type: "custom:button-card"
@@ -105,29 +99,30 @@ cards:
         name: "Lumières"
         style:
           - font-size: 19px
-      {% for Light in Lights %}
-      - type: horizontal-stack
-        cards:
-          {% for L in Light %}
-          - type: "custom:button-card"
-            entity: {{ L.entity }}
-            color_type: card
-            color: auto
-            size: 10%
-            name: {{ L.name }}
-            state: 
-              - value: "off"
-                color: grey
-              - value: "on"
-                color: rgb(233, 202, 9) 
-          {% endfor %}
-      {% endfor %}
+      - type: entities
+        entities:
+          - !include
+            - templates/light.yaml
+            - entity: light.salon_lampe_1
+              name: Lampe salon 1
+              dimmable: true
+          - !include
+            - templates/light.yaml
+            - entity: light.salon_lampe_2
+              name: Lampe salon 2
+              dimmable: true
+          - !include
+            - templates/light.yaml
+            - entity: light.salon_lampe_4
+              name: Lampe salon 4
+              dimmable: true
+          - !include
+            - templates/light.yaml
+            - entity: light.totem_light
+              name: Lampe lanterne
+              dimmable: false
+          - type: call-service
+            service: automation.trigger
+            entity: automation.btn_far_cry_mode
+            name: Mode FarCry
 
-#      - type: "custom:button-card"
-#        color_type: card
-#       .: automation.btn_light_salon_far_cry
-#       .tion:
-#       .on: turn_on
-#       ."FarCry Mode"
-#       .tate: false
-#       . auto
