@@ -22,6 +22,12 @@ homeassistant:
 rflink:
   port: /dev/ttyUSB1
 
+securitas_direct:
+  username: !secret securitas_direct_username
+  password: !secret securitas_direct_password
+  code: !secret securitas_direct_code
+  country: !secret securitas_direct_country
+
 lovelace_gen:
 
 lovelace:
@@ -68,6 +74,7 @@ wake_on_lan:
 
 # INCLUDE
 
+person: !include configs/person.yaml
 group: !include configs/groups.yaml
 automation old: !include_dir_merge_list automation/
 input_boolean: !include configs/input_boolean.yaml
