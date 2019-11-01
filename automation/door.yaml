@@ -1,0 +1,16 @@
+
+- id: notification alarme porte bureau
+  alias: "[Notif] alarme porte bureau"
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.securitas_360086
+    to: 'armed_away'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.zigate_00158d0002eab5d6_onoff'
+      state: 'on'
+  action:
+    - service: notify.discord
+      data:
+        target: [!secret discord_target]
+        message: "[Alerte] Maison sous alarme -> Porte fenêtre bureau ouverte "
