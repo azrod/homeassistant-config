@@ -12,6 +12,7 @@
 * Zwave - [EVERSPRING SA413](https://www.espace-domotique.fr/fr/transmetteur/everspring-controleur-usb-z-wave-plus-everspring-sa413-1-1043.html)
 * 433Mhz - [Rflink](http://www.rflink.nl/) et [DIY PCB](https://github.com/azrod/diy-rflink-pcb) 
 * Infrarouge - [Xiaomi IR remote](https://fr.gearbest.com/smart-home/pp_229556.html)
+* Bluetooth - [Clé Bluetooth]
 
 ### Eclairages 
 * Ampoules [Milight](http://www.milight.com/)<sup>[2,4Ghz]</sup>
@@ -23,6 +24,9 @@
 ### Télécommandes 
 * [Xiaomi Mijia Switch](https://fr.aliexpress.com/item/32825685057.html) <sup>[Zigbee]</sup> (x2)
 * [Télécommande Sonoff 433](https://sonoff.tech/product/accessories/rm433) <sup>[433Mhz]</sup>
+
+### Alarme 
+* [Securitas Direct] - Utilisation d'un [custom component](https://github.com/segalion/securitasdirect) qui s'appuie sur l'API mobile de MyVerisure 
 
 ### Capteurs
 #### Ouvertures
