@@ -9,5 +9,5 @@ piscine_marche_force:
 
 notification_onduleur:
   name: Notification Onduleur
-  initial: off
+  initial: on
   icon: mdi:car-battery

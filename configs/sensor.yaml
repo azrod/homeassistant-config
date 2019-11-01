@@ -28,11 +28,6 @@
   name: "Teleinfo ampere"
   state_topic: "teleinfo/811775938857/IINST"
   unit_of_measurement: "A"
-# - platform: mqtt
-#   name: "Teleinfo watt"
-#   state_topic: "teleinfo/811775938857/IINST"
-#   value_template: '{{ value | multiply(states(sensor.apcups_input_voltage)) | float }}'
-#   unit_of_measurement: "W"
 - platform: mqtt 
   name: "Teleinfo index"
   state_topic: "teleinfo/811775938857/BASE"
