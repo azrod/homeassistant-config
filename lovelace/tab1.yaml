@@ -82,6 +82,19 @@ cards:
       - type: "custom:button-card"
         color_type: label-card
         color: auto
+        name: "Alarme"
+        style:
+          - font-size: 19px
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - automation.notif_alarme_porte_bureau
+      - type: alarm-panel
+        entity: alarm_control_panel.securitas_360086  
+        name: Alarme maison
+      - type: "custom:button-card"
+        color_type: label-card
+        color: auto
         name: "TeleInfo"
         style:
           - font-size: 19px
