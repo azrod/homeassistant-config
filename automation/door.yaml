@@ -10,7 +10,7 @@
       entity_id: 'binary_sensor.zigate_00158d0002eab5d6_onoff'
       state: 'on'
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
-        message: "[Alerte] Maison sous alarme -> Porte fenêtre bureau ouverte "
+        title: "[Alerte]"
+        message: "Maison sous alarme -> Porte fenêtre bureau ouverte "

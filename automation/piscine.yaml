@@ -97,7 +97,7 @@
           - wed
           - sun
     action:
-      - service: notify.discord
+      - service: script.notify
         data: 
-          target: [!secret discord_target]
+          title: '[INFO]'
           message: 'Mettre brome dans la piscine'

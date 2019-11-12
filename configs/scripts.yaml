@@ -185,3 +185,51 @@
               entity_id: vacuum.xiaomi_vacuum_cleaner
               command: app_zoned_clean
               params: [[16781,23645,20431,25445,1],[16807,25402,17757,27602,1]]
+
+  notify: 
+    alias: 'Centre de Notification'
+    description: "Centre de Notification" 
+    fields:
+      message:
+        description: 'The message content'
+        example: 'Je suis un test de notification'
+      title: 
+        description: 'Title'
+        example: 'Je suis un titre'
+    sequence:
+      - service: script.notify_discord
+        data_template: 
+          title: "{{ title }}"
+          message: "{{ message }}"
+
+  notify_discord:
+    alias: 'Notification Discord'
+    description: "Notification Discord"
+    fields:
+      message:
+        description: 'The message content'
+        example: 'Je suis un test de notification'
+      title: 
+        description: 'Title'
+        example: 'Je suis un titre'
+    sequence:
+      - service: notify.discord
+        data_template:
+          message: "**{{ title }}** : {{ message }}"
+          target:  [!secret discord_target]
+
+  notify_ha:
+    alias: 'Notification Discord'
+    description: "Notification Discord"
+    fields:
+      message:
+        description: 'The message content'
+        example: 'Je suis un test de notification'
+      title: 
+        description: 'Title'
+        example: 'Je suis un titre'
+    sequence:
+      - service: persistent_notification.create
+        data_template:
+          title: "{{ title }}"
+          message: "{{ message }}"

@@ -8,9 +8,9 @@
       weekday:
         - sun
   action:
-    - service: notify.discord
+    - service: script.notify
       data: 
-        target: [!secret discord_target]
+        title: "[INFO]"
         message: 'Mettre un sachet dans la fosse'
 
 - id: notification sonde fuite baignoire
@@ -21,9 +21,9 @@
     from: 'off'
     to: 'on'
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
+        title: "[ATTENTION]"
         message: "Fuite d'eau baignoire"
 
 - id: notification probleme electrique
@@ -38,10 +38,10 @@
       entity_id: 'input_boolean.notification_onduleur'
       state: 'on'
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
-        message: "[Alerte] Coupure de courant. Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
+        title: "[Alerte] Coupure de courant"
+        message: "Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
 
 - id: notification retour electrique
   alias: "[Notif] retour electrique"
@@ -55,10 +55,10 @@
       entity_id: 'input_boolean.notification_onduleur'
       state: 'on'
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
-        message: "[Info] Retour du courant."
+        title: "[Info]"
+        message: "Retour du courant."
 
 - id: notification probleme electrique niveau batterie
   alias: "[Notif] Problème electrique niveau batterie"
@@ -86,10 +86,10 @@
       entity_id: 'input_boolean.notification_onduleur'
       state: 'on'
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
-        message: "[Alerte] Coupure de courant. Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
+        title: "[Alerte] Coupure de courant."
+        message: "Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
 
 
 - id: tracking_temperature_ext
@@ -111,7 +111,7 @@
         - thu
         - fri
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
-        message: "RISQUE DE GEL. Il fait actuellement {{ states.sensor.zigate_00158d0002c770dc_temperature.state }}°C"
+        title: "ATTENTION RISQUE DE GEL."
+        message: "Il fait actuellement {{ states.sensor.zigate_00158d0002c770dc_temperature.state }}°C"

@@ -107,10 +107,10 @@
         entity_id: input_select.vacuum_room
         data_template:
           option: "Choisir la pièce" 
-      - service: notify.discord
+      - service: script.notify
         data:
-          target: ['623247992119361560']
-          message: "[NESTOR] Impossible de nettoyer la porte du cellier est fermée"
+          title: "[NESTOR]"
+          message: "Impossible de nettoyer la porte du cellier est fermée"
 
   - alias: Start Nettoyage Cuisine
     trigger:
@@ -361,7 +361,7 @@
           - wed
           - fri
     action:
-      - service: notify.discord
+      - service: script.notify
         data:
-          target: [!secret discord_target]
-          message: "[NESTOR] Vider l'aspirateur"
+          title: "[NESTOR]"
+          message: "Vider l'aspirateur"

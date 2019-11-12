@@ -37,8 +37,9 @@
           {%- endfor %}
           {% endmacro %}
           {{ battery_level() }}
-    - service: notify.discord
+    - service: script.notify
       data_template:
+        title: "[INFO]"
         message: >
           {% macro battery_level() %}
           {%- set threshold = 40 -%}

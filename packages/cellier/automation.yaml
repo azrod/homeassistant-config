@@ -22,9 +22,9 @@
     from: 'off'
     to: 'on'
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
+        title: "[ALERTE]"
         message: "Fuite d'eau machine a laver"
 
 
@@ -36,9 +36,9 @@
       above: 9
   condition: []
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
+        title: "[ALERTE]"
         message: "La tempéature actuelle du frigo est de {{ states.zigate_00158d0002b72523_temperature.state }}C"
 
 - id: notification temperature congélateur
@@ -49,7 +49,7 @@
       above: -13
   condition: []
   action:
-    - service: notify.discord
+    - service: script.notify
       data:
-        target: [!secret discord_target]
+        title: "[ALERTE]"
         message: "La température actuele du congélateur est de {{ sensor.oregontemphygro_2dfe_temp }C"
