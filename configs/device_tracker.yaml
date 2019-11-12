@@ -5,7 +5,7 @@
 # 
 # ---------------------------------------------------------------- #
   - platform: nmap_tracker
-    home_interval: 10
+    home_interval: 1
     hosts:
       - !secret track_ip_tv
   - platform: bluetooth_tracker

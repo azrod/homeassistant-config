@@ -73,6 +73,8 @@ cards:
               card:
                 - animation: blink 2s ease infinite
     {% endfor %}
+      - type: weather-forecast
+        entity: weather.salles
 {% set TeleInfo = [
   {"entity":"sensor.teleinfo_watt","label":"Teleinfo Watt"},
   {"entity":"sensor.teleinfo_ampere","label":"Teleinfo Ampere"}
@@ -112,10 +114,7 @@ cards:
 {% set FlightRadar = [
   {"entity":"binary_sensor.fr24_feeder_link_connected"},
   {"entity":"binary_sensor.fr24_feeder_receiver_connected"},
-  {"entity":"sensor.fr24_feeder_aircraft_tracked"},
-  {"entity":"sensor.fr24_feeder_aircraft_uploaded"},
-  {"entity":"sensor.fr24_feeder_radar_code"},
-  {"entity":"sensor.fr24_feeder_version"}
+  {"entity":"sensor.fr24_feeder_aircraft_tracked"}
 ]%}
   - type: vertical-stack
     cards:

@@ -1,0 +1,7 @@
+# lovelace_gen
+type: "custom:button-card"
+color_type: label-card
+color: auto
+name: {{ name }}
+style:
+  - font-size: 19px

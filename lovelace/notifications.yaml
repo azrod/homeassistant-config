@@ -1,0 +1,18 @@
+# lovelace_gen
+
+type: custom:layout-card
+cards:
+  - type: vertical-stack
+    cards: 
+      - !include
+        - templates/label.yaml
+        - name: Notifications
+      - type: custom:monster-card
+        show_empty: false
+        card:
+          type: entities
+          show_header_toggle: false
+          show_title: false
+        filter:
+          include:
+            - entity_id: "automation.notif*"

@@ -21,7 +21,8 @@ resources:
     type: module
   - url: /community_plugin/button-entity-row/button-entity-row.js
     type: module
-
+  - url: /community_plugin/weather-card/weather-card.js
+    type: module
 
 views:
   - title: TAB1
@@ -64,7 +65,11 @@ views:
     panel: true
     cards:
       - !include lovelace/battery.yaml
-
+  - title: NOTIFICATIONS
+    icon: mdi:battery-50
+    panel: true
+    cards:
+      - !include lovelace/notifications.yaml
 
   - title: TODO
     icon: mdi:markdown

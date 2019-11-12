@@ -1,0 +1,132 @@
+# --------------------------------------------------------- #
+#     Controle du bouton switch du salon                    #
+#                                                           #
+#         V 1.0  -  22/01/2019                              # 
+# --------------------------------------------------------- #
+
+# flip90_04 Aqara Rotate Gauche
+
+- id: cube-aqara-rotate-0
+  alias: cube-aqara-rotate-0
+  trigger:
+    platform: event
+    event_type: state_changed
+    event_data:
+      entity_id: sensor.zigate_00158d000275dd2b_movement
+  condition:
+    - condition: template
+      value_template: >
+        {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]0', ignorecase=True) }}
+  action:
+    - service: automation.trigger
+      entity_id: automation.btn_far_cry_mode
+
+- id: cube-aqara-rotate-1
+  alias: cube-aqara-rotate-1
+  trigger:
+    platform: event
+    event_type: state_changed
+    event_data:
+      entity_id: sensor.zigate_00158d000275dd2b_movement
+  condition:
+    - condition: template
+      value_template: >
+        {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]1', ignorecase=True) }}
+  action:
+    service: script.turn_on
+    entity_id: script.group_tv_on_off
+
+- id: cube-aqara-rotate-3
+  alias: cube-aqara-rotate-3
+  trigger:
+    platform: event
+    event_type: state_changed
+    event_data:
+      entity_id: sensor.zigate_00158d000275dd2b_movement
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: >
+        {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]3', ignorecase=True) }}
+    - condition: state
+      entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+      state: 'home'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.wake_on_lan
+
+- id: cube-aqara-rotate-3
+  alias: cube-aqara-rotate-3
+  trigger:
+    platform: event
+    event_type: state_changed
+    event_data:
+      entity_id: sensor.zigate_00158d000275dd2b_movement
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: >
+        {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]3', ignorecase=True) }}
+    - condition: state
+      entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+      state: 'not_home'
+  action:
+    - service: script.turn_on
+      entity_id: script.group_tv_on_off
+    - service: switch.turn_on
+      entity_id: switch.wake_on_lan
+
+
+- id: cube-aqara-shake-1
+  alias: cube-aqara-shake-1
+  trigger:
+    platform: event
+    event_type: state_changed
+    event_data:
+      entity_id: sensor.zigate_00158d000275dd2b_movement
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: >
+        {{ trigger.event.data.new_state.state | regex_match('shake', ignorecase=True) }}
+    - condition: state
+      entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+      state: 'home'
+  action:
+    - service: script.turn_on
+      entity_id: script.group_tv_on_off
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+          - light.totem_light
+
+- id: cube-aqara-shake-2
+  alias: cube-aqara-shake-2
+  trigger:
+    platform: event
+    event_type: state_changed
+    event_data:
+      entity_id: sensor.zigate_00158d000275dd2b_movement
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: >
+        {{ trigger.event.data.new_state.state | regex_match('shake', ignorecase=True) }}
+    - condition: state
+      entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+      state: 'not_home'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.salon_lampe_1
+          - light.salon_lampe_2
+          - light.salon_lampe_4
+          - light.totem_light

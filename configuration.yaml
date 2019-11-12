@@ -33,6 +33,9 @@ lovelace_gen:
 lovelace:
   mode: yaml
 
+meteo_france:
+  - city: !secret code_postal
+
 zwave:
   usb_path: /dev/ttyACM0
   device_config: !include zwave_device_config.yaml
