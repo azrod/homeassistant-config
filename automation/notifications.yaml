@@ -115,3 +115,36 @@
       data:
         title: "ATTENTION RISQUE DE GEL."
         message: "Il fait actuellement {{ states.sensor.zigate_00158d0002c770dc_temperature.state }}°C"
+
+- id: notification zwave dead
+  alias: "[Notif] zwave dead"
+  trigger:
+    - platform: state
+      entity_id: zwave.fibaro_system_fgd212_dimmer_2
+      to: 'dead'
+    - platform: state
+      entity_id: zwave.qubino_zmnhdd1_z_wave_plus_flush_dimmer
+      to: 'dead'
+  action:
+    - service: script.notify
+      data:
+        title: "[ALERTE]"
+        message: "Un module Zwave est désynchronisé"
+        
+- id: notification alarme porte bureau
+  alias: "[Notif] alarme porte bureau"
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.securitas_360086
+    to: 'armed_away'
+  condition:
+    - condition: state
+      entity_id: 'binary_sensor.zigate_00158d0002eab5d6_onoff'
+      state: 'on'
+  action:
+    - service: script.notify
+      data:
+        title: "[Alerte]"
+        message: "Maison sous alarme -> Porte fenêtre bureau ouverte "
+
+
