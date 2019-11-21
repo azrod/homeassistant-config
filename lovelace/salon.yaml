@@ -1,39 +1,5 @@
 # lovelace_gen
-{% set Param = {"hours":"48","pointperhour":"2"} %}
-{% set Color = {"Blue":'#12AFF3',"Green":'#25C60E',"Red":'#D91F19'} %}
-{% set graphcard_entity = [
-                          {"entity":"sensor.zigate_00158d0002c99bd4","name":"Salon"}
-]%}
 
-type: custom:layout-card
-cards:
-#  - type: custom:compact-custom-header
-  - type: vertical-stack
-    cards: 
-      {% for c in graphcard_entity -%}
-      - type: custom:mini-graph-card
-        hours_to_show: {{ Param.hours }}
-        hour24: true
-        points_per_hour: {{ Param.pointperhour }}
-        color_thresholds:
-          - value: 10
-            color: "{{ Color.Blue }}"
-          - value: 20
-            color: "{{ Color.Green }}"
-          - value: 24
-            color: "{{ Color.Red }}"
-        entities:
-          - entity: {{c.entity}}_temperature
-            name: Température {{c.name}}
-      - type: custom:mini-graph-card
-        hours_to_show: {{ Param.hours }}
-        hour24: true
-        line_color: '{{ Color.Blue }}'
-        points_per_hour: {{ Param.pointperhour }}
-        entities:
-          - entity: {{c.entity}}_humidity
-            name: Humidité {{c.name}}
-      {% endfor %}  
   # CONFIGURATION TV
   {% set TV = [
     [{"entity":"script.group_tv_on_off","name":"ON/OFF Tous","icon":"play-box-outline"}],
@@ -42,6 +8,67 @@ cards:
     [{"entity":"script.sound_bar_vol_up","name":"Volume Plus","icon":"volume-plus"},
      {"entity":"script.sound_bar_vol_down","name":"Volume moins","icon":"volume-minus"}]
     ]%}
+
+type: custom:layout-card
+cards:
+  - type: vertical-stack
+    cards:
+      - type: entities
+        show_header_toggle: false
+        title: Salon
+        entities:
+          - type: section
+            label: Capteurs
+          - entity: sensor.zigate_00158d0002c99bd4_temperature
+            type: custom:multiple-entity-row
+            name: "Température"
+            primary:
+              entity: sensor.temperature_salon
+              name: false
+          - entity: sensor.zigate_00158d0002c99bd4_humidity
+            type: custom:multiple-entity-row
+            name: "Humidité"
+          - entity: sensor.luminosite_salon
+            type: custom:multiple-entity-row
+            name: "Luminosité"
+            primary: 
+              entity: sensor.zigate_00158d00032bd376_luminosity
+              name: false 
+          - entity: binary_sensor.zigate_00158d00032bd376_presence
+            type: custom:multiple-entity-row
+            name: "IR Salon"
+            info:
+              entity: zigate.00158d00032bd376
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - type: section
+            label: Eclairages
+          - !include
+            - templates/light.yaml
+            - entity: light.salon_lampe_1
+              name: Lampe salon 1
+              dimmable: true
+          - !include
+            - templates/light.yaml
+            - entity: light.salon_lampe_2
+              name: Lampe salon 2
+              dimmable: true
+          - !include
+            - templates/light.yaml
+            - entity: light.salon_lampe_4
+              name: Lampe salon 4
+              dimmable: true
+          - !include
+            - templates/light.yaml
+            - entity: light.totem_light
+              name: Lampe lanterne
+              dimmable: false
+          - type: call-service
+            service: automation.trigger
+            entity: automation.btn_far_cry_mode
+            name: Mode FarCry
+
   - type: vertical-stack
     cards:
       - type: "custom:button-card"
@@ -90,39 +117,106 @@ cards:
             size: 10%
             name: ON PC
   
-  # CONFIGURATIONS DE L'ECLAIRAGE
   - type: vertical-stack
     cards:
-      - type: "custom:button-card"
-        color_type: label-card
-        color: rgb(233, 202, 9)
-        name: "Lumières"
-        style:
-          - font-size: 19px
       - type: entities
+        show_header_toggle: false
+        title: Cuisine
         entities:
-          - !include
-            - templates/light.yaml
-            - entity: light.salon_lampe_1
-              name: Lampe salon 1
-              dimmable: true
-          - !include
-            - templates/light.yaml
-            - entity: light.salon_lampe_2
-              name: Lampe salon 2
-              dimmable: true
-          - !include
-            - templates/light.yaml
-            - entity: light.salon_lampe_4
-              name: Lampe salon 4
-              dimmable: true
-          - !include
-            - templates/light.yaml
-            - entity: light.totem_light
-              name: Lampe lanterne
-              dimmable: false
-          - type: call-service
-            service: automation.trigger
-            entity: automation.btn_far_cry_mode
-            name: Mode FarCry
+          - type: section
+            label: Contrôle
+          - entity: switch.prise1_relay
+            type: custom:multiple-entity-row
+            name: "Friteuse"
+          - type: section
+            label: Capteurs
+          - entity: binary_sensor.zigate_00158d0002e214e0_onoff
+            type: custom:multiple-entity-row
+            name: "Porte Cellier"
+            info:
+              entity: zigate.00158d0002e214e0
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: binary_sensor.zigate_00158d000283072c_zone_status
+            type: custom:multiple-entity-row
+            name: "Fuite machine à laver"
+            info:
+              entity: zigate.00158d000283072c
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: zigate.00158d0002c770dc
+            type: custom:multiple-entity-row
+            name: "Cellier"
+            icon: mdi:thermometer
+            hide_state: true
+            primary:
+              entity: sensor.zigate_00158d0002c770dc_temperature
+              name: Température
+            secondary:
+              entity: sensor.zigate_00158d0002c770dc_humidity
+              name: Humidité
+            info:
+              entity: zigate.00158d0002c770dc
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: zigate.00158d0002b72523
+            type: custom:multiple-entity-row
+            name: "Frigo"
+            icon: mdi:thermometer
+            hide_state: true
+            primary:
+              entity: sensor.zigate_00158d0002b72523_temperature
+              name: Température
+            secondary:
+              entity: sensor.zigate_00158d0002b72523_humidity
+              name: Humidité
+            info:
+              entity: zigate.00158d0002b72523
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: zigate.00158d000227f221
+            type: custom:multiple-entity-row
+            name: "Cave a vin"
+            icon: mdi:thermometer
+            hide_state: true
+            primary:
+              entity: sensor.zigate_00158d000227f221_temperature
+              name: Température
+            secondary:
+              entity: sensor.zigate_00158d000227f221_humidity
+              name: Humidité
+            info:
+              entity: zigate.00158d000227f221
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - type: section
+            label: Notifications
+          - entity: automation.notif_temperature_frigo
+            type: custom:multiple-entity-row
+            name: "Alerte temperature frigo"
+          - entity: automation.notif_temperature_congelateur
+            type: custom:multiple-entity-row
+            name: "Alerte temperature congélateur"
+          - entity: automation.notif_sonde_fuite_machinealaver
+            type: custom:multiple-entity-row
+            name: "Alerte fuite machine a laver"
 
+
+{% set entity_temperature = [
+                          {"entity":"sensor.zigate_00158d0002c770dc_temperature","name":"Cellier","environnement":"interieur"},
+                          {"entity":"sensor.oregontemphygro_2dfe_temp","name":"Congélateur","environnement":"congelateur"},
+                          {"entity":"sensor.zigate_00158d0002b72523_temperature","name":"Frigo","environnement":"frigo"},
+                          {"entity":"sensor.zigate_00158d000227f221_temperature","name":"Cave a vin","environnement":"caveavin"}
+]%}
+
+{% set entity_humidity = [
+                          {"entity":"sensor.zigate_00158d0002c770dc_humidity","name":"Cellier","environnement":"interieur"},
+                          {"entity":"sensor.oregontemphygro_2dfe_hum","name":"Congélateur","environnement":"congelateur"},
+                          {"entity":"sensor.zigate_00158d0002b72523_humidity","name":"Frigo","environnement":"frigo"},
+                          {"entity":"sensor.zigate_00158d000227f221_humidity","name":"Cave a vin","environnement":"caveavin"}
+]%}

@@ -2,7 +2,6 @@
 
 type: custom:layout-card
 cards:
-#  - type: custom:compact-custom-header
   - type: custom:monster-card
     show_empty: false
     card:
@@ -12,6 +11,14 @@ cards:
       include:
         - entity_id: "automation.telecommande*"
         - entity_id: "automation.btn*"
+  - type: custom:monster-card
+    show_empty: false
+    card:
+      type: entities
+      title: 'Eclairage'
+    filter:
+      include:
+        - entity_id: "automation.eclairage*"
   - type: custom:monster-card
     show_empty: false
     card:

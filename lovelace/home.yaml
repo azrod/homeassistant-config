@@ -1,0 +1,140 @@
+# lovelace_gen
+
+type: custom:layout-card
+cards:
+  - type: vertical-stack
+    cards:
+      - type: weather-forecast
+        entity: weather.salles 
+      - type: alarm-panel
+        entity: alarm_control_panel.securitas_360086  
+        name: Alarme maison
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        show_header_toggle: false
+        title: Capteurs
+        entities:
+          - type: section
+            label: Portes
+          - entity: binary_sensor.zigate_00158d0002e214e0_onoff
+            type: custom:multiple-entity-row
+            name: "Cellier"
+            info:
+              entity: zigate.00158d0002e214e0
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: binary_sensor.zigate_00158d0002eab5d6_onoff
+            type: custom:multiple-entity-row
+            name: "Ext Bureau"
+            info:
+              entity: zigate.00158d0002eab5d6
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - type: section
+            label: Présences
+          - entity: binary_sensor.zigate_00158d0002c63823_presence
+            type: custom:multiple-entity-row
+            name: "IR Boite aux lettres"
+            info:
+              entity: zigate.00158d0002c63823
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: binary_sensor.zigate_00158d0002b6e6d7_presence
+            type: custom:multiple-entity-row
+            name: "IR Porte"
+            info:
+              entity: zigate.00158d0002b6e6d7
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: binary_sensor.zigate_00158d00032bd376_presence
+            type: custom:multiple-entity-row
+            name: "IR Salon"
+            info:
+              entity: zigate.00158d00032bd376
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: binary_sensor.zigate_00158d0002f3c9b8_presence
+            type: custom:multiple-entity-row
+            name: "IR terrasse 2"
+            info:
+              entity: zigate.00158d0002f3c9b8_2
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - type: section
+            label: Fuites
+          - entity: binary_sensor.zigate_00158d000283072c_zone_status
+            type: custom:multiple-entity-row
+            name: "Fuite machine à laver"
+            info:
+              entity: zigate.00158d000283072c
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - entity: binary_sensor.zigate_00158d00027741fa_zone_status
+            type: custom:multiple-entity-row
+            name: "Fuite machine à laver"
+            info:
+              entity: zigate.00158d00027741fa
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+          - type: section
+            label: Eclairages
+          - entity: zwave.fibaro_system_fgd212_dimmer_2
+            type: custom:multiple-entity-row
+            name: "Extérieur porte"
+            info:
+              entity: zwave.fibaro_system_fgd212_dimmer_2
+              attribute: receivedTS
+              name: "> "
+          - entity: zwave.qubino_zmnhdd1_z_wave_plus_flush_dimmer
+            type: custom:multiple-entity-row
+            name: "Extérieur terrasse"
+            info:
+              entity: zwave.qubino_zmnhdd1_z_wave_plus_flush_dimmer
+              attribute: receivedTS
+              name: "> "
+          - type: section
+            label: Autres
+          - entity: binary_sensor.fr24_feeder_link_connected
+            type: custom:multiple-entity-row
+            name: FlightRadar
+            hide_state: true
+            primary: 
+              entity: binary_sensor.fr24_feeder_link_connected
+              name: Link
+            secondary:
+              entity: binary_sensor.fr24_feeder_receiver_connected
+              name: Receiver
+            tertiary: 
+              entity: sensor.fr24_feeder_aircraft_tracked
+              name: Aircraft
+              unit: " "
+          - type: section
+            label: Onduleur
+          - entity: sensor.apcups_status
+            type: custom:multiple-entity-row
+            name: Status
+            primary:
+              entity: sensor.apcups_input_voltage
+              name: Input Voltage
+          - entity: sensor.apcups_battery_charge
+            type: custom:multiple-entity-row
+            name: Batterie
+            primary:
+              entity: sensor.apcups_load
+              name: Charge
+            info:
+              entity: sensor.apcups_battery_runtime
+              name: "Temps sur batterie : "
+          - entity : input_boolean.notification_onduleur
+            name: Notification
+        theme: default

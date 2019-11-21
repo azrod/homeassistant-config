@@ -23,33 +23,34 @@ resources:
     type: module
   - url: /community_plugin/weather-card/weather-card.js
     type: module
+  - url: /community_plugin/lovelace-multiple-entity-row/multiple-entity-row.js
+    type: js
+  - url: /community_plugin/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
+    type: js
+  - url: /community_plugin/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
+    type: module
 
 views:
-  - title: TAB1
+  - title: Home
     icon: mdi:home
     panel: true
     cards:
-      - !include lovelace/tab1.yaml
+      - !include lovelace/home.yaml
   - title: Salon
     icon: mdi:sofa
     panel: true
     cards:
       - !include lovelace/salon.yaml
-  - title: Cuisine
-    icon: mdi:fridge-outline
-    panel: true
-    cards:
-      - !include lovelace/cuisine.yaml
   - title: Jardin
     icon: mdi:flower
     panel: true
     cards:
       - !include lovelace/jardin.yaml
-  - title: VACCUM
+  - title: VACUUM
     icon: mdi:robot-vacuum
     panel: true
     cards:
-      - !include lovelace/vaccum.yaml
+      - !include lovelace/vacuum.yaml
   - title: THERMAL
     icon: mdi:thermometer-lines
     panel: true
@@ -81,7 +82,6 @@ views:
             content: >
               ## Todo 
                 * Resync sonde fuite SDB
-                * Alerte porte ouverte
           - type: entities
             title: Admin Control
             show_header_toggle: false    

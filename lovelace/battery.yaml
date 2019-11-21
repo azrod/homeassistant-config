@@ -1,6 +1,26 @@
 # lovelace_gen
 type: custom:layout-card
 cards:
+{% set TeleInfo = [
+  {"entity":"sensor.teleinfo_watt","label":"Teleinfo Watt"}
+]%}
+  - type: "custom:button-card"
+    color_type: label-card
+    color: auto
+    name: "TeleInfo"
+    style:
+      - font-size: 19px
+{% for ti in TeleInfo %}
+  - type: custom:mini-graph-card
+    hours_to_show: 12
+    hour24: true
+    points_per_hour: 30
+    show:
+      graph: bar
+    entities:
+      - entity: "{{ ti.entity }}"
+        name: "{{ ti.label }}"
+{% endfor %}
   - type: custom:monster-card
     show_empty: false
     card:
