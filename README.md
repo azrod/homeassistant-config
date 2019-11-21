@@ -1,6 +1,6 @@
 # Configuration Home Assistant 
 
-[![Home Assistant Version](https://img.shields.io/badge/HomeAssistant%20Version-v0.101.0-green?style=for-the-badge)](https://github.com/home-assistant/home-assistant/releases/tag/0.101.0) [![Home Assistant Documentation](https://img.shields.io/badge/Rédaction%20Documentation-En%20cours-Orange?style=for-the-badge)](#)
+[![Home Assistant Version](https://img.shields.io/badge/HomeAssistant%20Version-v0.102.0-green?style=for-the-badge)](https://github.com/home-assistant/home-assistant/releases/tag/0.102.0) [![Home Assistant Documentation](https://img.shields.io/badge/Rédaction%20Documentation-En%20cours-Orange?style=for-the-badge)](#)
 
 ## Equipements
 ### Matériels
