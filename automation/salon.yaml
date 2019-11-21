@@ -1,0 +1,67 @@
+- id: light_salon_on
+  alias: "[Eclairage] Allumage auto salon"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.zigate_00158d00032bd376_presence
+    from: 'off'
+    to: 'on'
+  condition: 
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.luminosite_salon
+      below: 5
+    - condition: state
+      entity_id: device_tracker.c0_41_f6_93_75_a9
+      state: 'not_home'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - group.salon
+
+- id: light_salon_off
+  alias: "[Eclairage] Extinction auto salon"
+  trigger:
+    - platform: time_pattern
+      minutes: '/2'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.zigate_00158d00032bd376_presence # IR Salon
+        state: 'off'
+        for:
+          minutes: 3
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: device_tracker.c0_41_f6_93_75_a9
+            state: 'not_home'
+          - condition: state
+            entity_id: group.presence_home
+            state: 'not_home'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: light.salon_lampe_1
+            state: 'on'
+          - condition: state
+            entity_id: light.salon_lampe_2
+            state: 'on'
+          - condition: state
+            entity_id: light.salon_lampe_3
+            state: 'on'
+          - condition: state
+            entity_id: light.salon_lampe_4
+            state: 'on'
+          - condition: state
+            entity_id: light.totem_light
+            state: 'on'
+          - condition: state
+            entity_id: light.salon_all_lights
+            state: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: group.salon
