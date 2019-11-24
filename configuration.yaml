@@ -15,12 +15,12 @@ homeassistant:
   packages: 
     zigate: !include packages/zigate.yaml 
     pkg_cellier: !include_dir_named packages/cellier/
-    pkg_vacuum: !include_dir_named packages/vacuum/
+    pkg_vacuum: !include packages/vacuum.yaml
     pkg_battery: !include_dir_named packages/battery/
-    pkg_fr24: !include_dir_named packages/fr24/
+    pkg_fr24: !include packages/fr24.yaml
 
 rflink:
-  port: /dev/ttyUSB1
+  port: /dev/ttyUSB2
 
 securitas_direct:
   username: !secret securitas_direct_username
@@ -51,8 +51,17 @@ zigate:
   enable_led : false
 
 recorder:
-  purge_keep_days: 4
+  purge_keep_days: 1
+  purge_interval: 2
   db_url: !secret db_url
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - device_tracker
+      - script
+      - zigate
+      - zwave
 
 http:
   base_url: !secret base_url
