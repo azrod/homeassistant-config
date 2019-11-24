@@ -1,3 +1,213 @@
+homeassistant:
+  customize:
+    package.vacuum:
+      customize: &customize
+        package: 'Vacuum'
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret xiaomi_vaccum_host
+    token: !secret xiaomi_vaccum_token
+
+
+# ========================================================================================= #
+#                                                                                           #
+#       INPUT BOOLEAN VACCUM                                                                #
+#                                                                                           #
+#                                                                                           #
+#                                                                                           #
+# ========================================================================================= #
+input_boolean:
+  room_cuisine:
+    name: Pièce Cuisine
+    initial: off
+  room_salon:
+    name: Pièce Salon
+    initial: off
+  room_cellier:
+    name: Pièce Cellier
+    initial: off
+  room_couloir:
+    name: Pièce Couloir
+    initial: off
+  room_sdb:
+    name: Pièce Salle de bain
+    initial: off
+  room_toilette:
+    name: Pièce Toilette
+    initial: off
+  room_chambre:
+    name: Pièce Chambre
+    initial: off
+  room_bureau:
+    name: Pièce Bureau
+    initial: off
+  zone_salon:
+    name: Zone Salon
+    initial: off
+  zone_chambre:
+    name: Zone Chambre
+    initial: off
+  zone_devant_porte:
+    name: Zone Devant Porte
+    initial: off
+  zone_devant_baie_vitree:
+    name: Zone Baie Vitrée
+    initial: off
+
+# ========================================================================================= #
+#                                                                                           #
+#       INPUT SELECT VACCUM                                                                 #
+#                                                                                           #
+#                                                                                           #
+#                                                                                           #
+# ========================================================================================= #
+input_select:
+  vacuum_room:
+    name: Choisir la piece à nettoyer 
+    options:
+      - Choisir la piece
+      - Cuisine
+      - Salon
+      - Cellier 
+      - Chambre
+      - Bureau
+      - Couloir
+      - Salle de bain
+      - Toilette 
+    initial: Choisir la piece
+
+  vacuum_zone:
+    name: Choisir la zone à nettoyer 
+    options:
+      - Choisir la zone
+      - Zone Devant Porte
+      - Zone Salon
+      - Zone Chambre
+      - Zone Baie Vitrée
+    initial: Choisir la zone
+
+# ========================================================================================= #
+#                                                                                           #
+#       SCRIPT VACCUM                                                                       #
+#                                                                                           #
+#                                                                                           #
+#                                                                                           #
+# ========================================================================================= #
+
+script:
+  vacuum_cuisine:
+        alias: "Nettoyer Cuisine"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[22028,25937,25378,29487,1]]
+
+  vacuum_salon:
+        alias: "Nettoyer Salon"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[16869,23858,22519,29408,1],[22517,23883,24117,26083,1]]
+
+  vacuum_cellier:
+        alias: "Nettoyer Cellier"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[24366,24782,25416,25882,1]]
+
+  vacuum_couloir:
+        alias: "Nettoyer Couloir"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[23380,19936,24180,23786,1]]
+
+  vacuum_sdb:
+        alias: "Nettoyer Salle de bain"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[24225,21149,26025,23949,1]]
+
+  vacuum_toilette:
+        alias: "Nettoyer Toilette"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[24231,20152,25831,21002,1]]
+
+  vacuum_chambre:
+        alias: "Nettoyer Chambre"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[20581,17145,25531,19895,1]]
+
+  vacuum_zone_devant_porte:
+        alias: "Nettoyage devant de porte"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[19074,29193,22224,29943,3]]
+
+  vacuum_zone_salon:
+        alias: "Nettoyage zone salon"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[16801,24296,24151,29446,1],[24143,24312,25643,29462,1]]
+
+  vacuum_zone_chambre:
+        alias: "Nettoyage zone chambre"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[23367,19888,26317,23838,1],[20523,17133,26223,19883,1]]
+
+  vacuum_zone_baie_vitree:
+        alias: "Nettoyage zone baie vitree"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[16781,23645,20431,25445,1],[16807,25402,17757,27602,1]]
+
+  vacuum_zone_bureau:
+        alias: "Nettoyage Bureau"
+        sequence:
+          - service: vacuum.send_command
+            data:
+              entity_id: vacuum.xiaomi_vacuum_cleaner
+              command: app_zoned_clean
+              params: [[20692,20109,23242,23809,1]]
+
 # ========================================================================================= #
 #                                                                                           #
 #       AUTOMATION VACCUM                                                                   #
@@ -5,6 +215,7 @@
 #                                                                                           #
 #                                                                                           #
 # ========================================================================================= #
+automation:
   - alias: Start Nettoyage d'une pièce
     hide_entity: False
     trigger:
@@ -33,6 +244,8 @@
               script.vacuum_toilette
             {% elif is_state("input_select.vacuum_room", "Chambre") %}
               script.vacuum_chambre
+            {% elif is_state("input_select.vacuum_room", "Bureau") %}
+              script.vacuum_bureau
             {% else %}
             {% endif %}
       - service: input_select.select_option
@@ -48,9 +261,10 @@
           - input_boolean.room_sdb
           - input_boolean.room_toilette
           - input_boolean.room_chambre
+          - input_boolean.room_bureau
 
 
-  - alias: Start Nettoyage d'une pièce
+  - alias: Start Nettoyage d'une zone
     hide_entity: False
     trigger:
       - platform: state
@@ -85,7 +299,7 @@
           - input_boolean.zone_chambre
           - input_boolean.zone_baie_vitree
 
-  - alias: Start Fail Nettoyage d'une pièce
+  - alias: Start Fail Nettoyage
     hide_entity: False
     trigger:
       - platform: state
@@ -188,6 +402,17 @@
         entity_id: script.vacuum_chambre
       - service: input_boolean.turn_off
         entity_id: input_boolean.room_chambre
+
+  - alias: Start Nettoyage Bureau
+    trigger:
+      - platform: state
+        entity_id: input_boolean.room_bureau
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.vacuum_bureau
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.room_bureau
 
   - alias: Start Nettoyage Zone devant porte
     trigger:

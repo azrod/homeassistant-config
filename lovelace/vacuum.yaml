@@ -1,0 +1,59 @@
+# lovelace_gen
+
+type: custom:layout-card
+cards:
+  - type: vertical-stack
+    cards:
+    - type: custom:xiaomi-vacuum-card
+      entity: vacuum.xiaomi_vacuum_cleaner
+      image: /local/custom/folder/background.png
+      name: Nestor
+      buttons: true
+      labels:
+        status: Etat
+        battery: Batterie
+        mode: Puissance
+        main_brush: Brosse Principale
+        side_brush: Brosse Latérale
+        filter: Filtre
+        sensor: Capteurs
+    - type: entities
+      show_header_toggle: false
+      title: Lancer un nettoyage
+      entities:
+      - input_select.vacuum_room
+      - input_select.vacuum_zone
+  - type: vertical-stack
+    cards:
+        - type: custom:xiaomi-vacuum-map-card
+          entity: vacuum.xiaomi_vacuum_cleaner
+          map_image: '/local/map.png'
+          calibration_points:
+            - vacuum:
+                x: 16800
+                y: 29250
+              map:
+                x: 272
+                y: 239
+            - vacuum:
+                x: 26100
+                y: 29250
+              map:
+                x: 941
+                y: 239
+            - vacuum:
+                x: 26100
+                y: 17350
+              map:
+                x: 941
+                y: 1105
+          zones:
+            - [[20581,17145,25531,19895]] # Chambre
+            - [[24231,20152,25831,21002]] # Toilette
+            - [[24225,21149,26025,23949]] # SDB
+            - [[23380,19936,24180,23786]] # Couloir
+            - [[16869,23858,22519,29408],[22517,23883,24117,26083]] # Salon
+            - [[24366,24782,25416,25882]] # Cellier
+            - [[22028,25937,25378,29487]] # Cuisine
+            - [[20692,20109,23242,23809]] # Bureau
+
