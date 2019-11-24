@@ -37,3 +37,11 @@ cards:
       include:
         - entity_id: "automation.*"
           state: "off"
+  - type: custom:monster-card
+    show_empty: false
+    card:
+      type: entities
+      title: 'Notifications'
+    filter:
+      include:
+        - entity_id: "automation.notif*"

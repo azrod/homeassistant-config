@@ -6,6 +6,10 @@ cards:
     cards:
       - type: weather-forecast
         entity: weather.salles 
+      - type: glance
+        entities:
+          - person.elodie_2
+          - person.mickael_2
       - type: alarm-panel
         entity: alarm_control_panel.securitas_360086  
         name: Alarme maison

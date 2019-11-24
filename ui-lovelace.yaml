@@ -66,11 +66,6 @@ views:
     panel: true
     cards:
       - !include lovelace/battery.yaml
-  - title: NOTIFICATIONS
-    icon: mdi:battery-50
-    panel: true
-    cards:
-      - !include lovelace/notifications.yaml
 
   - title: TODO
     icon: mdi:markdown
