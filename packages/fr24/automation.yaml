@@ -1,0 +1,19 @@
+- id: notification flightradar down
+  alias: "[Notif] flightradar down"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.fr24_feeder_link_connected
+      to: 'off'
+      for:
+        minutes: 10
+    - platform: state
+      entity_id: binary_sensor.fr24_feeder_receiver_connected
+      to: 'off'
+      for:
+        minutes: 10 
+  condition: []
+  action:
+    - service: script.notify
+      data:
+        title: "[Alerte]"
+        message: "FlightRadar est à l'arrêt"
