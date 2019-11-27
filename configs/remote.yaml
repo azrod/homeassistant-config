@@ -21,3 +21,32 @@
     sound_bar_vol_down:
       command:
         - raw:Z6VnAEICAAB6BgAAsAgAAHYRAABXIwAAhJkAANR1AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAAEBAQEAAQEBAAAAAAEBAQEBAQAAAAAAAAAAAQEBBQJGAkYCRgJGAkYCRgJGAkYCQA
+- platform: xiaomi_miio
+  host: !secret xiaomi_miio_host2
+  token: !secret xiaomi_miio_token2
+  commands:
+    hdmi_a1:
+      command:
+        - raw:nE5mMwlk0mk2mEsms0ADKagBkAWYA9gLvNwD6nAC/gXrMZsAg0xmwCpgQkAQoDXgNUAQgJxgNWCv4HngVWEUwCHg8+F74MtA7eAhMwgA
+    hdmi_a2:
+      command:
+        - raw:nE5mEwlk0mk3mEsmszADKcABlMQB2mgA7ALuAec1AX8C+ptMJZMZsCQYCBTGbgrEBScxmwHTAIqA1AHhANcBYgHxgvuBX4MPgaME3gEJADoBlYCDhieGI4UXg7VMIAA=
+    hdmi_a3:
+      command:
+        - raw:nE5mMwlk0mk2mEsms0ADKcABkAgQA6AHvMwF/AX8BeZjN5gAgoBCgQlMZsA1gBBzabgNeBr4M8zUAMgmzAHMDLwIcBVUBBwVPA8oE2gtYCRcBDQCCmEA
+    hdmi_a4:
+      command:
+        - raw:nE5mEwlk0mk3mEsmszADKcABlNAAymwAbTUAMpjMJZNgAyAHMB9AJ3A4KbgblMwIznIC6zGbgKEBQYBCgInNgKimgBhTGcArmA1ABCAomBr4N+AM0B6wQLgroEVAA7gQWB04EGAMIGZwJUBe/MJZMIAA
+    hdmi_b1:
+      command:
+        - raw:nE5mEwlk0mk3mEsmszADKcABlMQB2APcBfwF/AXqYzcE0prNACCmwKLTGbANGAiYDWgEIBrgIxAEUCoYEZA0eBCoK9gMyBkYTfgqeBlk2APMCGAS8AyaYQA=
+    hdmi_b2:
+      command:
+        - raw:nE5mMwlk0mk2mEsmoBBTWcABlNAB2mYA7AL+Au4B5zUBfZjNgCDBMKYzabgMqAQoDXgqJMZvMAI3BOYBFQb/BvoE3gIfCRcIDwbmBYMDLwh4Ci8CpJhAAA==
+    hdmi_b3:
+      command:
+        - raw:nE4nEwlk0mk5mEsmsxADIAwprMwB+AXebABlNQF/Av2YzYAh5vMAIVAIUBrwGvAa8BqAaHAr8Cuge4AQ8JTw1fA58BDwECmEAA==
+    hdmi_b4:
+      command:
+        - raw:nE4nEwlk0mk5mEsmsxADIAwprMwB+AXeaAHzNgEzAv8A8pjNwFDAQKYzeYAIuAQYHRTGbAVsA1wGvgzrNgV6A8gAgwPPCK8AeAMvDE4LTAIDAy8BpJhAAA==
+

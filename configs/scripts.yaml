@@ -51,6 +51,41 @@
               command:
                 - 'tv_on_off'
 
+  hdmi_b1:
+        alias: "HDMI_B1"
+        sequence:
+          - service: remote.send_command
+            entity_id: 'remote.xiaomi_miio_192_168_0_28'
+            data:
+              command:
+                - 'hdmi_b1'
+
+  hdmi_b2:
+        alias: "HDMI_B2"
+        sequence:
+          - service: remote.send_command
+            entity_id: 'remote.xiaomi_miio_192_168_0_28'
+            data:
+              command:
+                - 'hdmi_b2'
+
+  hdmi_b3:
+        alias: "HDMI_B3"
+        sequence:
+          - service: remote.send_command
+            entity_id: 'remote.xiaomi_miio_192_168_0_28'
+            data:
+              command:
+                - 'hdmi_b3'
+
+  hdmi_b4:
+        alias: "HDMI_B4"
+        sequence:
+          - service: remote.send_command
+            entity_id: 'remote.xiaomi_miio_192_168_0_28'
+            data:
+              command:
+                - 'hdmi_b4'
   cycle_piscine_1h:
         alias: "Cycle Piscine"
         sequence:

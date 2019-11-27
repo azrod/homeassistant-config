@@ -99,3 +99,4 @@ google_assistant: !include configs/googleassistant.yaml
 notify: !include configs/notify.yaml
 logger: !include configs/logger.yaml
 device_tracker: !include configs/device_tracker.yaml
+timer: !include  configs/timer.yaml

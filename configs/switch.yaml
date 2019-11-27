@@ -25,6 +25,13 @@
       name: Bouton 7
     ev1527_0fea25_03:
       name: Bouton 8
+# Prise 433Mhz
+    ab400d_52_31:
+      name: Prise 1
+    ab400d_42_1:
+      name: Prise 2
+    ab400d_42_2:
+      name: Prise 3
 - platform: wake_on_lan
   mac_address: !secret mac_address_pc
   host: !secret ip_address_pc
