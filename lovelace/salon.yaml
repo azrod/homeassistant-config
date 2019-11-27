@@ -6,7 +6,9 @@
     [{"entity":"script.sound_bar_on_off","name":"ON/OFF Barre de son","icon":"volume-high"},
      {"entity":"script.tv_on_off","name":"ON/OFF TV","icon":"television-classic"}],
     [{"entity":"script.sound_bar_vol_up","name":"Volume Plus","icon":"volume-plus"},
-     {"entity":"script.sound_bar_vol_down","name":"Volume moins","icon":"volume-minus"}]
+     {"entity":"script.sound_bar_vol_down","name":"Volume moins","icon":"volume-minus"}],
+    [{"entity":"script.hdmi_b2","name":"HDMI Android TV","icon":"volume-plus"},
+     {"entity":"script.hdmi_b4","name":"HDMI PC","icon":"volume-minus"}]
     ]%}
 
 type: custom:layout-card
