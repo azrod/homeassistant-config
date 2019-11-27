@@ -19,48 +19,23 @@
       data:
         entity_id:
           - group.salon
+    - service: timer.start
+      data:
+        entity_id: timer.salon_lights_off_in 
 
 - id: light_salon_off
   alias: "[Eclairage] Extinction auto salon"
   trigger:
-    - platform: time_pattern
-      minutes: '/2'
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.salon_lights_off_in
   condition:
-    condition: and
+    condition: or
     conditions:
       - condition: state
-        entity_id: binary_sensor.zigate_00158d00032bd376_presence # IR Salon
-        state: 'off'
-        for:
-          minutes: 3
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: device_tracker.c0_41_f6_93_75_a9
-            state: 'not_home'
-          - condition: state
-            entity_id: group.presence_home
-            state: 'not_home'
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: light.salon_lampe_1
-            state: 'on'
-          - condition: state
-            entity_id: light.salon_lampe_2
-            state: 'on'
-          - condition: state
-            entity_id: light.salon_lampe_3
-            state: 'on'
-          - condition: state
-            entity_id: light.salon_lampe_4
-            state: 'on'
-          - condition: state
-            entity_id: light.totem_light
-            state: 'on'
-          - condition: state
-            entity_id: light.salon_all_lights
-            state: 'on'
+        entity_id: group.presence_home
+        state: 'not_home'
   action:
     - service: light.turn_off
       data:
