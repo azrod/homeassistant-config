@@ -1,0 +1,22 @@
+- id: light_exterieur_on
+  alias: "[Eclairage extérieur] Allumage auto"
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '+00:30:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - group.exterieur
+
+- id: light_exterieur_off
+  alias: "[Eclairage extérieur] Extinction auto"
+  trigger:
+    platform: time
+    at: "00:00:00"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - group.exterieur

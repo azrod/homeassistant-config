@@ -30,6 +30,7 @@
     name: Exterieur
     entities:
       - light.fibaro_system_fgd212_dimmer_2_level_2
+      - light.qubino_zmnhdd1_z_wave_plus_flush_dimmer_level
   salon:
     name: Salon
     entities:
