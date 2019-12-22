@@ -20,6 +20,7 @@
 * [Sonoff Basic R2](https://sonoff.tech/product/wifi-diy-smart-switches/basicr2) avec [Esphome](https://esphome.io/)<sup>[WiFi]</sup>
 * [Fibaro Dimmer 2](https://www.fibaro.com/fr/products/dimmer-2/) pour piloter un interrupteur mural<sup>[ZWave]</sup>
 * [Qubino Flush Dimmer](https://qubino.com/products/flush-dimmer/) pour piloter un interrupteur mural<sup>[Zwave]</sup>
+* [StripLed RGBW](https://www.amazon.fr/gp/product/B07BNKHRCF?pf_rd_p=3369e5a6-6989-43dc-ad01-b2b5ee1dcd12&pf_rd_r=28ZA91ZJ6R9EH1S5PVSF) Bande LED RGBW <sup>[WiFi]</sup> - Flashé sur ESPHOME [DIY](https://everythingsmarthome.co.uk/howto/diy-philips-hue-led-strips-installing-esphome-on-magic-home-rgbw-controllers/)
 
 ### Télécommandes 
 * [Xiaomi Mijia Switch](https://fr.aliexpress.com/item/32825685057.html) <sup>[Zigbee]</sup> (x2)
