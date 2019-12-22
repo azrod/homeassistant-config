@@ -33,5 +33,5 @@
     ab400d_42_2:
       name: Prise 3
 - platform: wake_on_lan
-  mac_address: !secret mac_address_pc
+  mac: !secret mac_address_pc
   host: !secret ip_address_pc

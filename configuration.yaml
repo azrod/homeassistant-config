@@ -18,9 +18,10 @@ homeassistant:
     pkg_vacuum: !include packages/vacuum.yaml
     pkg_battery: !include_dir_named packages/battery/
     pkg_fr24: !include packages/fr24.yaml
+    pkg_salon: !include packages/salon.yaml
 
 rflink:
-  port: /dev/ttyUSB2
+  port: /dev/ttyUSB1
 
 securitas_direct:
   username: !secret securitas_direct_username
@@ -64,7 +65,9 @@ recorder:
       - zwave
 
 http:
-  base_url: !secret base_url
+  base_url: !secret http_base_url
+  ssl_certificate: !secret http_ssl_certificate 
+  ssl_key: !secret http_ssl_key 
 
 # Huawei_LTE 
 huawei_lte:
@@ -83,6 +86,7 @@ logbook:
 sun:
 system_health:
 wake_on_lan:
+mobile_app:
 
 # INCLUDE
 
