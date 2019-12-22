@@ -2,6 +2,7 @@
 *.old
 *.log
 *.db
+*.pem
 *.db-shm
 *.db-wal
 *.pyc
