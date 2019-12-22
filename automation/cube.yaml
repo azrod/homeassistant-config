@@ -101,10 +101,9 @@
     - service: light.turn_off
       data:
         entity_id:
-          - light.salon_lampe_1
-          - light.salon_lampe_2
-          - light.salon_lampe_4
+          - light.salon_all_lights
           - light.totem_light
+          - light.ledstrip
 
 - id: cube-aqara-shake-2
   alias: cube-aqara-shake-2
@@ -126,7 +125,6 @@
     - service: light.turn_off
       data:
         entity_id:
-          - light.salon_lampe_1
-          - light.salon_lampe_2
-          - light.salon_lampe_4
+          - light.salon_all_lights
           - light.totem_light
+          - light.ledstrip
