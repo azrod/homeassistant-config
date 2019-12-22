@@ -137,6 +137,10 @@
         data_template: 
           title: "{{ title }}"
           message: "{{ message }}"
+      - service: script.notify_push_mobile
+        data_template: 
+          title: "{{ title }}"
+          message: "{{ message }}"
 
   notify_discord:
     alias: 'Notification Discord'
@@ -153,6 +157,22 @@
         data_template:
           message: "**{{ title }}** : {{ message }}"
           target:  [!secret discord_target]
+
+  notify_push_mobile:
+    alias: 'Notification Push Mobile'
+    description: "Notification Push Mobile"
+    fields:
+      message:
+        description: 'The message content'
+        example: 'Je suis un test de notification'
+      title: 
+        description: 'Title'
+        example: 'Je suis un titre'
+    sequence:
+      - service: notify.mobile_app_mi_9t
+        data_template:
+          title: "{{ title }}"
+          message: "{{ message }}"
 
   notify_ha:
     alias: 'Notification Discord'
