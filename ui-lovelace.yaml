@@ -41,21 +41,11 @@ views:
     panel: true
     cards:
       - !include lovelace/salon.yaml
-  - title: Jardin
-    icon: mdi:flower
-    panel: true
-    cards:
-      - !include lovelace/jardin.yaml
   - title: VACUUM
     icon: mdi:robot-vacuum
     panel: true
     cards:
       - !include lovelace/vacuum.yaml
-  - title: THERMAL
-    icon: mdi:thermometer-lines
-    panel: true
-    cards:
-      - !include lovelace/thermal.yaml
   - title: AUTOMATION
     icon: mdi:home-automation
     panel: true

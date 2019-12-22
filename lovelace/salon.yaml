@@ -48,6 +48,11 @@ cards:
             label: Eclairages
           - !include
             - templates/light.yaml
+            - entity: light.ledstrip
+              name: Bande LED
+              dimmable: true
+          - !include
+            - templates/light.yaml
             - entity: light.salon_lampe_1
               name: Lampe salon 1
               dimmable: true
@@ -70,6 +75,9 @@ cards:
             service: automation.trigger
             entity: automation.btn_far_cry_mode
             name: Mode FarCry
+          - type: custom:slider-entity-row
+            entity: input_select.ambiance_salon
+            name: "Ambiance"
 
   - type: vertical-stack
     cards:

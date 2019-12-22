@@ -66,29 +66,29 @@ cards:
                 color: {{ L.color_true }} 
           {% endfor %}
       {% endfor %}
-      - type: entities
-        show_header_toggle: false
-        title: Station météo 
-        entities:
-          - sensor.battery_voltage_2
-          - sensor.bme280_temperature
-          - sensor.bme280_relative_humidity
-          - sensor.bme280_pressure
+      # - type: entities
+      #   show_header_toggle: false
+      #   title: Station météo 
+      #   entities:
+      #     - sensor.battery_voltage_2
+      #     - sensor.bme280_temperature
+      #     - sensor.bme280_relative_humidity
+      #     - sensor.bme280_pressure
   - type: vertical-stack
     cards:
       - !include
         - templates/graph/temperature.yaml
         - entities: 
-          - entity: sensor.bme280_temperature
-            name: Station Météo Température
+          # - entity: sensor.bme280_temperature
+          #   name: Station Météo Température
           - entity: sensor.zigate_00158d00036b917b_temperature
             name: Température extérieur Xiaomi
           environnement: exterieur
       - !include
         - templates/graph/humidity.yaml
         - entities: 
-          - entity: sensor.bme280_relative_humidity
-            name: Station Météo Humidité
+          # - entity: sensor.bme280_relative_humidity
+          #   name: Station Météo Humidité
           - entity: sensor.zigate_00158d00036b917b_humidity
             name: Humidité extérieur Xiaomi
 
