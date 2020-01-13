@@ -38,7 +38,7 @@
       entity_id: 'input_boolean.notification_onduleur'
       state: 'on'
   action:
-    - service: script.notify
+    - service: script.notify_system
       data:
         title: "[Alerte] Coupure de courant"
         message: "Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
@@ -55,7 +55,7 @@
       entity_id: 'input_boolean.notification_onduleur'
       state: 'on'
   action:
-    - service: script.notify
+    - service: script.notify_system
       data:
         title: "[Info]"
         message: "Retour du courant."
@@ -86,7 +86,7 @@
       entity_id: 'input_boolean.notification_onduleur'
       state: 'on'
   action:
-    - service: script.notify
+    - service: script.notify_system
       data:
         title: "[Alerte] Coupure de courant."
         message: "Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
@@ -126,7 +126,7 @@
       entity_id: zwave.qubino_zmnhdd1_z_wave_plus_flush_dimmer
       to: 'dead'
   action:
-    - service: script.notify
+    - service: script.notify_system
       data:
         title: "[ALERTE]"
         message: "Un module Zwave est désynchronisé"
@@ -147,4 +147,20 @@
         title: "[Alerte]"
         message: "Maison sous alarme -> Porte fenêtre bureau ouverte "
 
-
+- id: notification alarme
+  alias: "[Notif] alarme"
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.securitas_360086
+    to: 'armed_away'
+  condition:
+    - condition: state
+      entity_id: 'group.presence_home'
+      state: 'not_home'
+      for:
+        minutes: 5
+  action:
+    - service: script.notify
+      data:
+        title: "[Alerte]"
+        message: "L'alarme n'est pas enclenché ! "
