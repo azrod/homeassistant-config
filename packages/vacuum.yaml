@@ -492,6 +492,9 @@ automation:
           - mon
           - wed
           - fri
+      - condition: state
+        entity_id: group.presence_home
+        state: 'not_home'
     action:
       - service: script.turn_on
         entity_id: script.vacuum_zone_salon
@@ -553,6 +556,9 @@ automation:
           - wed
           - thu
           - fri
+      - condition: state
+        entity_id: group.presence_home
+        state: 'not_home'
     action:
       - service: script.turn_on
         entity_id: script.vacuum_zone_devant_porte
@@ -570,6 +576,9 @@ automation:
           - mon
           - wed
           - fri
+      - condition: state
+        entity_id: group.presence_home
+        state: 'not_home'
     action:
       - service: script.turn_on
         entity_id: script.vacuum_zone_chambre
