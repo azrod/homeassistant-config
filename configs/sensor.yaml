@@ -26,11 +26,11 @@
 # TELEINFO https://github.com/Domochip/WirelessTeleInfo 
 - platform: mqtt
   name: "Teleinfo ampere"
-  state_topic: "teleinfo/811775938857/IINST"
+  state_topic: "teleinfo/811775938857/811775938857/IINST"
   unit_of_measurement: "A"
 - platform: mqtt 
   name: "Teleinfo index"
-  state_topic: "teleinfo/811775938857/BASE"
+  state_topic: "teleinfo/811775938857/811775938857/BASE"
   unit_of_measurement: "Wh"
 
 # TEMPLATE 
