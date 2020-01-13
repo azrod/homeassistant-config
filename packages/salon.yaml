@@ -15,6 +15,34 @@ input_select:
       - Chaud
       - Blanc
 
+light:
+  - name: "Salon all lights"
+    command_topic: lights/0x524E/rgbw/0
+    state_topic: lights/states/0x524E/rgbw/0
+    <<: &MILIGHT_PARAMS
+      platform: mqtt
+      schema: json
+      color_temp: false
+      rgb: true
+      brightness: true
+      effect: false
+  - name: "Salon Lampe 1"
+    command_topic: lights/0x524E/rgbw/1
+    state_topic: lights/states/0x524E/rgbw/1
+    <<: *MILIGHT_PARAMS
+  - name: "Salon Lampe 2"
+    command_topic: lights/0x524E/rgbw/2
+    state_topic: lights/states/0x524E/rgbw/2
+    <<: *MILIGHT_PARAMS
+  - name: "Salon Lampe 3"
+    command_topic: lights/0x524E/rgbw/3
+    state_topic: lights/states/0x524E/rgbw/3
+    <<: *MILIGHT_PARAMS
+  - name: "Salon Lampe 4"
+    state_topic: "lights/states/0x524E/rgbw/4"
+    command_topic: "lights/0x524E/rgbw/4"
+    <<: *MILIGHT_PARAMS
+
 automation:
   - id: light_salon_on
     alias: "[Eclairage] Allumage auto salon"
@@ -71,8 +99,26 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.salon_all_lights
+          entity_id: light.salon_lampe_1
           rgb_color: [255,119,0]
+      - service: light.turn_on
+        data:
+          entity_id: light.salon_lampe_2
+          rgb_color: [255,119,0]
+      - service: light.turn_on
+        data:
+          entity_id: light.salon_lampe_3
+          rgb_color: [255,119,0]
+      - service: light.turn_on
+        data:
+          entity_id: light.salon_lampe_4
+          rgb_color: [255,119,0]
+      - service: light.turn_on
+        data:
+          entity_id: light.ledstrip
+          rgb_color: [255,119,0]
+          white_value: 1
+          brightness: 255
 
   - alias: light_salon_automation_input_select_blanc
     hide_entity: False
@@ -83,5 +129,302 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.salon_all_lights
+          entity_id: light.salon_lampe_1
           rgb_color: [255,255,255]
+      - service: light.turn_on
+        data:
+          entity_id: light.salon_lampe_2
+          rgb_color: [255,255,255]
+      - service: light.turn_on
+        data:
+          entity_id: light.salon_lampe_3
+          rgb_color: [255,255,255]
+      - service: light.turn_on
+        data:
+          entity_id: light.salon_lampe_4
+          rgb_color: [255,255,255]
+      - service: light.turn_on
+        data:
+          entity_id: light.ledstrip
+          white_value: 255
+          brightness: 1
+
+  - id: btn_light_salon_on_off
+    alias: "[BTN] Light On/Off Salon"
+    trigger:
+      platform: state
+      entity_id: binary_sensor.zigate_00158d00026bb4c6_onoff
+      from: 'off'
+      to: 'on'
+      for: 
+        seconds: 1
+    action:
+      - service: light.toggle
+        data:
+          entity_id: group.salon
+
+  - id: btn_light_salon_far_cry
+    alias: "[BTN] Far Cry Mode"
+    trigger:
+      platform: state
+      entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+      from: '0'
+      to: '3'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id:
+            - light.salon_lampe_1
+            - light.totem_light
+      - service: light.turn_off
+        data:
+          entity_id:
+            - light.salon_lampe_2
+            - light.salon_lampe_4
+            
+  - id: btn_light_salon_off
+    alias: "[BTN] Light Off Salon"
+    trigger:
+      platform: state
+      entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+      from: '0'
+      to: '4'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: group.salon
+
+  - id: btn_tv_on_off
+    alias: "[BTN] Start/Stop TV"
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+      from: '0'
+      to: '2'
+    action:
+      service: script.turn_on
+      entity_id: script.group_tv_on_off
+
+  - id: btn_pc_on
+    alias: "[BTN] WOL PC"
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+      from: '0'
+      to: '128'
+    action:
+      service: switch.turn_on
+      entity_id: switch.wake_on_lan
+
+  - id: telecommande_tv_on_off
+    alias: "[TELECOMMANDE] Start/Stop TV"
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: switch.bouton_2
+      from: 'off'
+      to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.group_tv_on_off
+      - service: switch.turn_off
+        data:
+          entity_id:
+            - switch.bouton_2
+
+  - id: telecommande_salon_on_off
+    alias: "[TELECOMMANDE] ON/OFF lampes salon"
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: switch.bouton_1
+      from: 'off'
+      to: 'on'
+    action:
+      - service: light.toggle
+        data:
+          entity_id: group.salon
+      - service: switch.turn_off
+        data:
+          entity_id:
+            - switch.bouton_1
+
+  - id: telecommande_salon_farcry
+    alias: "[TELECOMMANDE] FARCRY lampes"
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: switch.bouton_3
+      from: 'off'
+      to: 'on'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id:
+            - light.salon_lampe_1
+            - light.totem_light
+      - service: light.turn_off
+        data:
+          entity_id:
+            - light.salon_lampe_2
+            - light.salon_lampe_4
+      - service: switch.turn_off
+        data:
+          entity_id:
+            - switch.bouton_3
+
+
+  - id: telecommande_salon_off
+    alias: "[TELECOMMANDE] OFF lampes salon"
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: switch.bouton_8
+      from: 'off'
+      to: 'on'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: group.salon
+      - service: switch.turn_off
+        data:
+          entity_id:
+            - switch.bouton_8
+
+  - id: telecommande_exterieur_off
+    alias: "[TELECOMMANDE] ON/OFF lampes extérieur"
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: switch.bouton_7
+      from: 'off'
+      to: 'on'
+    action:
+      - service: light.toggle
+        data:
+          entity_id:
+            - light.qubino_zmnhdd1_z_wave_plus_flush_dimmer_level
+            - light.fibaro_system_fgd212_dimmer_2_level_2
+      - service: switch.turn_off
+        data:
+          entity_id:
+            - switch.bouton_7
+
+  - id: cube-aqara-rotate-0
+    alias: cube-aqara-rotate-0
+    trigger:
+      platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: sensor.zigate_00158d000275dd2b_movement
+    condition:
+      - condition: template
+        value_template: >
+          {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]0', ignorecase=True) }}
+    action:
+      - service: automation.trigger
+        entity_id: automation.btn_far_cry_mode
+
+  - id: cube-aqara-rotate-1
+    alias: cube-aqara-rotate-1
+    trigger:
+      platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: sensor.zigate_00158d000275dd2b_movement
+    condition:
+      - condition: template
+        value_template: >
+          {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]1', ignorecase=True) }}
+    action:
+      service: script.turn_on
+      entity_id: script.group_tv_on_off
+
+  - id: cube-aqara-rotate-3
+    alias: cube-aqara-rotate-3
+    trigger:
+      platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: sensor.zigate_00158d000275dd2b_movement
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: >
+          {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]3', ignorecase=True) }}
+      - condition: state
+        entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+        state: 'home'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.wake_on_lan
+
+  - id: cube-aqara-rotate-3
+    alias: cube-aqara-rotate-3
+    trigger:
+      platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: sensor.zigate_00158d000275dd2b_movement
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: >
+          {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]3', ignorecase=True) }}
+      - condition: state
+        entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+        state: 'not_home'
+    action:
+      - service: script.turn_on
+        entity_id: script.group_tv_on_off
+      - service: switch.turn_on
+        entity_id: switch.wake_on_lan
+
+
+  - id: cube-aqara-shake-1
+    alias: cube-aqara-shake-1
+    trigger:
+      platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: sensor.zigate_00158d000275dd2b_movement
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: >
+          {{ trigger.event.data.new_state.state | regex_match('shake', ignorecase=True) }}
+      - condition: state
+        entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+        state: 'home'
+    action:
+      - service: script.turn_on
+        entity_id: script.group_tv_on_off
+      - service: light.turn_off
+        data:
+          entity_id: group.salon
+
+  - id: cube-aqara-shake-2
+    alias: cube-aqara-shake-2
+    trigger:
+      platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: sensor.zigate_00158d000275dd2b_movement
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: >
+          {{ trigger.event.data.new_state.state | regex_match('shake', ignorecase=True) }}
+      - condition: state
+        entity_id: 'device_tracker.c0_41_f6_93_75_a9'
+        state: 'not_home'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: group.salon
