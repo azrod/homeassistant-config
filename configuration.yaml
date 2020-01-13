@@ -21,7 +21,7 @@ homeassistant:
     pkg_salon: !include packages/salon.yaml
 
 rflink:
-  port: /dev/ttyUSB1
+  port: /dev/ttyUSB0
 
 securitas_direct:
   username: !secret securitas_direct_username
@@ -34,8 +34,11 @@ lovelace_gen:
 lovelace:
   mode: yaml
 
-meteo_france:
-  - city: !secret code_postal
+weather:
+  - platform: openweathermap
+    api_key: !secret openweathermap_api_key
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
 
 zwave:
   usb_path: /dev/ttyACM0
@@ -50,6 +53,10 @@ mqtt:
 
 zigate:
   enable_led : false
+
+zha:
+  usb_path: auto
+  database_path: /homeassistant/homeassistant/.homeassistant/zigbee.db
 
 recorder:
   purge_keep_days: 1
@@ -70,12 +77,11 @@ http:
   ssl_key: !secret http_ssl_key 
 
 # Huawei_LTE 
-huawei_lte:
-  - url: !secret huawei_lte_url
-    username: !secret huawei_lte_username
-    password: !secret huawei_lte_password
+# huawei_lte:
+#   - url: !secret huawei_lte_url
+#     username: !secret huawei_lte_username
+#     password: !secret huawei_lte_password
 
-weather: 
 frontend:
   themes: !include_dir_merge_named themes
 config:
