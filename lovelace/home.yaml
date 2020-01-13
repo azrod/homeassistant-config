@@ -6,7 +6,7 @@ cards:
   - type: vertical-stack
     cards:
       - type: weather-forecast
-        entity: weather.salles 
+        entity: weather.openweathermap 
       - type: glance
         entities:
           - person.elodie_2
