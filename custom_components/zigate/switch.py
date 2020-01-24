@@ -5,6 +5,8 @@ For more details about this platform, please refer to the documentation
 https://home-assistant.io/components/switch.zigate/
 """
 import logging
+
+from homeassistant.exceptions import PlatformNotReady
 from homeassistant.components.switch import SwitchDevice, ENTITY_ID_FORMAT
 from . import DOMAIN as ZIGATE_DOMAIN
 from . import DATA_ZIGATE_ATTRS
@@ -76,6 +78,8 @@ class ZiGateSwitch(SwitchDevice):
             _LOGGER.debug("Event received: %s", call.data)
             if call.data['cluster'] == 6 and call.data['attribute'] == 0:
                 self._is_on = call.data['value']
+            if not self.hass:
+                raise PlatformNotReady
             self.schedule_update_ha_state()
 
     @property
@@ -134,7 +138,7 @@ class ZiGateSwitch(SwitchDevice):
         return {
             'addr': self._device.addr,
             'ieee': self._device.ieee,
-            'endpoint': self._endpoint
+            'endpoint': '0x{:02x}'.format(self._endpoint),
         }
 
 #     @property
