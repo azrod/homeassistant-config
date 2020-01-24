@@ -48,23 +48,28 @@ cards:
             label: Eclairages
           - !include
             - templates/light.yaml
+            - entity: group.salon
+              name: Lampes Salon
+              dimmable: false
+          - !include
+            - templates/light.yaml
             - entity: light.ledstrip
               name: Bande LED
               dimmable: true
           - !include
             - templates/light.yaml
-            - entity: light.salon_lampe_1
+            - entity: light.zigate_ccccccfffed80154_1
               name: Lampe salon 1
               dimmable: true
           - !include
             - templates/light.yaml
-            - entity: light.salon_lampe_2
+            - entity: light.zigate_ccccccfffed6a188_1
               name: Lampe salon 2
               dimmable: true
           - !include
             - templates/light.yaml
-            - entity: light.salon_lampe_4
-              name: Lampe salon 4
+            - entity: light.zigate_ccccccfffeda1b92_1
+              name: Lampe salon 3
               dimmable: true
           - !include
             - templates/light.yaml
@@ -172,22 +177,22 @@ cards:
               attribute: battery_level
               name: Batterie
               unit: '%'
-          - entity: zigate.00158d0002b72523
-            type: custom:multiple-entity-row
-            name: "Frigo"
-            icon: mdi:thermometer
-            hide_state: true
-            primary:
-              entity: sensor.zigate_00158d0002b72523_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_00158d0002b72523_humidity
-              name: Humidité
-            info:
-              entity: zigate.00158d0002b72523
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+          # - entity: zigate.00158d0002b72523
+          #   type: custom:multiple-entity-row
+          #   name: "Frigo"
+          #   icon: mdi:thermometer
+          #   hide_state: true
+          #   primary:
+          #     entity: sensor.zigate_00158d0002b72523_temperature
+          #     name: Température
+          #   secondary:
+          #     entity: sensor.zigate_00158d0002b72523_humidity
+          #     name: Humidité
+          #   info:
+          #     entity: zigate.00158d0002b72523
+          #     attribute: battery_level
+          #     name: Batterie
+          #     unit: '%'
           - entity: zigate.00158d000227f221
             type: custom:multiple-entity-row
             name: "Cave a vin"

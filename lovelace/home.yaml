@@ -80,55 +80,55 @@ cards:
               name: Batterie
               unit: '%'
             {% set ieee = "00158d0002b5403f" %}
-          - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
-            name: "Chambre"
-            hide_state: true
-            primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
-              name: Humidité
-            info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
-            {% set ieee = "00158d0002c8bd7b" %}
-          - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
-            name: "Bureau"
-            hide_state: true
-            primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
-              name: Humidité
-            info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+          # - entity: zigate.{{ ieee }}
+          #   type: custom:multiple-entity-row
+          #   name: "Chambre"
+          #   hide_state: true
+          #   primary:
+          #     entity: sensor.zigate_{{ ieee }}_temperature
+          #     name: Température
+          #   secondary:
+          #     entity: sensor.zigate_{{ ieee }}_humidity
+          #     name: Humidité
+          #   info:
+          #     entity: zigate.{{ ieee }}
+          #     attribute: battery_level
+          #     name: Batterie
+          #     unit: '%'
+          #   {% set ieee = "00158d0002c8bd7b" %}
+          # - entity: zigate.{{ ieee }}
+          #   type: custom:multiple-entity-row
+          #   name: "Bureau"
+          #   hide_state: true
+          #   primary:
+          #     entity: sensor.zigate_{{ ieee }}_temperature
+          #     name: Température
+          #   secondary:
+          #     entity: sensor.zigate_{{ ieee }}_humidity
+          #     name: Humidité
+          #   info:
+          #     entity: zigate.{{ ieee }}
+          #     attribute: battery_level
+          #     name: Batterie
+          #     unit: '%'
           - type: section
             label: Cuisine  
-            {% set ieee = "00158d0002b72523" %}
-          - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
-            name: "Frigo"
-            hide_state: true
-            primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
-              name: Humidité
-            info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+          #   {% set ieee = "00158d0002b72523" %}
+          # - entity: zigate.{{ ieee }}
+          #   type: custom:multiple-entity-row
+          #   name: "Frigo"
+          #   hide_state: true
+          #   primary:
+          #     entity: sensor.zigate_{{ ieee }}_temperature
+          #     name: Température
+          #   secondary:
+          #     entity: sensor.zigate_{{ ieee }}_humidity
+          #     name: Humidité
+          #   info:
+          #     entity: zigate.{{ ieee }}
+          #     attribute: battery_level
+          #     name: Batterie
+          #     unit: '%'
             {% set ieee = "00158d000227f221" %}
           - entity: zigate.{{ ieee }}
             type: custom:multiple-entity-row
@@ -145,37 +145,37 @@ cards:
               attribute: battery_level
               name: Batterie
               unit: '%'
-          - entity: sensor.oregontemphygro_2de4_hstatus
-            type: custom:multiple-entity-row
-            name: "Congélateur"
-            hide_state: true
-            primary:
-              entity: sensor.oregontemphygro_2de4_temp
-              name: Température
-            secondary:
-              entity: sensor.oregontemphygro_2de4_hum
-              name: Humidité
-            info:
-              entity: sensor.oregontemphygro_2de4_bat
-              name: Batterie
-          - type: section
-            label: Extérieur
+          # - entity: sensor.oregontemphygro_2de4_hstatus
+          #   type: custom:multiple-entity-row
+          #   name: "Congélateur"
+          #   hide_state: true
+          #   primary:
+          #     entity: sensor.oregontemphygro_2de4_temp
+          #     name: Température
+          #   secondary:
+          #     entity: sensor.oregontemphygro_2de4_hum
+          #     name: Humidité
+          #   info:
+          #     entity: sensor.oregontemphygro_2de4_bat
+          #     name: Batterie
+          # - type: section
+          #   label: Extérieur
             {% set ieee = "00158d00036b917b" %}
-          - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
-            name: "Extérieur"
-            hide_state: true
-            primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
-              name: Humidité
-            info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+          # - entity: zigate.{{ ieee }}
+          #   type: custom:multiple-entity-row
+          #   name: "Extérieur"
+          #   hide_state: true
+          #   primary:
+          #     entity: sensor.zigate_{{ ieee }}_temperature
+          #     name: Température
+          #   secondary:
+          #     entity: sensor.zigate_{{ ieee }}_humidity
+          #     name: Humidité
+          #   info:
+          #     entity: zigate.{{ ieee }}
+          #     attribute: battery_level
+          #     name: Batterie
+          #     unit: '%'
 
              
   - type: vertical-stack
@@ -238,22 +238,22 @@ cards:
               unit: '%'
           - type: section
             label: Fuites
-          - entity: binary_sensor.zigate_00158d000283072c_zone_status
-            type: custom:multiple-entity-row
-            name: "Fuite machine à laver"
-            info:
-              entity: zigate.00158d000283072c
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
-          - entity: binary_sensor.zigate_00158d00027741fa_zone_status
-            type: custom:multiple-entity-row
-            name: "Fuite machine à laver"
-            info:
-              entity: zigate.00158d00027741fa
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+          # - entity: binary_sensor.zigate_00158d000283072c_zone_status
+          #   type: custom:multiple-entity-row
+          #   name: "Fuite machine à laver"
+          #   info:
+          #     entity: zigate.00158d000283072c
+          #     attribute: battery_level
+          #     name: Batterie
+          #     unit: '%'
+          # - entity: binary_sensor.zigate_00158d00027741fa_zone_status
+          #   type: custom:multiple-entity-row
+          #   name: "Fuite machine à laver"
+          #   info:
+          #     entity: zigate.00158d00027741fa
+          #     attribute: battery_level
+          #     name: Batterie
+          #     unit: '%'
           - type: section
             label: Eclairages
           - entity: zwave.fibaro_system_fgd212_dimmer_2
