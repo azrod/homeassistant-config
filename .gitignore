@@ -51,4 +51,5 @@ configs/person.yaml
 .Trash*
 
 # Specific keeps
+!packages/zigate.yaml
 !.gitkeep
