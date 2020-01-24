@@ -1,19 +1,4 @@
 # AUTOMATION BOUTON FRITEUSE 
-- id: btn_cellier_onoff
-  alias: '[BTN] On/OFF Friteuse'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.zigate_00158d0002f98bcf_onoff
-    from: 'off'
-    to: 'on'
-    for: 
-      seconds: 1
-  action:
-    - service: switch.toggle
-      data:
-        entity_id:
-          - switch.prise1_relay
-
 - id: notification sonde fuite machinealaver
   alias: "[Notif] sonde fuite machinealaver"
   trigger:

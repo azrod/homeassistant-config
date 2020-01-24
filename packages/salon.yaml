@@ -43,7 +43,109 @@ light:
     command_topic: "lights/0x524E/rgbw/4"
     <<: *MILIGHT_PARAMS
 
+script:
+  group_tv_on_off:
+   alias: "ON OFF TV"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_49'
+       data:
+         command:
+           - 'tv_on_off'
+           - 'sound_bar_on_off'
+  sound_bar_on_off:
+   alias: "ON OFF SOUND BAR"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_49'
+       data:
+         command:
+           - 'sound_bar_on_off'
+  sound_bar_vol_up:
+   alias: "SOUND BAR VOL UP"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_49'
+       data:
+         command:
+           - 'sound_bar_vol_up'
+  sound_bar_vol_down:
+   alias: "SOUND BAR VOL DOWN"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_49'
+       data:
+         command:
+           - 'sound_bar_vol_down'
+  tv_on_off:
+   alias: "ON OFF TV"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_49'
+       data:
+         command:
+           - 'tv_on_off'
+  hdmi_b1:
+   alias: "HDMI_B1"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_28'
+       data:
+         command:
+           - 'hdmi_b1'
+  hdmi_b2:
+   alias: "HDMI_B2"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_28'
+       data:
+         command:
+           - 'hdmi_b2'
+  hdmi_b3:
+   alias: "HDMI_B3"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_28'
+       data:
+         command:
+           - 'hdmi_b3'
+  hdmi_b4:
+   alias: "HDMI_B4"
+   sequence:
+     - service: remote.send_command
+       entity_id: 'remote.xiaomi_miio_192_168_0_28'
+       data:
+         command:
+           - 'hdmi_b4'
+
 automation:
+  - id: btn_cellier_onoff
+    alias: '[BTN] On/OFF Friteuse'
+    trigger:
+      platform: state
+      entity_id: binary_sensor.zigate_00158d0002f98bcf_onoff
+      from: 'off'
+      to: 'on'
+      for: 
+        seconds: 1
+    action:
+      - service: light.toggle
+        data:
+          entity_id:
+            - group.salon
+  - id: btn_cellier_onoff
+    alias: '[BTN] On/OFF Friteuse'
+    trigger:
+      platform: state
+      entity_id: sensor.zigate_00158d0002f98bcf_multiclick
+      from: '0'
+      to: '2'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id:
+            - group.salon
+            
   - id: light_salon_on
     alias: "[Eclairage] Allumage auto salon"
     trigger:
@@ -99,19 +201,15 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.salon_lampe_1
+          entity_id: light.zigate_ccccccfffed6a188_1
           rgb_color: [255,119,0]
       - service: light.turn_on
         data:
-          entity_id: light.salon_lampe_2
+          entity_id: light.zigate_ccccccfffed80154_1
           rgb_color: [255,119,0]
       - service: light.turn_on
         data:
-          entity_id: light.salon_lampe_3
-          rgb_color: [255,119,0]
-      - service: light.turn_on
-        data:
-          entity_id: light.salon_lampe_4
+          entity_id: light.zigate_ccccccfffeda1b92_1
           rgb_color: [255,119,0]
       - service: light.turn_on
         data:
@@ -129,19 +227,15 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.salon_lampe_1
+          entity_id: light.zigate_ccccccfffed6a188_1
           rgb_color: [255,255,255]
       - service: light.turn_on
         data:
-          entity_id: light.salon_lampe_2
+          entity_id: light.zigate_ccccccfffed80154_1
           rgb_color: [255,255,255]
       - service: light.turn_on
         data:
-          entity_id: light.salon_lampe_3
-          rgb_color: [255,255,255]
-      - service: light.turn_on
-        data:
-          entity_id: light.salon_lampe_4
+          entity_id: light.zigate_ccccccfffeda1b92_1
           rgb_color: [255,255,255]
       - service: light.turn_on
         data:
@@ -174,13 +268,13 @@ automation:
       - service: light.turn_on
         data:
           entity_id:
-            - light.salon_lampe_1
+            - light.zigate_ccccccfffed80154_1
             - light.totem_light
       - service: light.turn_off
         data:
           entity_id:
-            - light.salon_lampe_2
-            - light.salon_lampe_4
+            - light.zigate_ccccccfffed6a188_1
+            - light.zigate_ccccccfffeda1b92_1
             
   - id: btn_light_salon_off
     alias: "[BTN] Light Off Salon"
@@ -263,13 +357,13 @@ automation:
       - service: light.turn_on
         data:
           entity_id:
-            - light.salon_lampe_1
+            - light.zigate_ccccccfffed80154_1
             - light.totem_light
       - service: light.turn_off
         data:
           entity_id:
-            - light.salon_lampe_2
-            - light.salon_lampe_4
+            - light.zigate_ccccccfffed6a188_1
+            - light.zigate_ccccccfffeda1b92_1
       - service: switch.turn_off
         data:
           entity_id:
