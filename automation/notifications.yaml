@@ -1,3 +1,14 @@
+- id: notification waze matin
+  alias: "[Notif] Waze matin"
+  trigger:
+    platform: time
+    at: '08:55:00'
+  action:
+    - service: script.notify_system
+      data: 
+        title: "Temps trajet"
+        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_time')|int }} minutes" 
+
 - id: notification produit fosse
   alias: "[Notif] Mettre produit pour la Fosse"
   trigger:
@@ -41,7 +52,7 @@
     - service: script.notify_system
       data:
         title: "[Alerte] Coupure de courant"
-        message: "Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
+        message: "Niveau de la batterie : {{ states('sensor.apcups_battery_charg')|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
 
 - id: notification retour electrique
   alias: "[Notif] retour electrique"
@@ -89,20 +100,19 @@
     - service: script.notify_system
       data:
         title: "[Alerte] Coupure de courant."
-        message: "Niveau de la batterie : {{ states(sensor.apcups_battery_charg)|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
+        message: "Niveau de la batterie : {{ states('sensor.apcups_battery_charg')|int }}% . Charge actuelle : {{ states('sensor.apcups_load')|int }}%. Temps estimé avant coupure : {{states('sensor.apcups_battery_runtime')|int}}s"
 
 
 - id: tracking_temperature_ext
   alias: Tracking Temprature Extérieur
   trigger:
     platform: time
-    at: '08:00:00'
+    at: '08:30:00'
   condition:
     condition: and
     conditions:
-    - condition: numeric_state
-      entity_id: sensor.zigate_00158d0002c770dc_temperature
-      below: '2'
+    - condition: template
+      value_template: '{{ state_attr("weather.openweathermap", "temperature") < 3}}'
     - condition: time
       weekday:
         - mon
@@ -114,7 +124,7 @@
     - service: script.notify
       data:
         title: "ATTENTION RISQUE DE GEL."
-        message: "Il fait actuellement {{ states.sensor.zigate_00158d0002c770dc_temperature.state }}°C"
+        message: "Il fait actuellement {{ state_attr('weather.openweathermap', 'temperature')}}°C"
 
 - id: notification zwave dead
   alias: "[Notif] zwave dead"
