@@ -3,6 +3,7 @@
 *.log
 *.db
 *.pem
+*.json
 *.db-shm
 *.db-wal
 *.pyc
