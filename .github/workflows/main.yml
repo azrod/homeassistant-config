@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: mv dummy_secrets.yaml secrets.yaml
+      - run: mv dummy_secrets.yaml secrets.yaml && touch zwave_device_config.yaml
       - uses: kpucynski/action-ha-config-check@master
         with:
           ha_version: "latest"
