@@ -1,6 +1,7 @@
 # Configuration Home Assistant 
 
-[![Home Assistant Version](https://img.shields.io/badge/HomeAssistant%20Version-v0.103.0-green?style=for-the-badge)](https://github.com/home-assistant/home-assistant/releases/tag/0.103.0) [![Home Assistant Documentation](https://img.shields.io/badge/Rédaction%20Documentation-En%20cours-Orange?style=for-the-badge)](#)
+[![Home Assistant Version](https://img.shields.io/badge/HomeAssistant%20Version-v0.103.5-green?style=for-the-badge)](https://github.com/home-assistant/home-assistant/releases/tag/0.103.5) [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fazrod%2Fhomeassistant-config%2Fbadge%3Fref%3Dmaster&style=for-the-badge)](https://actions-badge.atrox.dev/azrod/homeassistant-config/goto?ref=master)
+
 
 ## Equipements
 ### Matériels
@@ -15,8 +16,8 @@
 * Bluetooth - [Clé Bluetooth]
 
 ### Eclairages 
-* Ampoules [Milight](http://www.milight.com/)<sup>[2,4Ghz]</sup>
-* DIY Milight Gateway [Github esp8266_milight_hub](https://github.com/sidoh/esp8266_milight_hub)<sup>[WiFi]</sup>
+* Tradfri Couleur 600lm<sup>Zigbee</sup> (x3) [Ikea](https://www.ikea.com/fr/fr/p/tradfri-ampoule-led-e27-600-lumen-sans-fil-a-variateur-dintensite-spectre-blanc-colore-opalin-00408612/)
+* Tradfri Blanc 1000lm<sup>Zigbee</sup> (x3)  [Ikea](https://www.ikea.com/fr/fr/p/tradfri-ampoule-led-e27-1000-lumen-sans-fil-a-variateur-dintensite-spectre-blanc-opalin-60408483/)
 * [Sonoff Basic R2](https://sonoff.tech/product/wifi-diy-smart-switches/basicr2) avec [Esphome](https://esphome.io/)<sup>[WiFi]</sup>
 * [Fibaro Dimmer 2](https://www.fibaro.com/fr/products/dimmer-2/) pour piloter un interrupteur mural<sup>[ZWave]</sup>
 * [Qubino Flush Dimmer](https://qubino.com/products/flush-dimmer/) pour piloter un interrupteur mural<sup>[Zwave]</sup>
