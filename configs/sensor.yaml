@@ -53,3 +53,7 @@
       value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'filter_left') }}"
       unit_of_measurement: 'H'
 
+- platform: waze_travel_time
+  origin: 44.565936,-0.867319
+  destination: 44.858023,-0.559550
+  region: 'EU'

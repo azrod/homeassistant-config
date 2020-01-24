@@ -34,9 +34,8 @@
   salon:
     name: Salon
     entities:
-      - light.salon_lampe_1
-      - light.salon_lampe_2
-      - light.salon_lampe_3
-      - light.salon_lampe_4
+      - light.zigate_ccccccfffed6a188_1
+      - light.zigate_ccccccfffeda1b92_1
+      - light.zigate_ccccccfffed80154_1
       - light.totem_light
       - light.ledstrip

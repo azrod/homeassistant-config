@@ -4,4 +4,7 @@
 # File : logger.yaml
 # 
 # ---------------------------------------------------------------- #
-  default: info
+  default: warning
+  # logs:
+  #   zigate: debug
+  #   custom_components.zigate: debug
