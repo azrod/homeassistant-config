@@ -16,15 +16,6 @@ const texts = {
         repeats: "Times:",
         confirmation: "Command sent!"
     },
-    "es": {
-        mode: "Modos",
-        goToTarget: "Ir al objetivo",
-        zonedCleanup: "Zona de limpieza",
-        zones: "Zonas",
-        run: "Empezar",
-        repeats: "Veces:",
-        confirmation: "Comando enviado!"
-    },
     "de": {
         mode: "Modus",
         goToTarget: "Gehe zum Zielpunkt",
@@ -34,14 +25,59 @@ const texts = {
         repeats: "Wiederholungen:",
         confirmation: "Kommando gesendet!"
     },
-    "nl": {
+    "dk": {
         mode: "Mode",
+        goToTarget: "Gå til punkt",
+        zonedCleanup: "Zone rengøring",
+        zones: "Zoner",
+        run: "Start",
+        repeats: "Gentagelser:",
+        confirmation: "Kommando afsendt!"
+    },
+    "es": {
+        mode: "Modos",
+        goToTarget: "Ir al objetivo",
+        zonedCleanup: "Zona de limpieza",
+        zones: "Zonas",
+        run: "Empezar",
+        repeats: "Veces:",
+        confirmation: "Comando enviado!"
+    },
+    "fr": {
+        mode: "Mode",
+        goToTarget: "Aller sur la cible",
+        zonedCleanup: "Nettoyage de zone",
+        zones: "Zones",
+        run: "Démarrage",
+        repeats: "Répéter:",
+        confirmation: "Commande envoyée!"
+    },
+    "it": {
+        mode: "Modalità",
+        goToTarget: "Raggiungi punto",
+        zonedCleanup: "Pulizia zona",
+        zones: "Zone",
+        run: "Avvia",
+        repeats: "Volte:",
+        confirmation: "Comando inviato!"
+    },
+    "nl": {
+        mode: "Modus",
         goToTarget: "Ga naar een punt",
         zonedCleanup: "Zone reinigen",
         zones: "Zones",
         run: "Start",
         repeats: "Herhalingen",
         confirmation: "Commando gestuurd!"
+    },
+    "no": {
+        mode: "Modus",
+        goToTarget: "Gå til mål",
+        zonedCleanup: "Sonerengjøring",
+        zones: "Soner",
+        run: "Start",
+        repeats: "Repetisjoner:",
+        confirmation: "Kommando sendt!"
     },
     "pl": {
         mode: "Tryb",
@@ -52,14 +88,14 @@ const texts = {
         repeats: "Razy:",
         confirmation: "Komenda wysłana!"
     },
-    "dk": {
-        mode: "Mode",
-        goToTarget: "Gå til punkt",
-        zonedCleanup: "Zone rengøring",
-        zones: "Zoner",
-        run: "Start",
-        repeats: "Gentagelser:",
-        confirmation: "Kommando afsendt!"
+    "ru": {
+        mode: "Режим",
+        goToTarget: "Движение к цели",
+        zonedCleanup: "Зональная уборка",
+        zones: "Зоны",
+        run: "Старт",
+        repeats: "Повторы:",
+        confirmation: "Команда отправлена"
     },
     "se": {
         mode: "Läge",
