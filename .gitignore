@@ -37,13 +37,10 @@ secrets.yaml
 zigate.*
 zwcfg_*
 zwscene.xml
-zwavz_device_config.yaml
 custom_components/*.sh
 www/*.sh
 www/img
 zwave_device_config.yaml
-
-configs/person.yaml
 
 # Ignore files created by IDE's
 .vscode
