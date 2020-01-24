@@ -1,0 +1,10 @@
+- name: Elodie
+  id: ece757fce34549099620a2a4c166d894
+  device_trackers:
+    - device_tracker.huawei_p9_lite
+    - device_tracker.chiktika
+- name: Mickael 
+  id: f47e5b270c314f49be650a7ac903bc7c 
+  device_trackers: 
+    - device_tracker.mi9t_miphone
+    - device_tracker.qcom_btd
