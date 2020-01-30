@@ -1,0 +1,10 @@
+- id: home light off
+  alias: "[LIGHT] Off toutes les lumieres"
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.securitas_360086
+    to: 'armed_away'
+  action:
+      - service: light.turn_off
+        data:
+          entity_id: group.salon

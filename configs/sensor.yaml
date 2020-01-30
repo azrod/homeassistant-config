@@ -57,3 +57,8 @@
   origin: 44.565936,-0.867319
   destination: 44.858023,-0.559550
   region: 'EU'
+
+- platform: waze_travel_time
+  origin: 44.565936,-0.867319
+  destination: 44.837193, -0.685309
+  region: 'EU'

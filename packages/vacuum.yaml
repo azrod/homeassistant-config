@@ -107,7 +107,7 @@ script:
             data:
               entity_id: vacuum.xiaomi_vacuum_cleaner
               command: app_zoned_clean
-              params: [[22318,25727,25568,29527,1],[24179,24662,25479,25812,1]]
+              params: [[22324,24808,25274,29608,1]]
 
   vacuum_salon:
         alias: "Nettoyer Salon"

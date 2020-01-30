@@ -6,7 +6,7 @@ cards:
     cards:
     - type: custom:xiaomi-vacuum-card
       entity: vacuum.xiaomi_vacuum_cleaner
-      image: /local/custom/folder/background.png
+      # image: /local/custom/folder/background.png
       name: Nestor
       buttons: true
       labels:

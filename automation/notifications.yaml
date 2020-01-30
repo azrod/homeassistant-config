@@ -1,13 +1,40 @@
-- id: notification waze matin
-  alias: "[Notif] Waze matin"
+- id: notification mickael waze matin
+  alias: "[Notif] Mickael Waze matin"
   trigger:
     platform: time
     at: '08:55:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - fri
   action:
-    - service: script.notify_system
+    - service: notify.mobile_app_mi_9t
       data: 
-        title: "Temps trajet"
-        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_time')|int }} minutes" 
+        title: "Temps trajet -> Travail"
+        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_tim_2')|int }} minutes" 
+
+- id: notification elodie waze matin
+  alias: "[Notif] Elodie Waze matin"
+  trigger:
+    platform: time
+    at: '08:55:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: notify.mobile_app_huawei_vns_l31
+      data: 
+        title: "Temps trajet -> Travail"
+        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_tim2')|int }} minutes" 
+
 
 - id: notification produit fosse
   alias: "[Notif] Mettre produit pour la Fosse"
@@ -140,7 +167,7 @@
       data:
         title: "[ALERTE]"
         message: "Un module Zwave est désynchronisé"
-        
+
 - id: notification alarme porte bureau
   alias: "[Notif] alarme porte bureau"
   trigger:

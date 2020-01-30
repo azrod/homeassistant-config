@@ -7,10 +7,13 @@ cards:
     cards:
       - type: weather-forecast
         entity: weather.openweathermap 
-      - type: glance
-        entities:
-          - person.elodie_2
-          - person.mickael_2
+      - type: custom:auto-entities
+        card: 
+          type: glance
+        filter:
+          include:
+            - domain: person 
+        show_empty: false
       - type: alarm-panel
         entity: alarm_control_panel.securitas_360086  
         name: Alarme maison
@@ -33,84 +36,38 @@ cards:
             label: Pièces
             {% set ieee = "00158d0002c99bd4" %}
           - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
             name: "Salon"
-            hide_state: true
-            primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
-              name: Humidité
-            info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+            <<: &SENSOR_PARAMS
+              type: custom:multiple-entity-row
+              hide_state: true
+              primary:
+                entity: sensor.zigate_{{ ieee }}_temperature
+                name: Température
+              secondary:
+                entity: sensor.zigate_{{ ieee }}_humidity
+                name: Humidité
+              info:
+                entity: zigate.{{ ieee }}
+                attribute: battery_level
+                name: Batterie
+                unit: '%'
+
             {% set ieee = "00158d0002faa0f9" %}
           - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
             name: "Salle de bain"
-            hide_state: true
-            primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
-              name: Humidité
-            info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+            <<: *SENSOR_PARAMS
             {% set ieee = "00158d0002c770dc" %}
           - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
             name: "Cellier"
-            hide_state: true
-            primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
-              name: Température
-            secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
-              name: Humidité
-            info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
+            <<: *SENSOR_PARAMS
             {% set ieee = "00158d0002b5403f" %}
           # - entity: zigate.{{ ieee }}
-          #   type: custom:multiple-entity-row
           #   name: "Chambre"
-          #   hide_state: true
-          #   primary:
-          #     entity: sensor.zigate_{{ ieee }}_temperature
-          #     name: Température
-          #   secondary:
-          #     entity: sensor.zigate_{{ ieee }}_humidity
-          #     name: Humidité
-          #   info:
-          #     entity: zigate.{{ ieee }}
-          #     attribute: battery_level
-          #     name: Batterie
-          #     unit: '%'
+          #   <<: *SENSOR_PARAMS
           #   {% set ieee = "00158d0002c8bd7b" %}
           # - entity: zigate.{{ ieee }}
-          #   type: custom:multiple-entity-row
           #   name: "Bureau"
-          #   hide_state: true
-          #   primary:
-          #     entity: sensor.zigate_{{ ieee }}_temperature
-          #     name: Température
-          #   secondary:
-          #     entity: sensor.zigate_{{ ieee }}_humidity
-          #     name: Humidité
-          #   info:
-          #     entity: zigate.{{ ieee }}
-          #     attribute: battery_level
-          #     name: Batterie
-          #     unit: '%'
+          #   <<: *SENSOR_PARAMS
           - type: section
             label: Cuisine  
           #   {% set ieee = "00158d0002b72523" %}
@@ -131,53 +88,23 @@ cards:
           #     unit: '%'
             {% set ieee = "00158d000227f221" %}
           - entity: zigate.{{ ieee }}
-            type: custom:multiple-entity-row
             name: "Cave a vin"
+            <<: *SENSOR_PARAMS
+            {% set ieee= "oregontemphygro_2de4_hstatus" %}
+          - entity: sensor.{{ieee}}
+            name: "Congélateur"
+            type: custom:multiple-entity-row
             hide_state: true
             primary:
-              entity: sensor.zigate_{{ ieee }}_temperature
+              entity: sensor.oregontemphygro_2de4_temp
               name: Température
             secondary:
-              entity: sensor.zigate_{{ ieee }}_humidity
+              entity: sensor.oregontemphygro_2de4_hum
               name: Humidité
             info:
-              entity: zigate.{{ ieee }}
-              attribute: battery_level
+              entity: sensor.oregontemphygro_2de4_bat
               name: Batterie
-              unit: '%'
-          # - entity: sensor.oregontemphygro_2de4_hstatus
-          #   type: custom:multiple-entity-row
-          #   name: "Congélateur"
-          #   hide_state: true
-          #   primary:
-          #     entity: sensor.oregontemphygro_2de4_temp
-          #     name: Température
-          #   secondary:
-          #     entity: sensor.oregontemphygro_2de4_hum
-          #     name: Humidité
-          #   info:
-          #     entity: sensor.oregontemphygro_2de4_bat
-          #     name: Batterie
-          # - type: section
-          #   label: Extérieur
-            {% set ieee = "00158d00036b917b" %}
-          # - entity: zigate.{{ ieee }}
-          #   type: custom:multiple-entity-row
-          #   name: "Extérieur"
-          #   hide_state: true
-          #   primary:
-          #     entity: sensor.zigate_{{ ieee }}_temperature
-          #     name: Température
-          #   secondary:
-          #     entity: sensor.zigate_{{ ieee }}_humidity
-          #     name: Humidité
-          #   info:
-          #     entity: zigate.{{ ieee }}
-          #     attribute: battery_level
-          #     name: Batterie
-          #     unit: '%'
 
-             
   - type: vertical-stack
     cards:
       - type: entities
