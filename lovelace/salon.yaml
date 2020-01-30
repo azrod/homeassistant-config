@@ -86,26 +86,48 @@ cards:
 
   - type: vertical-stack
     cards:
-      - type: "custom:button-card"
-        color_type: icon
-        entity: device_tracker.c0_41_f6_93_75_a9
-        layout: icon_label
-        show_state: false
-        show_label: true
-        show_name: false
-        tap_action:
-          action: more-info
-        label: "TV"
-        state:
-          - value: "home"
-            color: green
-            icon: mdi:television
-          - value: "not_home"
-            color: red
-            icon: mdi:television-off
-          - operator: default
-            color: grey
-            icon: mdi:television
+      - type: horizontal-stack
+        cards: 
+          - type: "custom:button-card"
+            color_type: icon
+            entity: device_tracker.c0_41_f6_93_75_a9
+            layout: icon_label
+            show_state: false
+            show_label: true
+            show_name: false
+            tap_action:
+              action: more-info
+            label: "TV"
+            state:
+              - value: "home"
+                color: green
+                icon: mdi:television
+              - value: "not_home"
+                color: red
+                icon: mdi:television-off
+              - operator: default
+                color: grey
+                icon: mdi:television
+          - type: "custom:button-card"
+            color_type: icon
+            entity: device_tracker.pcsalon
+            label: "PC"
+            layout: icon_label
+            show_state: false
+            show_label: true
+            show_name: false
+            tap_action:
+              action: more-info
+            state:
+              - value: "home"
+                color: green
+                icon: mdi:television
+              - value: "not_home"
+                color: red
+                icon: mdi:television-off
+              - operator: default
+                color: grey
+                icon: mdi:television
       {% for T in TV %}
       - type: horizontal-stack
         cards:

@@ -8,4 +8,5 @@
     home_interval: 1
     hosts:
       - !secret track_ip_tv
+      - !secret ip_address_pc
   - platform: bluetooth_tracker
