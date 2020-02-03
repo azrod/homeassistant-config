@@ -37,10 +37,32 @@ automation:
           minutes: 10 
     condition: []
     action:
-      - service: script.notify
+      - service: script.notify_system
         data:
           title: "[Alerte]"
           message: "FlightRadar est à l'arrêt"
+
+  - id: notification flightradar up
+    alias: "[Notif] flightradar up"
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.fr24_feeder_link_connected
+        from: 'off'
+        to: 'on'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: binary_sensor.fr24_feeder_receiver_connected
+        from: 'off'
+        to: 'on'
+        for:
+          minutes: 10 
+    condition: []
+    action:
+      - service: script.notify_system
+        data:
+          title: "[Alerte]"
+          message: "FlightRadar est de nouveau UP"
 
 sensor:
   - platform: rest
