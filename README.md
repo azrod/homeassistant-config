@@ -64,5 +64,5 @@ Dump1090 fournis une page web avec des informations en Json pour récupérer les
 
 ![dump1090](mdimg/dump1090-lovelace.png)
 
-Tous les fichiers de configuration pour HomeAssistant sont dsponible dans `packages/fr24/`
+Tous les fichiers de configuration pour HomeAssistant sont dsponible dans `packages/fr24.yaml`
 
