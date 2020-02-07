@@ -14,6 +14,13 @@ input_select:
     options:
       - Chaud
       - Blanc
+  brightness_salon:
+    name: Choisir la luminosité du salon
+    options:
+      - 50
+      - 125
+      - 200
+      - 255
 
 light:
   - name: "Salon all lights"
@@ -149,10 +156,14 @@ automation:
   - id: light_salon_on
     alias: "[Eclairage] Allumage auto salon"
     trigger:
-      platform: state
-      entity_id: binary_sensor.zigate_00158d00032bd376_presence
-      from: 'off'
-      to: 'on'
+      - platform: state
+        entity_id: binary_sensor.zigate_00158d00032bd376_presence
+        from: 'off'
+        to: 'on'
+      - plateform: state
+        entity_id: binary_sensor.zigate_00158d0002f3c9b8_presence
+        from: 'off'
+        to: 'on'
     condition: 
       condition: and
       conditions:
@@ -193,7 +204,6 @@ automation:
           entity_id: group.salon
 
   - alias: light_salon_automation_input_select_chaud
-    hide_entity: False
     trigger:
       - platform: state
         entity_id: input_select.ambiance_salon
@@ -218,8 +228,29 @@ automation:
           white_value: 1
           brightness: 255
 
+  - alias: light_salon_automation_input_select_brightness
+    trigger:
+      - platform: state
+        entity_id: input_select.brightness_salon
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: light.zigate_ccccccfffed6a188_1
+          brightness: "{{ states('input_select.brightness_salon')|int }}"
+      - service: light.turn_on
+        data_template:
+          entity_id: light.zigate_ccccccfffed80154_1
+          brightness: "{{ states('input_select.brightness_salon')|int }}"
+      - service: light.turn_on
+        data_template:
+          entity_id: light.zigate_ccccccfffeda1b92_1
+          brightness: "{{ states('input_select.brightness_salon')|int }}"
+      - service: light.turn_on
+        data_template:
+          entity_id: light.ledstrip
+          brightness: "{{ states('input_select.brightness_salon')|int }}"
+
   - alias: light_salon_automation_input_select_blanc
-    hide_entity: False
     trigger:
       - platform: state
         entity_id: input_select.ambiance_salon
@@ -290,7 +321,6 @@ automation:
 
   - id: btn_tv_on_off
     alias: "[BTN] Start/Stop TV"
-    hide_entity: False
     trigger:
       platform: state
       entity_id: sensor.zigate_00158d00026bb4c6_multiclick
@@ -302,7 +332,6 @@ automation:
 
   - id: btn_pc_on
     alias: "[BTN] WOL PC"
-    hide_entity: False
     trigger:
       platform: state
       entity_id: sensor.zigate_00158d00026bb4c6_multiclick
@@ -314,7 +343,6 @@ automation:
 
   - id: telecommande_tv_on_off
     alias: "[TELECOMMANDE] Start/Stop TV"
-    hide_entity: False
     trigger:
       platform: state
       entity_id: switch.bouton_2
@@ -330,7 +358,6 @@ automation:
 
   - id: telecommande_salon_on_off
     alias: "[TELECOMMANDE] ON/OFF lampes salon"
-    hide_entity: False
     trigger:
       platform: state
       entity_id: switch.bouton_1
@@ -347,7 +374,6 @@ automation:
 
   - id: telecommande_salon_farcry
     alias: "[TELECOMMANDE] FARCRY lampes"
-    hide_entity: False
     trigger:
       platform: state
       entity_id: switch.bouton_3
@@ -372,7 +398,6 @@ automation:
 
   - id: telecommande_salon_off
     alias: "[TELECOMMANDE] OFF lampes salon"
-    hide_entity: False
     trigger:
       platform: state
       entity_id: switch.bouton_8
@@ -389,7 +414,6 @@ automation:
 
   - id: telecommande_exterieur_off
     alias: "[TELECOMMANDE] ON/OFF lampes extérieur"
-    hide_entity: False
     trigger:
       platform: state
       entity_id: switch.bouton_7
