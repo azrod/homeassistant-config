@@ -219,9 +219,9 @@ automation:
   - id: stop vacuum alarme desactive
     alias: "[VACUUM] stop si alarme desactivé "
     trigger:
-      platform: state
-      entity_id: alarm_control_panel.securitas_360086
-      to: 'disarmed'
+      - platform: state
+        entity_id: alarm_control_panel.securitas_360086
+        to: 'disarmed'
     condition:
       - condition: state
         entity_id: 'vacuum.xiaomi_vacuum_cleaner'
@@ -234,7 +234,6 @@ automation:
         entity_id: vacuum.xiaomi_vacuum_cleaner
 
   - alias: Start Nettoyage d'une pièce
-
     trigger:
       - platform: state
         entity_id: input_select.vacuum_room
@@ -280,9 +279,7 @@ automation:
           - input_boolean.room_chambre
           - input_boolean.room_bureau
 
-
   - alias: Start Nettoyage d'une zone
-
     trigger:
       - platform: state
         entity_id: input_select.vacuum_zone
@@ -317,7 +314,6 @@ automation:
           - input_boolean.zone_baie_vitree
 
   - alias: Start Fail Nettoyage
-
     trigger:
       - platform: state
         entity_id: input_select.vacuum_room

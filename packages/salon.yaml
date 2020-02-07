@@ -129,12 +129,12 @@ automation:
   - id: btn_cellier_onoff
     alias: '[BTN] On/OFF Friteuse'
     trigger:
-      platform: state
-      entity_id: binary_sensor.zigate_00158d0002f98bcf_onoff
-      from: 'off'
-      to: 'on'
-      for: 
-        seconds: 1
+      - platform: state
+        entity_id: binary_sensor.zigate_00158d0002f98bcf_onoff
+        from: 'off'
+        to: 'on'
+        for: 
+          seconds: 1
     action:
       - service: light.toggle
         data:
@@ -143,10 +143,10 @@ automation:
   - id: btn_cellier_onoff
     alias: '[BTN] On/OFF Friteuse'
     trigger:
-      platform: state
-      entity_id: sensor.zigate_00158d0002f98bcf_multiclick
-      from: '0'
-      to: '2'
+      - platform: state
+        entity_id: sensor.zigate_00158d0002f98bcf_multiclick
+        from: '0'
+        to: '2'
     action:
       - service: light.turn_off
         data:
@@ -160,7 +160,7 @@ automation:
         entity_id: binary_sensor.zigate_00158d00032bd376_presence
         from: 'off'
         to: 'on'
-      - plateform: state
+      - platform: state
         entity_id: binary_sensor.zigate_00158d0002f3c9b8_presence
         from: 'off'
         to: 'on'
@@ -277,12 +277,12 @@ automation:
   - id: btn_light_salon_on_off
     alias: "[BTN] Light On/Off Salon"
     trigger:
-      platform: state
-      entity_id: binary_sensor.zigate_00158d00026bb4c6_onoff
-      from: 'off'
-      to: 'on'
-      for: 
-        seconds: 1
+      - platform: state
+        entity_id: binary_sensor.zigate_00158d00026bb4c6_onoff
+        from: 'off'
+        to: 'on'
+        for: 
+          seconds: 1
     action:
       - service: light.toggle
         data:
@@ -291,10 +291,10 @@ automation:
   - id: btn_light_salon_far_cry
     alias: "[BTN] Far Cry Mode"
     trigger:
-      platform: state
-      entity_id: sensor.zigate_00158d00026bb4c6_multiclick
-      from: '0'
-      to: '3'
+      - platform: state
+        entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+        from: '0'
+        to: '3'
     action:
       - service: light.turn_on
         data:
@@ -310,10 +310,10 @@ automation:
   - id: btn_light_salon_off
     alias: "[BTN] Light Off Salon"
     trigger:
-      platform: state
-      entity_id: sensor.zigate_00158d00026bb4c6_multiclick
-      from: '0'
-      to: '4'
+      - platform: state
+        entity_id: sensor.zigate_00158d00026bb4c6_multiclick
+        from: '0'
+        to: '4'
     action:
       - service: light.turn_off
         data:
@@ -501,7 +501,6 @@ automation:
         entity_id: script.group_tv_on_off
       - service: switch.turn_on
         entity_id: switch.wake_on_lan
-
 
   - id: cube-aqara-shake-1
     alias: cube-aqara-shake-1
