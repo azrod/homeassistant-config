@@ -29,18 +29,13 @@ homeassistant:
 
 group:
   zigate_view:
-    view: yes
     entities:
       - group.all_zigate
       - group.zigate_command
     
   zigate_command:
-    control: hidden
     entities:
       - input_boolean.zigate_permit_join
-      
-  zigate_entities:
-    control: hidden
 
 input_boolean:
   zigate_permit_join:

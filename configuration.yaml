@@ -102,7 +102,7 @@ script: !include configs/scripts.yaml
 switch: !include configs/switch.yaml
 remote: !include configs/remote.yaml
 sensor: !include configs/sensor.yaml
-google_assistant: !include configs/googleassistant.yaml
+# google_assistant: !include configs/googleassistant.yaml
 notify: !include configs/notify.yaml
 logger: !include configs/logger.yaml
 device_tracker: !include configs/device_tracker.yaml

@@ -8,3 +8,6 @@
   # logs:
   #   zigate: debug
   #   custom_components.zigate: debug
+  # logs:
+  #   rflink: debug
+  #   homeassistant.components.rflink: debug

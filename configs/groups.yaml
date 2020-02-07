@@ -1,7 +1,6 @@
 
 # DEFAULT VIEW
   default_view:
-    view: false
     icon: mdi:home
     entities:
       - weather.openweathermap
@@ -11,7 +10,6 @@
 ## LIGHTS 
 
   lights:
-    view: true
     name: Eclairage
     icon: mdi:lightbulb-on-outline
     entities:
@@ -19,7 +17,6 @@
       - group.salon
 
   presence_home:
-    view: true
     name: Presence Home
     icon: mdi:human-male-female
     entities:
