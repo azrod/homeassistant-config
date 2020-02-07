@@ -17,17 +17,56 @@ cards:
       - type: alarm-panel
         entity: alarm_control_panel.securitas_360086  
         name: Alarme maison
-      - type: entities
-        show_header_toggle: true 
-        title: Extérieur
-        entities:
-          - entity: light.fibaro_system_fgd212_dimmer_2_level_2
-            name: Lumière Ouest
-          - entity: light.qubino_zmnhdd1_z_wave_plus_flush_dimmer_level
-            name: Lumières terrasse
 
   - type: vertical-stack
     cards:
+      - type: horizontal-stack
+        cards: 
+          - type: "custom:button-card"
+            entity: light.fibaro_system_fgd212_dimmer_2_level_2
+            color_type: card
+            color: blue
+            show_icon: true
+            icon: mdi:light
+            size: 30%
+            name: "Extérieur porte"
+            state:
+              - value: "on"
+                color: yellow
+                icon: mdi:lightbulb-on-outline
+              - value: "off"
+                color: grey
+                icon: mdi:lightbulb-outline
+              - operator: default
+                color: grey
+                icon: mdi:lightbulb-off-outline
+          - type: "custom:button-card"
+            entity: light.qubino_zmnhdd1_z_wave_plus_flush_dimmer_level
+            color_type: card
+            color: blue
+            show_icon: true
+            icon: mdi:light
+            size: 30%
+            name: "Terrasse"
+            state:
+              - value: "on"
+                color: yellow
+                icon: mdi:lightbulb-on-outline
+              - value: "off"
+                color: grey
+                icon: mdi:lightbulb-outline
+              - operator: default
+                color: grey
+                icon: mdi:lightbulb-off-outline
+      - type: custom:mini-graph-card
+        hours_to_show: 12
+        hour24: true
+        points_per_hour: 30
+        show:
+          graph: bar
+        entities:
+          - entity: "sensor.teleinfo_watt"
+            name: "Teleinfo Watt"
       - type: entities
         show_header_toggle: false
         title: Capteurs
@@ -165,14 +204,14 @@ cards:
               unit: '%'
           - type: section
             label: Fuites
-          # - entity: binary_sensor.zigate_00158d000283072c_zone_status
-          #   type: custom:multiple-entity-row
-          #   name: "Fuite machine à laver"
-          #   info:
-          #     entity: zigate.00158d000283072c
-          #     attribute: battery_level
-          #     name: Batterie
-          #     unit: '%'
+          - entity: binary_sensor.zigate_00158d000283072c_zone_status
+            type: custom:multiple-entity-row
+            name: "Fuite machine à laver"
+            info:
+              entity: zigate.00158d000283072c
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
           # - entity: binary_sensor.zigate_00158d00027741fa_zone_status
           #   type: custom:multiple-entity-row
           #   name: "Fuite machine à laver"

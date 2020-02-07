@@ -1,7 +1,8 @@
 # lovelace_gen
 
 title: Home
-
+custom_header:
+  compact_mode: true
 resources:
   - url: /community_plugin/lovelace-layout-card/layout-card.js
     type: js
@@ -31,6 +32,8 @@ resources:
   - url: /community_plugin/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
     type: module
   - url: /community_plugin/lovelace-auto-entities/auto-entities.js
+    type: module
+  - url: /community_plugin/custom-header/custom-header.js
     type: module
 
 views:

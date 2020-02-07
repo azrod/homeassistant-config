@@ -15,42 +15,99 @@ type: custom:layout-card
 cards:
   - type: vertical-stack
     cards:
+      - type: "custom:button-card"
+        entity: group.salon
+        layout: icon_name_state
+        color_type: card
+        color: blue
+        show_icon: true
+        icon: mdi:lightbulb-group-outline
+        size: 30%
+        name: "Lampes Salon"
+        state:
+          - value: "on"
+            color: yellow
+          - value: "off"
+            color: grey
+          - operator: default
+            color: grey
+      # - type: horizontal-stack
+      #   cards:
+      #   - !include
+      #     - templates/light-btn.yaml
+      #     - entity: light.zigate_ccccccfffed80154_1
+      #       name: Lampe salon 1
+      #       dimmable: true
+      #   - !include
+      #     - templates/light-btn.yaml
+      #     - entity: light.zigate_ccccccfffed6a188_1
+      #       name: Lampe salon 2
+      #       dimmable: true
+      #   - !include
+      #     - templates/light-btn.yaml
+      #     - entity: light.zigate_ccccccfffeda1b92_1
+      #       name: Lampe salon 3
+      #       dimmable: true
+      # - type: horizontal-stack
+      #   cards:
+      #   - !include
+      #     - templates/light-btn.yaml
+      #     - entity: light.ledstrip
+      #       name: Bande LED
+      #       dimmable: true
+      #   - !include
+      #     - templates/light-btn.yaml
+      #     - entity: light.totem_light
+      #       name: Lampe lanterne
+      #       dimmable: false
+      - type: horizontal-stack
+        cards:
+        - type: "custom:button-card"
+          entity: input_select.ambiance_salon
+          icon: mdi:theme-light-dark
+          color_type: card
+          size: 20%
+          layout: icon_name_state
+          name: "Ambiance"
+          tap_action:
+            action: call-service
+            service: input_select.select_next
+            service_data:
+              entity_id: input_select.ambiance_salon
+          show_state: false
+          state:
+            - value: "Blanc"
+              color: "white"
+            - value: "Chaud"
+              color: "Orange"
+        - type: "custom:button-card"
+          entity: input_select.brightness_salon
+          icon: mdi:theme-light-dark
+          color_type: card
+          size: 20%
+          layout: icon_name_state
+          name: "Luminosité"
+          tap_action:
+            action: call-service
+            service: input_select.select_next
+            service_data:
+              entity_id: input_select.brightness_salon
+          show_state: false
+          state:
+            - value: 50
+              color: "#fff9a8"
+            - value: 125
+              color: "#fcf48d"
+            - value: 200
+              color: "#fcf060"
+            - value: "255"
+              color: "#ffec00"
       - type: entities
         show_header_toggle: false
         title: Salon
         entities:
           - type: section
-            label: Capteurs
-          - entity: sensor.zigate_00158d0002c99bd4_temperature
-            type: custom:multiple-entity-row
-            name: "Température"
-            primary:
-              entity: sensor.temperature_salon
-              name: false
-          - entity: sensor.zigate_00158d0002c99bd4_humidity
-            type: custom:multiple-entity-row
-            name: "Humidité"
-          - entity: sensor.luminosite_salon
-            type: custom:multiple-entity-row
-            name: "Luminosité"
-            primary: 
-              entity: sensor.zigate_00158d00032bd376_luminosity
-              name: false 
-          - entity: binary_sensor.zigate_00158d00032bd376_presence
-            type: custom:multiple-entity-row
-            name: "IR Salon"
-            info:
-              entity: zigate.00158d00032bd376
-              attribute: battery_level
-              name: Batterie
-              unit: '%'
-          - type: section
             label: Eclairages
-          - !include
-            - templates/light.yaml
-            - entity: group.salon
-              name: Lampes Salon
-              dimmable: false
           - !include
             - templates/light.yaml
             - entity: light.ledstrip
@@ -76,14 +133,31 @@ cards:
             - entity: light.totem_light
               name: Lampe lanterne
               dimmable: false
-          - type: call-service
-            service: automation.trigger
-            entity: automation.btn_far_cry_mode
-            name: Mode FarCry
-          - type: custom:slider-entity-row
-            entity: input_select.ambiance_salon
-            name: "Ambiance"
-
+          - type: section
+            label: Capteurs
+          - entity: sensor.zigate_00158d0002c99bd4_temperature
+            type: custom:multiple-entity-row
+            name: "Température"
+            primary:
+              entity: sensor.temperature_salon
+              name: false
+          - entity: sensor.zigate_00158d0002c99bd4_humidity
+            type: custom:multiple-entity-row
+            name: "Humidité"
+          - entity: sensor.luminosite_salon
+            type: custom:multiple-entity-row
+            name: "Luminosité"
+            primary: 
+              entity: sensor.zigate_00158d00032bd376_luminosity
+              name: false 
+          - entity: binary_sensor.zigate_00158d00032bd376_presence
+            type: custom:multiple-entity-row
+            name: "IR Salon"
+            info:
+              entity: zigate.00158d00032bd376
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
   - type: vertical-stack
     cards:
       - type: horizontal-stack
@@ -121,13 +195,96 @@ cards:
             state:
               - value: "home"
                 color: green
-                icon: mdi:television
+                icon: mdi:laptop
               - value: "not_home"
                 color: red
-                icon: mdi:television-off
+                icon: mdi:laptop-off
+              - operator: default
+                color: grey
+                icon: mdi:laptop
+      - type: horizontal-stack
+        cards: 
+          - type: "custom:button-card"
+            action: call-service
+            service: script.turn_on
+            entity: device_tracker.c0_41_f6_93_75_a9
+            service_data: script.group_tv_on_off
+            label: "ON/OFF"
+            color_type: icon
+            layout: name_state
+            show_state: false
+            show_label: false
+            show_name: false
+            state:
+              - value: "home"
+                color: green
+                icon: mdi:power-standby
+              - value: "not_home"
+                color: red
+                icon: mdi:power-standby
               - operator: default
                 color: grey
                 icon: mdi:television
+          - type: "custom:button-card"
+            action: call-service
+            service: script.turn_on
+            entity: script.sound_bar_vol_up
+            service_data: script.sound_bar_vol_up
+            label: "Plus"
+            color_type: icon
+            layout: name_state
+            show_state: false
+            show_label: false
+            show_name: false
+            state:
+              - operator: default
+                color: grey
+                icon: mdi:plus
+          - type: "custom:button-card"
+            action: call-service
+            service: script.turn_on
+            entity: script.sound_bar_vol_down
+            service_data: script.sound_bar_vol_down
+            label: "Moins"
+            color_type: icon
+            layout: name_state
+            show_state: false
+            show_label: false
+            show_name: false
+            state:
+              - operator: default
+                color: grey
+                icon: mdi:minus
+          - type: "custom:button-card"
+            action: call-service
+            service: script.turn_on
+            entity: script.hdmi_b4
+            service_data: script.hdmi_b4
+            label: "ANDROID TV"
+            color_type: icon
+            layout: name_state
+            show_state: false
+            show_label: false
+            show_name: false
+            state:
+              - operator: default
+                color: grey
+                icon: mdi:android-head
+          - type: "custom:button-card"
+            action: call-service
+            service: script.turn_on
+            entity: script.hdmi_b2
+            service_data: script.hdmi_b2
+            label: "LAPTOP"
+            color_type: icon
+            layout: name_state
+            show_state: false
+            show_label: false
+            show_name: false
+            state:
+              - operator: default
+                color: grey
+                icon: mdi:laptop
       {% for T in TV %}
       - type: horizontal-stack
         cards:

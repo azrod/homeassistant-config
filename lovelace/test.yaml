@@ -1,0 +1,31 @@
+# lovelace_gen
+
+type: custom:layout-card
+cards:
+  - type: custom:auto-entities
+    show_empty: false
+    card:
+      type: entities
+      title: 'Zigate'
+      show_header_toggle: false
+    filter:
+      include:
+        - entity_id: "zigate.*"
+  - type: custom:auto-entities
+    show_empty: false
+    card:
+      type: entities
+      title: 'Zigate Binary Sensor'
+      show_header_toggle: false
+    filter:
+      include:
+        - entity_id: "binary_sensor.zigate_*"
+  - type: custom:auto-entities
+    show_empty: false
+    card:
+      type: entities
+      title: 'Zigate Sensor'
+      show_header_toggle: false
+    filter:
+      include:
+        - entity_id: "sensor.zigate_*"

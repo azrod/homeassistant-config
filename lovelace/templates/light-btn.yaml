@@ -1,0 +1,20 @@
+# lovelace_gen
+type: "custom:button-card"
+entity: {{ entity }}
+layout: vertical
+color_type: card
+color: blue
+show_icon: true
+icon: mdi:light
+size: 20%
+name: {{ name }}
+state:
+  - value: "on"
+    color: yellow
+    icon: mdi:lightbulb-on-outline
+  - value: "off"
+    color: grey
+    icon: mdi:lightbulb-outline
+  - operator: default
+    color: grey
+    icon: mdi:lightbulb-off-outline
