@@ -1,9 +1,0 @@
-  customize:
-    sensor.fr24_feeder:
-      hidden: true
-    sensor.fr24_feeder_aircraft_tracked:
-      icon: mdi:airplane
-    sensor.fr24_feeder_aircraft_uploaded:
-      icon: mdi:airplane
-    sensor.fr24_feeder_radar_code:
-      icon: mdi:radar
