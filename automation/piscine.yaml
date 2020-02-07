@@ -1,5 +1,4 @@
   - alias: Nettoyage piscine cycle start
-    hide_entity: False
     trigger:
       - at: '09:00:00'
         platform: time
@@ -30,7 +29,6 @@
         entity_id: 'switch.piscine_relay'
 
   - alias: Nettoyage piscine cycle start extra
-    hide_entity: False
     trigger:
       - at: '12:05:00'
         platform: time
@@ -53,7 +51,6 @@
         entity_id: 'switch.piscine_relay'
 
   - alias: Nettoyage piscine cycle stop
-    hide_entity: False
     trigger:
       - at: '10:00:00'
         platform: time

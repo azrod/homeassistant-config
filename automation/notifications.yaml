@@ -14,7 +14,7 @@
     - service: notify.mobile_app_mi_9t
       data: 
         title: "Temps trajet -> Travail"
-        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_tim_2')|int }} minutes" 
+        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_time_2')|int }} minutes" 
 
 - id: notification elodie waze matin
   alias: "[Notif] Elodie Waze matin"
@@ -33,7 +33,7 @@
     - service: notify.mobile_app_huawei_vns_l31
       data: 
         title: "Temps trajet -> Travail"
-        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_tim2')|int }} minutes" 
+        message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_time')|int }} minutes" 
 
 
 - id: notification produit fosse
