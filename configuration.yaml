@@ -6,7 +6,6 @@
 # ---------------------------------------------------------------- #
 homeassistant:
   name: Home
-  customize: !include customize.yaml
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: 0
@@ -14,7 +13,7 @@ homeassistant:
   time_zone: Europe/Paris
   packages: 
     zigate: !include packages/zigate.yaml 
-    pkg_cellier: !include_dir_named packages/cellier/
+    pkg_cellier: !include packages/cellier.yaml
     pkg_vacuum: !include packages/vacuum.yaml
     pkg_battery: !include_dir_named packages/battery/
     pkg_fr24: !include packages/fr24.yaml
@@ -83,6 +82,7 @@ http:
 frontend:
   themes: !include_dir_merge_named themes
 config:
+map:
 updater:  
 discovery:
 history:

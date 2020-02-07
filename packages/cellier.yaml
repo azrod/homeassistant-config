@@ -1,0 +1,49 @@
+homeassistant: 
+  customize:
+    package.cellier:
+      customize: &customize
+        package: 'Cellier '
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+automation:
+  - id: notification sonde fuite machinealaver
+    alias: "[Notif] sonde fuite machinealaver"
+    trigger:
+      platform: state
+      entity_id: binary_sensor.zigate_00158d000283072c_zone_status
+      from: 'off'
+      to: 'on'
+    action:
+      - service: script.notify
+        data:
+          title: "[ALERTE]"
+          message: "Fuite d'eau machine a laver"
+
+  - id: notification temperature frigo
+    alias: "[Notif] Temperature Frigo"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.zigate_00158d0002b72523_temperature
+        above: 9
+    condition: []
+    action:
+      - service: script.notify
+        data:
+          title: "[ALERTE]"
+          message: "La tempéature actuelle du frigo est de {{ states(sensor.zigate_00158d0002b72523_temperature)|int }}C"
+
+  - id: notification temperature congélateur
+    alias: "[Notif] Temperature congélateur"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.oregontemphygro_2dfe_temp
+        above: -13
+    condition: []
+    action:
+      - service: script.notify
+        data:
+          title: "[ALERTE]"
+          message: "La température actuele du congélateur est de {{ states(sensor.oregontemphygro_2dfe_temp)|int }}C"
