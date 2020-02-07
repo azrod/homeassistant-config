@@ -1,57 +1,57 @@
-project_id: !secret google_assistant_project_id
-api_key: !secret google_assistant_apikey
-expose_by_default: false
-# exposed_domains:
-#   - light
-entity_config:
-  light.salon_all_lights:
-    name: "Lumières salon"
-    expose: true
-    aliases:
-      - salon
-    room: salon 
-  script.vacuum_cellier:
-    name: "nestor cellier"
-    expose: true
-    aliases: 
-      - "nestor dans le cellier"
-    room: Cellier
-  script.vacuum_cuisine:
-    name: "nestor cuisine"
-    expose: true
-    aliases: 
-      - "nestor dasn la cuisine"
-    room: Cuisine
-  script.vacuum_salon:
-    name: "nestor salon"
-    expose: true
-    aliases: 
-      - "nestor dans le salon"
-    room: Salon
-  script.vacuum_sdb:
-    name: "nestor sdb"
-    expose: true
-    aliases: 
-      - "nestor dans la salle de bain"
-    room: Salle de bain
-  script.vacuum_chambre:
-    name: "nestor chambre"
-    expose: true
-    aliases: 
-      - "nestor dans la chambre"
-    room: Chambre
-  script.vacuum_couloir:
-    name: "nestor couloir"
-    expose: true
-    aliases: 
-      - "nestor dans le couloir"
-    room: Couloir
-  script.vacuum_wc:
-    name: "nestor wc"
-    expose: true
-    aliases: 
-      - "nestor dans les wc"
-    room: WC
-  vacuum.xiaomi_vacuum_cleaner:
-    name: nestor
-    expose: true
+# project_id: !secret google_assistant_project_id
+# api_key: !secret google_assistant_apikey
+# expose_by_default: false
+# # exposed_domains:
+# #   - light
+# entity_config:
+#   light.salon_all_lights:
+#     name: "Lumières salon"
+#     expose: true
+#     aliases:
+#       - salon
+#     room: salon 
+#   script.vacuum_cellier:
+#     name: "nestor cellier"
+#     expose: true
+#     aliases: 
+#       - "nestor dans le cellier"
+#     room: Cellier
+#   script.vacuum_cuisine:
+#     name: "nestor cuisine"
+#     expose: true
+#     aliases: 
+#       - "nestor dasn la cuisine"
+#     room: Cuisine
+#   script.vacuum_salon:
+#     name: "nestor salon"
+#     expose: true
+#     aliases: 
+#       - "nestor dans le salon"
+#     room: Salon
+#   script.vacuum_sdb:
+#     name: "nestor sdb"
+#     expose: true
+#     aliases: 
+#       - "nestor dans la salle de bain"
+#     room: Salle de bain
+#   script.vacuum_chambre:
+#     name: "nestor chambre"
+#     expose: true
+#     aliases: 
+#       - "nestor dans la chambre"
+#     room: Chambre
+#   script.vacuum_couloir:
+#     name: "nestor couloir"
+#     expose: true
+#     aliases: 
+#       - "nestor dans le couloir"
+#     room: Couloir
+#   script.vacuum_wc:
+#     name: "nestor wc"
+#     expose: true
+#     aliases: 
+#       - "nestor dans les wc"
+#     room: WC
+#   vacuum.xiaomi_vacuum_cleaner:
+#     name: nestor
+#     expose: true
