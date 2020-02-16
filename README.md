@@ -1,6 +1,6 @@
 # Configuration Home Assistant 
 
-[![Home Assistant Version](https://img.shields.io/badge/HomeAssistant%20Version-v0.103.5-green?style=for-the-badge)](https://github.com/home-assistant/home-assistant/releases/tag/0.103.5) [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fazrod%2Fhomeassistant-config%2Fbadge%3Fref%3Dmaster&style=for-the-badge)](https://actions-badge.atrox.dev/azrod/homeassistant-config/goto?ref=master)
+[![Home Assistant Version](https://img.shields.io/badge/HomeAssistant%20Version-v0.105.4-green?style=for-the-badge)](https://github.com/home-assistant/home-assistant/releases/tag/0.105.4) [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fazrod%2Fhomeassistant-config%2Fbadge%3Fref%3Dmaster&style=for-the-badge)](https://actions-badge.atrox.dev/azrod/homeassistant-config/goto?ref=master)
 
 
 ## Equipements
