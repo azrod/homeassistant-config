@@ -7,3 +7,7 @@ notification_onduleur:
   name: Notification Onduleur
   initial: on
   icon: mdi:car-battery
+
+sachet_fosse:
+  name: Sachet fosse
+  initial: off

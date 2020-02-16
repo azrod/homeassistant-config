@@ -396,6 +396,20 @@ cards:
               attribute: battery_level
               name: Batterie
               unit: '%'
+            {% set ieee= "oregontemphygro_2de4_hstatus" %}
+          - entity: sensor.{{ieee}}
+            name: "Congélateur"
+            type: custom:multiple-entity-row
+            hide_state: true
+            primary:
+              entity: sensor.oregontemphygro_2de4_temp
+              name: Température
+            secondary:
+              entity: sensor.oregontemphygro_2de4_hum
+              name: Humidité
+            info:
+              entity: sensor.oregontemphygro_2de4_bat
+              name: Batterie
           - type: section
             label: Notifications
           - entity: automation.notif_temperature_frigo

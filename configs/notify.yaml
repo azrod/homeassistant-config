@@ -7,3 +7,7 @@
   - platform: discord
     name: discord
     token: !secret discord_token
+  - name: all_devices
+    platform: group
+    services:
+      - service: mobile_app_mickael

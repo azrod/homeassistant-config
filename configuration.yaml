@@ -91,6 +91,7 @@ sun:
 system_health:
 wake_on_lan:
 mobile_app:
+uilogs:
 
 # INCLUDE
 

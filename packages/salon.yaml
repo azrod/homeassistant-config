@@ -415,10 +415,10 @@ automation:
   - id: telecommande_exterieur_off
     alias: "[TELECOMMANDE] ON/OFF lampes extérieur"
     trigger:
-      platform: state
-      entity_id: switch.bouton_7
-      from: 'off'
-      to: 'on'
+      - platform: state
+        entity_id: switch.bouton_7
+        from: 'off'
+        to: 'on'
     action:
       - service: light.toggle
         data:
@@ -433,10 +433,10 @@ automation:
   - id: cube-aqara-rotate-0
     alias: cube-aqara-rotate-0
     trigger:
-      platform: event
-      event_type: state_changed
-      event_data:
-        entity_id: sensor.zigate_00158d000275dd2b_movement
+      - platform: event
+        event_type: state_changed
+        event_data:
+          entity_id: sensor.zigate_00158d000275dd2b_movement
     condition:
       - condition: template
         value_template: >
@@ -448,20 +448,20 @@ automation:
   - id: cube-aqara-rotate-1
     alias: cube-aqara-rotate-1
     trigger:
-      platform: event
-      event_type: state_changed
-      event_data:
-        entity_id: sensor.zigate_00158d000275dd2b_movement
+      - platform: event
+        event_type: state_changed
+        event_data:
+          entity_id: sensor.zigate_00158d000275dd2b_movement
     condition:
       - condition: template
         value_template: >
           {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]1', ignorecase=True) }}
     action:
-      service: script.turn_on
-      entity_id: script.group_tv_on_off
+      - service: script.turn_on
+        entity_id: script.group_tv_on_off
 
-  - id: cube-aqara-rotate-3
-    alias: cube-aqara-rotate-3
+  - id: cube-aqara-rotate-3-bis
+    alias: cube-aqara-rotate-3-bis
     trigger:
       platform: event
       event_type: state_changed
@@ -469,7 +469,7 @@ automation:
         entity_id: sensor.zigate_00158d000275dd2b_movement
     condition:
       condition: and
-      conditions:
+      conditions: 
       - condition: template
         value_template: >
           {{ trigger.event.data.new_state.state | regex_match('flip90_[0-9]3', ignorecase=True) }}
@@ -505,10 +505,10 @@ automation:
   - id: cube-aqara-shake-1
     alias: cube-aqara-shake-1
     trigger:
-      platform: event
-      event_type: state_changed
-      event_data:
-        entity_id: sensor.zigate_00158d000275dd2b_movement
+      - platform: event
+        event_type: state_changed
+        event_data:
+          entity_id: sensor.zigate_00158d000275dd2b_movement
     condition:
       condition: and
       conditions:
