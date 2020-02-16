@@ -150,11 +150,19 @@ cards:
             primary: 
               entity: sensor.zigate_00158d00032bd376_luminosity
               name: false 
-          - entity: binary_sensor.zigate_00158d00032bd376_presence
+            {% set ieee = "00158d00032bd376" %}
+          - entity: binary_sensor.zigate_{{ ieee }}_presence
             type: custom:multiple-entity-row
-            name: "IR Salon"
             info:
-              entity: zigate.00158d00032bd376
+              entity: zigate.{{ ieee }}
+              attribute: battery_level
+              name: Batterie
+              unit: '%'
+            {% set ieee = "00158d0002f3c9b8" %}
+          - entity: binary_sensor.zigate_{{ ieee }}_presence
+            type: custom:multiple-entity-row
+            info:
+              entity: zigate.{{ ieee }}_2
               attribute: battery_level
               name: Batterie
               unit: '%'
