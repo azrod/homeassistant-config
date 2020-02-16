@@ -36,20 +36,53 @@
         message: "Le temps de trajet est estimé à {{ states('sensor.waze_travel_time')|int }} minutes" 
 
 
-- id: notification produit fosse
-  alias: "[Notif] Mettre produit pour la Fosse"
+- id: produit_fosse
+  alias: "Produit pour la Fosse"
   trigger:
     platform: time
-    at: '20:30:00'
+    at: '20:25:00'
   condition:
     - condition: time
       weekday:
         - sun
   action:
-    - service: script.notify
-      data: 
-        title: "[INFO]"
-        message: 'Mettre un sachet dans la fosse'
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.sachet_fosse
+
+- id: notification_produit_fosse
+  alias: "[Notif] Mettre produit pour la Fosse"
+  trigger:
+    - platform: time
+      at: '08:30:00'
+    - platform: time
+      at: '20:30:00'
+  condition:
+    - condition: state
+      entity_id: 'input_boolean.sachet_fosse'
+      state: 'on'
+  action: 
+    - service: notify.all_devices
+      data:
+        title: "INFO"
+        message: "Mettre un sachet dans la fosse."
+        data:
+          actions:
+            - action: "fosse_ok"
+              title: "Fait !"
+            - action: "fosse_ignorer"
+              title: "Ignorer"
+
+- id: notif_fosse_action_ok
+  alias: "[Fosse] ok action notification"
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: fosse_ok
+  action:
+    service: input_boolean.turn_off
+    entity_id: input_boolean.sachet_fosse
+
 
 - id: notification sonde fuite baignoire
   alias: "[Notif] sonde fuite baignoire"
@@ -184,12 +217,12 @@
         title: "[Alerte]"
         message: "Maison sous alarme -> Porte fenêtre bureau ouverte "
 
-- id: notification alarme
+- id: notif_alarme
   alias: "[Notif] alarme"
   trigger:
-    platform: state
-    entity_id: alarm_control_panel.securitas_360086
-    to: 'armed_away'
+    - platform: state
+      entity_id: alarm_control_panel.securitas_360086
+      to: 'armed_away'
   condition:
     - condition: state
       entity_id: 'group.presence_home'
@@ -197,7 +230,28 @@
       for:
         minutes: 5
   action:
-    - service: script.notify
+    - service: notify.all_devices
       data:
-        title: "[Alerte]"
-        message: "L'alarme n'est pas enclenché ! "
+        title: "ALERTE"
+        message: "L'alarme n'est pas enclenché !"
+        data:
+          ttl: 0
+          priority: high
+          actions:
+            - action: "activer_alarme"
+              title: "Activer l'alarme"
+            - action: "ignorer_alarme"
+              title: "Ignorer"
+
+- id: notif_alarme_action_activer
+  alias: "[Alarme] Activer alarme action notification"
+  trigger:
+    platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: activer_alarme
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.securitas_360086
+    data:
+      code: !secret securitas_direct_code
